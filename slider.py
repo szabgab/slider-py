@@ -36,6 +36,9 @@ def parse(filename):
     if not 'title' in chapter:
         raise SliderError('Chapter title is missing from {}'.format(filename))
 
+    if not 'id' in chapter:
+        raise SliderError('Chapter id is missing from {}'.format(filename))
+
     return chapter
 
 
