@@ -48,3 +48,31 @@ def test_pages():
         ],
     }
 
+def test_ul():
+    slider = Slider()
+
+    pages = slider.parse('cases/ul.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title'   : 'Page One Title',
+                'id'      : 'page-1-url',
+                'content' : [
+                    {
+                        'name' : 'ul',
+                        'content' : [
+                            'Several Bullet',
+                            'Points',
+                            'There is a 3rd point',
+                        ]
+                    }
+                ]
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+            },
+        ],
+    }

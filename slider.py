@@ -19,6 +19,7 @@ class Slider(object):
         self.chapter = {}
         self.chapter['pages'] = []
         self.page = {}
+        self.tag = {}
 
         # TODO: error when md file is missing
         with open(filename) as fh:
@@ -52,12 +53,30 @@ class Slider(object):
                     self.page['title'] = match.group(1)
                     continue
 
+                # ol
+                match = re.search(r'\A\* (.*)\Z', row)
+                if match:
+                    if not self.page:
+                        raise SliderError('* Encountered outside of page {}'.format(filename))
+                    if not self.tag:
+                        self.tag['name'] = 'ul'
+                        self.tag['content'] = []
+                    if self.tag:
+                        if self.tag['name'] != 'ul':
+                            raise SliderError('* Encountered outside of ul {} in {}'.format(filename. self.page))
+                        self.tag['content'].append(match.group(1))
+
+                match = re.search(r'\A\s*\Z', row)
+                if match:
+                    self.add_tag()
+                    continue
+
+
+            self.add_tag()
             self.add_page()
 
 
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
-
-
 
         if not 'title' in self.chapter:
             raise SliderError('Chapter title is missing in {}'.format(filename))
@@ -66,6 +85,13 @@ class Slider(object):
             raise SliderError('Chapter id is missing in {}'.format(filename))
 
         return self.chapter
+
+    def add_tag(self):
+        if self.tag:
+            if 'content' not in self.page:
+                self.page['content'] = []
+            self.page['content'].append(self.tag)
+            self.tag = {}
 
     def add_page(self):
         if self.page:
