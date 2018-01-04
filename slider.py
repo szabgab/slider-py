@@ -1,6 +1,7 @@
 import argparse
 import re
 import os
+import yaml
 from jinja2 import Environment, FileSystemLoader
 
 class SliderError(Exception):
@@ -16,6 +17,11 @@ def main():
     slider.parse(args.file)
 
 class Slider(object):
+    def process_yml(self, filename):
+        with open(filename, 'r') as fh:
+            conf = yaml.load(fh)
+        return {}
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []

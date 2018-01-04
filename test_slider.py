@@ -284,3 +284,9 @@ another
             },
         ],
     }
+
+def test_multi():
+    slider = Slider()
+
+    data = slider.process_yml('cases/multi.yml')
+    assert data == {}

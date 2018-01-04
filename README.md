@@ -45,7 +45,6 @@ TODO:
 * bold
 * command (maybe just bold)
 * links []() or a href ?
-* tags to be indexed
 * Images
 * Multiple files in one course
 * Extra text that is not included in the slide (or is optional)
