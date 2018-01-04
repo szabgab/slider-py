@@ -171,6 +171,46 @@ First line
     }
 
 
+def test_include():
+    slider = Slider()
+
+    pages = slider.parse('cases/include.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title'   : 'Page One Title',
+                'id'      : 'page-1-url',
+                'content' : [
+                    {
+                        'name' : 'include',
+                        'filename' : 'sample/do.py',
+                        'title' : 'This Title',
+                        'content' : [
+'''import sys
+
+def main():
+    print(sys.argv)
+
+
+
+if __name__ == '__main__':
+    main()
+'''
+                        ]
+                    }
+                ]
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+            },
+        ],
+    }
+
+
+
 def test_all():
     slider = Slider()
 

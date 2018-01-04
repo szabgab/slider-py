@@ -1,5 +1,6 @@
 import argparse
 import re
+import os
 from jinja2 import Environment, FileSystemLoader
 
 class SliderError(Exception):
@@ -103,6 +104,22 @@ class Slider(object):
 
                 # free text
                 if not self.tag:
+                    # include
+                    # ![Title](sample/do.py)
+                    match = re.search(r'\A\!\[([^]]*)\]\(([^)]+)\)\Z', row)
+                    if match:
+                        title = match.group(1)
+                        include_file = match.group(2)
+                        include_path = os.path.join('cases', include_file)
+                        with open(include_path, 'r') as fh:
+                            content = fh.read()
+                        self.tag['name'] = 'include'
+                        self.tag['filename'] = include_file
+                        self.tag['content'] = [content]
+                        self.tag['title'] = title
+                        self.add_tag()
+                        continue
+
                     self.tag['name'] = 'p'
                     self.tag['content'] = ['\n']
 
