@@ -21,7 +21,8 @@ def parse(filename):
     # TODO: error when md file is missing
     with open(filename) as fh:
         for row in fh:
-            match = re.search(r'\A# (.*)', row)
+            row = row.rstrip('\n')
+            match = re.search(r'\A# (.*)\Z', row)
             if match:
             # TODO: error if duplicate chapter title in the same file
                 if 'title' in chapter:
@@ -31,7 +32,7 @@ def parse(filename):
 
             # TODO: error if something follows a Chapter title that is not an id - probably not needed
             # TODO: error if there are duplicate chapter ids
-            match = re.search(r'id: ([a-z0-9-]+)', row)
+            match = re.search(r'\Aid: ([a-z0-9-]+)\Z', row)
             if match:
                 if page:
                     if 'id' in page:
@@ -43,7 +44,7 @@ def parse(filename):
                     chapter['id'] = match.group(1)
                 continue
 
-            match = re.search(r'^## (.*)', row)
+            match = re.search(r'\A## (.*)\Z', row)
             if match:
                 if page:
                     # TODO: check if page has a title, id etc
