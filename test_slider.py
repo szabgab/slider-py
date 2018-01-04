@@ -138,6 +138,39 @@ another
         ],
     }
 
+
+def test_paragraphs():
+    slider = Slider()
+
+    pages = slider.parse('cases/p.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title'   : 'Page One Title',
+                'id'      : 'page-1-url',
+                'content' : [
+                    {
+                        'name' : 'p',
+                        'content' : [
+'''
+First line
+    Indented line
+3rd line
+'''
+                        ]
+                    }
+                ]
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+            },
+        ],
+    }
+
+
 def test_all():
     slider = Slider()
 

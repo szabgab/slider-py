@@ -91,8 +91,11 @@ class Slider(object):
                 if match:
                     if self.tag:
                         if self.tag['name'] == 'verbatim':
-                            self.tag['content'][0] += "\n"
+                            if self.tag['name'] == 'verbatim':
+                                self.tag['content'][0] += "\n"
                             continue
+                        if self.tag['name'] == 'p':
+                            self.add_tag()
 
                     self.add_tag()
                     continue
@@ -101,7 +104,7 @@ class Slider(object):
                 # free text
                 if not self.tag:
                     self.tag['name'] = 'p'
-                    self.tag['content'] = ['']
+                    self.tag['content'] = ['\n']
 
                 if self.tag['name'] == 'verbatim' or self.tag['name'] == 'p':
                     self.tag['content'][0] += row + "\n"
