@@ -1,8 +1,10 @@
 import pytest
 from slider import Slider, SliderError
 import json
+import filecmp
+import os
 
-def test_chapter():
+def test_chapter(tmpdir):
     slider = Slider()
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/no-chapter-title.md')
@@ -25,7 +27,13 @@ def test_chapter():
     pages = slider.parse('cases/chapter.md')
     with open('cases/dom/chapter.json') as fh:
         assert pages == json.load(fh)
-    assert slider.generate_html() == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
+    target_dir = str(tmpdir)
+    print(target_dir)
+    slider.generate_html_files(target_dir)
+    dcmp = filecmp.dircmp(target_dir, os.path.join('cases', 'html', 'chapter'))
+    assert dcmp.left_only == []
+    assert dcmp.right_only == []
+    assert dcmp.diff_files == []
 
 
 @pytest.mark.parametrize("name", [

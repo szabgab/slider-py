@@ -189,5 +189,11 @@ class Slider(object):
             }
         ]
 
+    def generate_html_files(self, in_dir):
+        page = self.generate_html()
+        filename = os.path.join(in_dir, page[0]['id'] + '.html')
+        with open(filename, 'w') as fh:
+            fh.write(page[0]['html'])
+
 if __name__ == '__main__':
     main()
