@@ -1,22 +1,23 @@
 import pytest
-import slider
+from slider import Slider, SliderError
 
 def test_chapter():
+    slider = Slider()
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/no-chapter-title.md')
-    assert exinfo.type == slider.SliderError
+    assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Chapter title is missing in cases/no-chapter-title.md'
 
 
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/no-chapter-id.md')
-    assert exinfo.type == slider.SliderError
+    assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Chapter id is missing in cases/no-chapter-id.md'
 
 
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/chapters.md')
-    assert exinfo.type == slider.SliderError
+    assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Second chapter found in the same file in cases/chapters.md'
 
 
@@ -30,6 +31,7 @@ def test_chapter():
 
 
 def test_pages():
+    slider = Slider()
     pages = slider.parse('cases/pages.md')
     assert pages == {
         'title' : 'Chapter Title',
@@ -45,3 +47,4 @@ def test_pages():
             },
         ],
     }
+
