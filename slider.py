@@ -21,23 +21,27 @@ def parse(filename):
             match = re.search(r'# (.*)', row)
             if match:
             # TODO: error if duplicate chapter title in the same file
-            #    if 'title' in chapter
+                if 'title' in chapter:
+                    raise SliderError('Second chapter found in the same file in {}'.format(filename))
                 chapter['title'] = match.group(1)
                 continue
 
-            # TODO: error if something follows a Chapter title that is not an id
+            # TODO: error if something follows a Chapter title that is not an id - probably not needed
             # TODO: error if there are duplicate chapter ids
-            # TODO: error if chapter id is missing
             match = re.search(r'id: ([a-z-]+)', row)
             if match:
                 chapter['id'] = match.group(1)
                 continue
 
+# TODO: error if id already exists anywhere in the slides (chapters, pages)
+
+
+
     if not 'title' in chapter:
-        raise SliderError('Chapter title is missing from {}'.format(filename))
+        raise SliderError('Chapter title is missing in {}'.format(filename))
 
     if not 'id' in chapter:
-        raise SliderError('Chapter id is missing from {}'.format(filename))
+        raise SliderError('Chapter id is missing in {}'.format(filename))
 
     return chapter
 
