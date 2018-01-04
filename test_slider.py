@@ -27,7 +27,7 @@ def test_chapter():
         'id'    : 'chapter-path',
         'pages' : [],
     }
-    assert slider.generate_html(pages) == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
+    assert slider.generate_html() == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
 
 
 def test_pages():

@@ -16,8 +16,8 @@ def main():
 
 class Slider(object):
     def parse(self, filename):
-        chapter = {}
-        chapter['pages'] = []
+        self.chapter = {}
+        self.chapter['pages'] = []
         page = {}
 
         # TODO: error when md file is missing
@@ -27,9 +27,9 @@ class Slider(object):
                 match = re.search(r'\A# (.*)\Z', row)
                 if match:
                 # TODO: error if duplicate chapter title in the same file
-                    if 'title' in chapter:
+                    if 'title' in self.chapter:
                         raise SliderError('Second chapter found in the same file in {}'.format(filename))
-                    chapter['title'] = match.group(1)
+                    self.chapter['title'] = match.group(1)
                     continue
 
                 # TODO: error if something follows a Chapter title that is not an id - probably not needed
@@ -41,44 +41,44 @@ class Slider(object):
                             raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), page)
                         page['id'] = match.group(1)
                     else:
-                        if 'id' in chapter:
+                        if 'id' in self.chapter:
                             raise SliderError('Second chapter id found in the same file in {}'.format(filename))
-                        chapter['id'] = match.group(1)
+                        self.chapter['id'] = match.group(1)
                     continue
 
                 match = re.search(r'\A## (.*)\Z', row)
                 if match:
                     if page:
                         # TODO: check if page has a title, id etc
-                        chapter['pages'].append(page)
+                        self.chapter['pages'].append(page)
                         page = {}
                     page['title'] = match.group(1)
                     continue
 
             if page:
-                chapter['pages'].append(page)
+                self.chapter['pages'].append(page)
 
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
 
 
-        if not 'title' in chapter:
+        if not 'title' in self.chapter:
             raise SliderError('Chapter title is missing in {}'.format(filename))
 
-        if not 'id' in chapter:
+        if not 'id' in self.chapter:
             raise SliderError('Chapter id is missing in {}'.format(filename))
 
-        return chapter
+        return self.chapter
 
-    def generate_html(self, chapter):
+    def generate_html(self):
         env = Environment(loader=FileSystemLoader('templates'))
         template = env.get_template('chapter.html')
         html = template.render(
-            title = chapter['title']
+            title = self.chapter['title']
         )
         return [
             {
-                'id'   : chapter['id'],
+                'id'   : self.chapter['id'],
                 'html' : html,
             }
         ]
