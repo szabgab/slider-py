@@ -1,5 +1,6 @@
 import argparse
 import re
+from jinja2 import Environment, FileSystemLoader
 
 class SliderError(Exception):
     pass
@@ -46,7 +47,6 @@ def parse(filename):
     return chapter
 
 def generate_html(chapter):
-    from jinja2 import Environment, FileSystemLoader
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template('chapter.html')
     html = template.render(
