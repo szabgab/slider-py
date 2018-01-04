@@ -18,7 +18,7 @@ class Slider(object):
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
-        page = {}
+        self.page = {}
 
         # TODO: error when md file is missing
         with open(filename) as fh:
@@ -36,10 +36,10 @@ class Slider(object):
                 # TODO: error if there are duplicate chapter ids
                 match = re.search(r'\Aid: ([a-z0-9-]+)\Z', row)
                 if match:
-                    if page:
-                        if 'id' in page:
-                            raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), page)
-                        page['id'] = match.group(1)
+                    if self.page:
+                        if 'id' in self.page:
+                            raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), self.page)
+                        self.page['id'] = match.group(1)
                     else:
                         if 'id' in self.chapter:
                             raise SliderError('Second chapter id found in the same file in {}'.format(filename))
@@ -48,15 +48,15 @@ class Slider(object):
 
                 match = re.search(r'\A## (.*)\Z', row)
                 if match:
-                    if page:
+                    if self.page:
                         # TODO: check if page has a title, id etc
-                        self.chapter['pages'].append(page)
-                        page = {}
-                    page['title'] = match.group(1)
+                        self.chapter['pages'].append(self.page)
+                        self.page = {}
+                    self.page['title'] = match.group(1)
                     continue
 
-            if page:
-                self.chapter['pages'].append(page)
+            if self.page:
+                self.chapter['pages'].append(self.page)
 
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
