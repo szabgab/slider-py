@@ -1,5 +1,6 @@
 import pytest
 from slider import Slider, SliderError
+import json
 
 def test_chapter():
     slider = Slider()
@@ -22,56 +23,23 @@ def test_chapter():
 
 
     pages = slider.parse('cases/chapter.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-path',
-        'pages' : [],
-    }
+    with open('cases/dom/chapter.json') as fh:
+        assert pages == json.load(fh)
     assert slider.generate_html() == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
 
 
 def test_pages():
     slider = Slider()
     pages = slider.parse('cases/pages.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title' : 'Page One Title',
-                'id'    : 'page-1-url',
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-            },
-        ],
-    }
+    with open('cases/dom/pages.json') as fh:
+        assert pages == json.load(fh)
 
 def test_index():
     slider = Slider()
     pages = slider.parse('cases/index.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title' : 'Page One Title',
-                'id'    : 'page-1-url',
-                'i' : [
-                    ["subject matter"]
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-                'i': [
-                    ["an other", "sub ject"],
-                    ["index field"]
-                ]
-            },
-        ],
-    }
+    with open('cases/dom/index.json') as fh:
+        assert pages == json.load(fh)
+
 
 def test_ul():
     slider = Slider()
