@@ -40,8 +40,3 @@ include: path/to/file.py
 
 ``` 
 
-
-TODO:
-
-* error when md file is missing
-* error if duplicate chapter title in the same file
