@@ -28,16 +28,13 @@ def test_chapter():
     assert slider.generate_html() == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
 
 
-def test_pages():
+@pytest.mark.parametrize("name", [
+    'pages', 'index'
+])
+def test_cases(name):
     slider = Slider()
-    pages = slider.parse('cases/pages.md')
-    with open('cases/dom/pages.json') as fh:
-        assert pages == json.load(fh)
-
-def test_index():
-    slider = Slider()
-    pages = slider.parse('cases/index.md')
-    with open('cases/dom/index.json') as fh:
+    pages = slider.parse('cases/{}.md'.format(name))
+    with open('cases/dom/{}.json'.format(name)) as fh:
         assert pages == json.load(fh)
 
 
