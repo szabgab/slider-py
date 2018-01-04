@@ -48,15 +48,12 @@ class Slider(object):
 
                 match = re.search(r'\A## (.*)\Z', row)
                 if match:
-                    if self.page:
-                        # TODO: check if page has a title, id etc
-                        self.chapter['pages'].append(self.page)
-                        self.page = {}
+                    self.add_page()
                     self.page['title'] = match.group(1)
                     continue
 
-            if self.page:
-                self.chapter['pages'].append(self.page)
+            self.add_page()
+
 
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
@@ -69,6 +66,13 @@ class Slider(object):
             raise SliderError('Chapter id is missing in {}'.format(filename))
 
         return self.chapter
+
+    def add_page(self):
+        if self.page:
+            # TODO: check if page has a title, id etc
+            self.chapter['pages'].append(self.page)
+            self.page = {}
+        return
 
     def generate_html(self):
         env = Environment(loader=FileSystemLoader('templates'))
