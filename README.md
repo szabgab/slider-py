@@ -12,6 +12,8 @@ Example:
 ```
 # Chapter Title
 id: page-url
+{i: subject matter}
+{i: another!subject}
 
 ## Page Title
 id: page-url
@@ -47,3 +49,5 @@ TODO:
 * Images
 * Multiple files in one course
 * Extra text that is not included in the slide (or is optional)
+
+* Generate HTML and test it

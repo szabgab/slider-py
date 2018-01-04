@@ -48,6 +48,31 @@ def test_pages():
         ],
     }
 
+def test_index():
+    slider = Slider()
+    pages = slider.parse('cases/index.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title' : 'Page One Title',
+                'id'    : 'page-1-url',
+                'i' : [
+                    ["subject matter"]
+                ]
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+                'i': [
+                    ["an other", "sub ject"],
+                    ["index field"]
+                ]
+            },
+        ],
+    }
+
 def test_ul():
     slider = Slider()
 

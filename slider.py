@@ -48,6 +48,18 @@ class Slider(object):
                         self.chapter['id'] = match.group(1)
                     continue
 
+                # {i: index field}
+                # {i: index!field}
+                match = re.search(r'\A\{i:\s+(.+)\}\s*\Z', row)
+                #match = re.search(r'\A\{i:\s+(.+)', row)
+                if match:
+                    if not 'i' in self.page:
+                        self.page['i'] = []
+                    fields = match.group(1).split('!')
+                    self.page['i'].append(fields)
+                    continue
+
+
                 match = re.search(r'\A## (.*)\Z', row)
                 if match:
                     self.add_page()
