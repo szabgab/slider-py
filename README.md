@@ -34,9 +34,16 @@ Free Paragraph text.
 
 HTML Links: <a href="https://code-maven.com/slides/">slides</a> that will be used as links anywhere except in verbatim text 
 
-Include external files:
-
-include: path/to/file.py
+![Title](path/to/file.py)    # include external file
+![](path/to/file.py)         # include external file use filename as title
 
 ``` 
 
+TODO:
+* bold
+* command (maybe just bold)
+* links []() or a href ?
+* tags to be indexed
+* Images
+* Multiple files in one course
+* Extra text that is not included in the slide (or is optional)
