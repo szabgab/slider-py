@@ -171,6 +171,16 @@ def test_all():
                             'Without',
                             'Numbers. There is a 3rd point',
                         ]
+                    },
+                    {
+                        'name': 'verbatim',
+                        'content': [
+'''
+code
+    indentend line of this
+another
+'''
+                        ]
                     }
                 ]
             },
