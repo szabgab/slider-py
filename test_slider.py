@@ -1,7 +1,7 @@
 import pytest
 import slider
 
-def test_parser():
+def test_chapter():
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/no-chapter-title.md')
     assert exinfo.type == slider.SliderError
@@ -23,6 +23,25 @@ def test_parser():
     pages = slider.parse('cases/chapter.md')
     assert pages == {
         'title' : 'Chapter Title',
-        'id'    : 'chapter-path'
+        'id'    : 'chapter-path',
+        'pages' : [],
     }
     assert slider.generate_html(pages) == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]
+
+
+def test_pages():
+    pages = slider.parse('cases/pages.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title' : 'Page One Title',
+                'id'    : 'page-1-url',
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+            },
+        ],
+    }

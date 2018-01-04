@@ -15,11 +15,13 @@ def main():
 
 def parse(filename):
     chapter = {}
+    chapter['pages'] = []
+    page = {}
 
     # TODO: error when md file is missing
     with open(filename) as fh:
         for row in fh:
-            match = re.search(r'# (.*)', row)
+            match = re.search(r'\A# (.*)', row)
             if match:
             # TODO: error if duplicate chapter title in the same file
                 if 'title' in chapter:
@@ -29,12 +31,31 @@ def parse(filename):
 
             # TODO: error if something follows a Chapter title that is not an id - probably not needed
             # TODO: error if there are duplicate chapter ids
-            match = re.search(r'id: ([a-z-]+)', row)
+            match = re.search(r'id: ([a-z0-9-]+)', row)
             if match:
-                chapter['id'] = match.group(1)
+                if page:
+                    if 'id' in page:
+                        raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), page)
+                    page['id'] = match.group(1)
+                else:
+                    if 'id' in chapter:
+                        raise SliderError('Second chapter id found in the same file in {}'.format(filename))
+                    chapter['id'] = match.group(1)
                 continue
 
-# TODO: error if id already exists anywhere in the slides (chapters, pages)
+            match = re.search(r'^## (.*)', row)
+            if match:
+                if page:
+                    # TODO: check if page has a title, id etc
+                    chapter['pages'].append(page)
+                    page = {}
+                page['title'] = match.group(1)
+                continue
+
+        if page:
+            chapter['pages'].append(page)
+
+    # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
 
 
