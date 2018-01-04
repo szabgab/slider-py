@@ -174,6 +174,9 @@ First line
 def test_include():
     slider = Slider()
 
+    with open('cases/sample/do.py', 'r') as fh:
+        file_content = fh.read()
+
     pages = slider.parse('cases/include.md')
     assert pages == {
         'title' : 'Chapter Title',
@@ -187,24 +190,21 @@ def test_include():
                         'name' : 'include',
                         'filename' : 'sample/do.py',
                         'title' : 'This Title',
-                        'content' : [
-'''import sys
-
-def main():
-    print(sys.argv)
-
-
-
-if __name__ == '__main__':
-    main()
-'''
-                        ]
+                        'content' : [file_content]
                     }
                 ]
             },
             {
                 'title': 'Page Two Title',
                 'id': 'page-2-url',
+                'content': [
+                    {
+                        'name': 'include',
+                        'filename': 'sample/do.py',
+                        'title': '',
+                        'content': [file_content],
+                    }
+                ]
             },
         ],
     }
