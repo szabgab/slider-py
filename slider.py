@@ -69,11 +69,46 @@ class Slider(object):
                         if self.tag['name'] != tag_name:
                             raise SliderError('* Encountered outside of {} {} in {}'.format(tag_name, filename. self.page))
                         self.tag['content'].append(match.group(2))
+                    continue
 
-                match = re.search(r'\A\s*\Z', row)
+                match = re.search(r'\A```\Z', row)
                 if match:
+                    if not self.page:
+                        raise SliderError('``` outside of page {}'.format(filename))
+                    if not self.tag:
+                        self.tag['name'] = 'verbatim'
+                        self.tag['content'] = ['\n']
+                        continue
+                    if self.tag['name'] != 'verbatim':
+                        raise SliderError('``` cannot be inside another tag {}'.format(filename))
                     self.add_tag()
                     continue
+
+
+                # empty row ends the ol, ul tags
+                # empty row is included in the verbatim tag
+                match = re.search(r'\A\s*\Z', row)
+                if match:
+                    if self.tag:
+                        if self.tag['name'] == 'verbatim':
+                            self.tag['content'][0] += "\n"
+                            continue
+
+                    self.add_tag()
+                    continue
+
+
+                # free text
+                if not self.tag:
+                    self.tag['name'] = 'p'
+                    self.tag['content'] = ['']
+
+                if self.tag['name'] == 'verbatim' or self.tag['name'] == 'p':
+                    self.tag['content'][0] += row + "\n"
+                    continue
+
+                raise SliderError('Unhandled row "{}" in {}'.format(row, filename))
+
 
             self.add_page()
 
