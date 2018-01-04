@@ -11,12 +11,12 @@ Example:
 
 ```
 # Chapter Title
-id: page-url
+{id: page-url}
 {i: subject matter}
 {i: another!subject}
 
 ## Page Title
-id: page-url
+{id: page-url}
 
 * Bullet
 * Points

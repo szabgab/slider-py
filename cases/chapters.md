@@ -1,6 +1,6 @@
 # Chapter Title
-id: chapter-path
+{id: chapter-path}
 
 
 # Another Chapter Title
-id: chapter-path2
+{id: chapter-path2}

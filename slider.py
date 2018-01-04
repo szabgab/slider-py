@@ -36,7 +36,7 @@ class Slider(object):
 
                 # TODO: error if something follows a Chapter title that is not an id - probably not needed
                 # TODO: error if there are duplicate chapter ids
-                match = re.search(r'\Aid: ([a-z0-9-]+)\Z', row)
+                match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
                 if match:
                     if self.page:
                         if 'id' in self.page:
