@@ -53,18 +53,22 @@ class Slider(object):
                     self.page['title'] = match.group(1)
                     continue
 
-                # ol
-                match = re.search(r'\A\* (.*)\Z', row)
+                # ul, ol
+                match = re.search(r'\A([\*1]) (.*)\Z', row)
                 if match:
+                    tag_name = 'ul'
+                    if match.group(1) == '1':
+                        tag_name = 'ol'
+
                     if not self.page:
                         raise SliderError('* Encountered outside of page {}'.format(filename))
                     if not self.tag:
-                        self.tag['name'] = 'ul'
+                        self.tag['name'] = tag_name
                         self.tag['content'] = []
                     if self.tag:
-                        if self.tag['name'] != 'ul':
-                            raise SliderError('* Encountered outside of ul {} in {}'.format(filename. self.page))
-                        self.tag['content'].append(match.group(1))
+                        if self.tag['name'] != tag_name:
+                            raise SliderError('* Encountered outside of {} {} in {}'.format(tag_name, filename. self.page))
+                        self.tag['content'].append(match.group(2))
 
                 match = re.search(r'\A\s*\Z', row)
                 if match:
