@@ -20,7 +20,9 @@ def test_parser():
     assert str(exinfo.value) == 'Second chapter found in the same file in cases/chapters.md'
 
 
-    assert slider.parse('cases/chapter.md') == {
+    pages = slider.parse('cases/chapter.md')
+    assert pages == {
         'title' : 'Chapter Title',
         'id'    : 'chapter-path'
     }
+    assert slider.generate_html(pages) == [{'html': '<h1>Chapter Title</h1>', 'id': 'chapter-path'}]

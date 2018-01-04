@@ -45,6 +45,19 @@ def parse(filename):
 
     return chapter
 
+def generate_html(chapter):
+    from jinja2 import Environment, FileSystemLoader
+    env = Environment(loader=FileSystemLoader('templates'))
+    template = env.get_template('chapter.html')
+    html = template.render(
+        title = chapter['title']
+    )
+    return [
+        {
+            'id'   : chapter['id'],
+            'html' : html,
+        }
+    ]
 
 if __name__ == '__main__':
     main()
