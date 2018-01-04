@@ -77,6 +77,7 @@ def test_ul():
         ],
     }
 
+
 def test_ol():
     slider = Slider()
 
@@ -102,6 +103,46 @@ def test_ol():
             {
                 'title': 'Page Two Title',
                 'id': 'page-2-url',
+            },
+        ],
+    }
+
+
+def test_all():
+    slider = Slider()
+
+    pages = slider.parse('cases/all.md')
+    assert pages == {
+        'title' : 'Chapter Title',
+        'id'    : 'chapter-url',
+        'pages' : [
+            {
+                'title'   : 'Page One Title',
+                'id'      : 'page-1-url',
+                'content' : [
+                    {
+                        'name' : 'ol',
+                        'content' : [
+                            'Several Bullet',
+                            'Points',
+                            'There is a 3rd point',
+                        ]
+                    }
+                ]
+            },
+            {
+                'title': 'Page Two Title',
+                'id': 'page-2-url',
+                'content': [
+                    {
+                        'name': 'ul',
+                        'content': [
+                            'Bullets',
+                            'Without',
+                            'Numbers. There is a 3rd point',
+                        ]
+                    }
+                ]
             },
         ],
     }

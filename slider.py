@@ -75,8 +75,6 @@ class Slider(object):
                     self.add_tag()
                     continue
 
-
-            self.add_tag()
             self.add_page()
 
 
@@ -98,6 +96,7 @@ class Slider(object):
             self.tag = {}
 
     def add_page(self):
+        self.add_tag()
         if self.page:
             # TODO: check if page has a title, id etc
             self.chapter['pages'].append(self.page)
