@@ -4,7 +4,7 @@ import json
 import filecmp
 import os
 
-def test_chapter(tmpdir):
+def test_exceptions(tmpdir):
     slider = Slider()
     with pytest.raises(Exception) as exinfo:
         slider.parse('cases/no-chapter-title.md')
@@ -23,6 +23,8 @@ def test_chapter(tmpdir):
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Second chapter found in the same file in cases/chapters.md'
 
+def test_chapter(tmpdir):
+    slider = Slider()
 
     pages = slider.parse('cases/chapter.md')
     with open('cases/dom/chapter.json') as fh:
