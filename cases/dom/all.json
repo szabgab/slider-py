@@ -1,0 +1,39 @@
+{
+        "title" : "Chapter Title",
+        "id"    : "chapter-url",
+        "pages" : [
+            {
+                "title"   : "Page One Title",
+                "id"      : "page-1-url",
+                "content" : [
+                    {
+                        "name" : "ol",
+                        "content" : [
+                            "Several Bullet",
+                            "Points",
+                            "There is a 3rd point"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Page Two Title",
+                "id": "page-2-url",
+                "content": [
+                    {
+                        "name": "ul",
+                        "content": [
+                            "Bullets",
+                            "Without",
+                            "Numbers. There is a 3rd point"
+                        ]
+                    },
+                    {
+                        "name": "verbatim",
+                        "content": ["\ncode\n    indentend line of this\nanother\n"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }

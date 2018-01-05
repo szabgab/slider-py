@@ -44,7 +44,7 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'pages', 'index', 'ul', 'ol', 'verbatim', 'p'
+    'pages', 'index', 'ul', 'ol', 'verbatim', 'p', 'all'
 ])
 def test_cases(name):
     slider = Slider()
@@ -92,54 +92,7 @@ def test_include():
 
 
 
-def test_all():
-    slider = Slider()
 
-    pages = slider.parse('cases/all.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'ol',
-                        'content' : [
-                            'Several Bullet',
-                            'Points',
-                            'There is a 3rd point',
-                        ]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-                'content': [
-                    {
-                        'name': 'ul',
-                        'content': [
-                            'Bullets',
-                            'Without',
-                            'Numbers. There is a 3rd point',
-                        ]
-                    },
-                    {
-                        'name': 'verbatim',
-                        'content': [
-'''
-code
-    indentend line of this
-another
-'''
-                        ]
-                    }
-                ]
-            },
-        ],
-    }
 
 def test_multi():
     slider = Slider()
