@@ -44,51 +44,13 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'pages', 'index', 'ul', 'ol', 'verbatim', 'p', 'all'
+    'pages', 'index', 'ul', 'ol', 'verbatim', 'p', 'all', 'include'
 ])
 def test_cases(name):
     slider = Slider()
     pages = slider.parse('cases/{}.md'.format(name))
     with open('cases/dom/{}.json'.format(name)) as fh:
         assert pages == json.load(fh)
-
-def test_include():
-    slider = Slider()
-
-    pages = slider.parse('cases/include.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'include',
-                        'filename' : 'sample/do.py',
-                        'title' : 'This Title',
-                        'content' : ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-                'content': [
-                    {
-                        'name': 'include',
-                        'filename': 'sample/do.py',
-                        'title': '',
-                        'content': ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"],
-                    }
-                ]
-            },
-        ],
-    }
-
-
-
 
 
 def test_multi():
