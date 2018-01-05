@@ -44,137 +44,13 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'pages', 'index'
+    'pages', 'index', 'ul', 'ol', 'verbatim', 'p'
 ])
 def test_cases(name):
     slider = Slider()
     pages = slider.parse('cases/{}.md'.format(name))
     with open('cases/dom/{}.json'.format(name)) as fh:
         assert pages == json.load(fh)
-
-
-def test_ul():
-    slider = Slider()
-
-    pages = slider.parse('cases/ul.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'ul',
-                        'content' : [
-                            'Several Bullet',
-                            'Points',
-                            'There is a 3rd point',
-                        ]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-            },
-        ],
-    }
-
-
-def test_ol():
-    slider = Slider()
-
-    pages = slider.parse('cases/ol.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'ol',
-                        'content' : [
-                            'Several Bullet',
-                            'Points',
-                            'There is a 3rd point',
-                        ]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-            },
-        ],
-    }
-
-def test_verbatim():
-    slider = Slider()
-
-    pages = slider.parse('cases/verbatim.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'verbatim',
-                        'content' : [
-'''
-code
-    indentend line of this
-another
-'''
-                        ]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-            },
-        ],
-    }
-
-
-def test_paragraphs():
-    slider = Slider()
-
-    pages = slider.parse('cases/p.md')
-    assert pages == {
-        'title' : 'Chapter Title',
-        'id'    : 'chapter-url',
-        'pages' : [
-            {
-                'title'   : 'Page One Title',
-                'id'      : 'page-1-url',
-                'content' : [
-                    {
-                        'name' : 'p',
-                        'content' : [
-'''
-First line
-    Indented line
-3rd line
-'''
-                        ]
-                    }
-                ]
-            },
-            {
-                'title': 'Page Two Title',
-                'id': 'page-2-url',
-            },
-        ],
-    }
-
 
 def test_include():
     slider = Slider()

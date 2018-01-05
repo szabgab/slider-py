@@ -1,0 +1,22 @@
+{
+        "title" : "Chapter Title",
+        "id"    : "chapter-url",
+        "pages" : [
+            {
+                "title"   : "Page One Title",
+                "id"      : "page-1-url",
+                "content" : [
+                    {
+                        "name" : "p",
+                        "content" : ["\nFirst line\n    Indented line\n3rd line\n"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Page Two Title",
+                "id": "page-2-url"
+            }
+        ]
+    }
+

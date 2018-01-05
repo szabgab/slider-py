@@ -1,0 +1,22 @@
+{
+        "title" : "Chapter Title",
+        "id"    : "chapter-url",
+        "pages" : [
+            {
+                "title"   : "Page One Title",
+                "id"      : "page-1-url",
+                "content" : [
+                    {
+                        "name" : "verbatim",
+                        "content" : [ "\ncode\n    indentend line of this\nanother\n"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Page Two Title",
+                "id": "page-2-url"
+            }
+        ]
+    }
+
