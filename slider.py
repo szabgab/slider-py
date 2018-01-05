@@ -178,22 +178,38 @@ class Slider(object):
 
     def generate_html(self):
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('chapter.html')
-        html = template.render(
+        pages = []
+
+        chapter_template = env.get_template('chapter.html')
+        html = chapter_template.render(
             title = self.chapter['title']
         )
-        return [
+        pages.append(
             {
                 'id'   : self.chapter['id'],
                 'html' : html,
             }
-        ]
+        )
+        page_template = env.get_template('page.html')
+        for page in self.chapter['pages']:
+            html = page_template.render(
+                page = page
+            )
+            pages.append(
+                {
+                    'id'   : page['id'],
+                    'html' : html,
+                }
+            )
+
+        return pages
 
     def generate_html_files(self, in_dir):
-        page = self.generate_html()
-        filename = os.path.join(in_dir, page[0]['id'] + '.html')
-        with open(filename, 'w') as fh:
-            fh.write(page[0]['html'])
+        pages = self.generate_html()
+        for page in pages:
+            filename = os.path.join(in_dir, page['id'] + '.html')
+            with open(filename, 'w') as fh:
+                fh.write(page['html'])
 
 if __name__ == '__main__':
     main()
