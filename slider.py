@@ -182,7 +182,8 @@ class Slider(object):
 
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
-            title = self.chapter['title']
+            title = self.chapter['title'],
+            pages = self.chapter['pages']
         )
         pages.append(
             {

@@ -1,2 +1,7 @@
 <h1>{{ title }}</h1>
 
+<ol>
+    {% for p in pages %}
+       <li><a href="{{ p.id }}.html">{{ p.title }}</a></li>
+    {% endfor %}
+</ol>
