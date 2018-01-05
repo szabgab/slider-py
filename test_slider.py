@@ -25,7 +25,7 @@ def test_exceptions(tmpdir):
 
 
 @pytest.mark.parametrize("name", [
-    'chapter', 'pages'
+    'chapter', 'pages', 'all'
 ])
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
@@ -44,7 +44,7 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'index', 'ul', 'ol', 'verbatim', 'p', 'all', 'include'
+    'index', 'ul', 'ol', 'verbatim', 'p', 'include'
 ])
 def test_cases(name):
     slider = Slider()

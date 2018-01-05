@@ -33,8 +33,7 @@ Example:
 
 Free Paragraph text.
 
-
-HTML Links: <a href="https://code-maven.com/slides/">slides</a> that will be used as links anywhere except in verbatim text 
+HTML Links: [slides](https://code-maven.com/slides/) that will be used as links anywhere except in verbatim text 
 
 ![Title](path/to/file.py)    # include external file
 ![](path/to/file.py)         # include external file use filename as title
@@ -44,7 +43,6 @@ HTML Links: <a href="https://code-maven.com/slides/">slides</a> that will be use
 TODO:
 * bold
 * command (maybe just bold)
-* links []() or a href ?
 * Images
 * Multiple files in one course
 * Extra text that is not included in the slide (or is optional)
