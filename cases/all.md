@@ -15,8 +15,19 @@
 * Without
 * Numbers. There is a 3rd point
 
+Some free text after the bullet points 
+but before the verbatim text. It also has a [link](https://code-maven.com/).
+
 ```
 code
     indentend line of this
 another
 ```
+
+It includes and external file:
+
+![This Title](sample/do.py)
+
+It will also have an image added:
+
+And some **bold text**.

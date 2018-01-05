@@ -20,4 +20,16 @@
           {{ c.content[0] }}
       </pre>
   {% endif %}
+  {% if c.name == 'p' %}
+      <p>
+          {{ c.content[0] }}
+      </p>
+  {% endif %}
+  {% if c.name == 'include' %}
+      <b>{{ c.title }}</b><br>
+      <b>{{ c.filename }}</b><br>
+      <pre>
+          {{ c.content[0] }}
+      </pre>
+  {% endif %}
 {% endfor %}

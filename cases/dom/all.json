@@ -1,39 +1,72 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title"   : "Page One Title",
-                "id"      : "page-1-url",
-                "content" : [
-                    {
-                        "name" : "ol",
-                        "content" : [
-                            "Several Bullet",
-                            "Points",
-                            "There is a 3rd point"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url",
-                "content": [
-                    {
-                        "name": "ul",
-                        "content": [
-                            "Bullets",
-                            "Without",
-                            "Numbers. There is a 3rd point"
-                        ]
-                    },
-                    {
-                        "name": "verbatim",
-                        "content": ["\ncode\n    indentend line of this\nanother\n"
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+    "id": "chapter-url",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "Several Bullet",
+                        "Points",
+                        "There is a 3rd point"
+                    ],
+                    "name": "ol"
+                }
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "content": [
+                {
+                    "content": [
+                        "Bullets",
+                        "Without",
+                        "Numbers. There is a 3rd point"
+                    ],
+                    "name": "ul"
+                },
+                {
+                    "content": [
+                        "\nSome free text after the bullet points \nbut before the verbatim text. It also has a [link](https://code-maven.com/).\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "\ncode\n    indentend line of this\nanother\n"
+                    ],
+                    "name": "verbatim"
+                },
+                {
+                    "content": [
+                        "\nIt includes and external file:\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"
+                    ],
+                    "filename": "sample/do.py",
+                    "name": "include",
+                    "title": "This Title"
+                },
+                {
+                    "content": [
+                        "\nIt will also have an image added:\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "\nAnd some **bold text**.\n"
+                    ],
+                    "name": "p"
+                }
+            ],
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}
