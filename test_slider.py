@@ -55,9 +55,6 @@ def test_cases(name):
 def test_include():
     slider = Slider()
 
-    with open('cases/sample/do.py', 'r') as fh:
-        file_content = fh.read()
-
     pages = slider.parse('cases/include.md')
     assert pages == {
         'title' : 'Chapter Title',
@@ -71,7 +68,7 @@ def test_include():
                         'name' : 'include',
                         'filename' : 'sample/do.py',
                         'title' : 'This Title',
-                        'content' : [file_content]
+                        'content' : ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"]
                     }
                 ]
             },
@@ -83,7 +80,7 @@ def test_include():
                         'name': 'include',
                         'filename': 'sample/do.py',
                         'title': '',
-                        'content': [file_content],
+                        'content': ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"],
                     }
                 ]
             },
