@@ -23,16 +23,21 @@ def test_exceptions(tmpdir):
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Second chapter found in the same file in cases/chapters.md'
 
-def test_chapter(tmpdir):
+
+@pytest.mark.parametrize("name", [
+    'chapter',
+])
+def test_cases_with_html(tmpdir, name):
     slider = Slider()
 
-    pages = slider.parse('cases/chapter.md')
-    with open('cases/dom/chapter.json') as fh:
+    pages = slider.parse('cases/{}.md'.format(name))
+    with open('cases/dom/{}.json'.format(name)) as fh:
         assert pages == json.load(fh)
+
     target_dir = str(tmpdir)
-    print(target_dir)
+#    print(target_dir)
     slider.generate_html_files(target_dir)
-    dcmp = filecmp.dircmp(target_dir, os.path.join('cases', 'html', 'chapter'))
+    dcmp = filecmp.dircmp(target_dir, os.path.join('cases', 'html', name))
     assert dcmp.left_only == []
     assert dcmp.right_only == []
     assert dcmp.diff_files == []
