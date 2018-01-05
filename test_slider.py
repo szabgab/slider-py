@@ -25,7 +25,7 @@ def test_exceptions(tmpdir):
 
 
 @pytest.mark.parametrize("name", [
-    'chapter',
+    'chapter', 'pages'
 ])
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
@@ -35,7 +35,7 @@ def test_cases_with_html(tmpdir, name):
         assert pages == json.load(fh)
 
     target_dir = str(tmpdir)
-#    print(target_dir)
+    print(target_dir)
     slider.generate_html_files(target_dir)
     dcmp = filecmp.dircmp(target_dir, os.path.join('cases', 'html', name))
     assert dcmp.left_only == []
@@ -44,7 +44,7 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'pages', 'index', 'ul', 'ol', 'verbatim', 'p', 'all', 'include'
+    'index', 'ul', 'ol', 'verbatim', 'p', 'all', 'include'
 ])
 def test_cases(name):
     slider = Slider()
