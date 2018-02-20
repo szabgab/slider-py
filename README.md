@@ -33,18 +33,23 @@ Example:
 
 Free Paragraph text.
 
+
 HTML Links: [slides](https://code-maven.com/slides/) that will be used as links anywhere except in verbatim text 
 
 ![Title](path/to/file.py)    # include external file
 ![](path/to/file.py)         # include external file use filename as title
 
+**bold**
+
+![Title](path/to/file.png)    # include image
+
 ``` 
 
 TODO:
-* bold
-* command (maybe just bold)
+
 * Images
 * Multiple files in one course
 * Extra text that is not included in the slide (or is optional)
 
 * Generate HTML and test it
+* Copy external file without including it in the pages
