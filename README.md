@@ -1,5 +1,5 @@
 # Slider-Py
-[![Build Status](https://travis-ci.org/szabgab/silder-py.png)](https://travis-ci.org/szabgab/slider-py)
+[![Build Status](https://travis-ci.org/szabgab/slider-py.png)](https://travis-ci.org/szabgab/slider-py)
 [![Coverage Status](https://coveralls.io/repos/github/szabgab/slider-py/badge.svg?branch=master)](https://coveralls.io/github/szabgab/slider-py?branch=master)
 
 
