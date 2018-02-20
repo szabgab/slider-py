@@ -18,7 +18,7 @@ def main():
     '''
     parser = argparse.ArgumentParser()
     parser.add_argument("--parse", help="Create DOM of md file as JSON file", action='store_true')
-    parser.add_argument("--html", help="Create HTML file of md file as JSON file", action='store_true')
+    parser.add_argument("--html", help="Create HTML files", action='store_true')
     parser.add_argument("--md", help="Name of and md file")
     parser.add_argument("--dir", help="Path to the HTML directory")
 
@@ -64,6 +64,7 @@ class Slider(object):
         self.chapter['pages'] = []
         self.page = {}
         self.tag = {}
+        self.path_to_file = os.path.dirname(filename)
 
         # TODO: error when md file is missing
         with open(filename) as fh:
@@ -165,7 +166,7 @@ class Slider(object):
                     if match:
                         title = match.group(1)
                         include_file = match.group(2)
-                        include_path = os.path.join('cases', include_file)
+                        include_path = os.path.join(self.path_to_file, include_file)
                         file_name, file_extension = os.path.splitext(include_file)
                         if file_extension in ['.png']:
                             self.tag['name'] = 'image'
@@ -272,7 +273,7 @@ class Slider(object):
                     img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
                     if not os.path.exists(img_dir):
                         os.makedirs(img_dir)
-                    include_path = os.path.join('cases', c['filename'])
+                    include_path = os.path.join(self.path_to_file, c['filename'])
                     #print(include_path)
                     shutil.copy(include_path, img_dir)
 
