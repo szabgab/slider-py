@@ -7,6 +7,6 @@ install:
   - pip install coveralls
   - pip install -r requirements.txt
 script:
-  - pytest --cov=slider.py
+  - pytest --cov=slider/
 after_success:
   - coveralls
