@@ -32,4 +32,7 @@
           {{ c.content[0] }}
       </pre>
   {% endif %}
+  {% if c.name == 'image' %}
+     <img src="{{ c.filename }}" title="{{ c.title }}" />
+  {% endif %}
 {% endfor %}

@@ -62,6 +62,11 @@
                         "\nAnd some **bold text**.\n"
                     ],
                     "name": "p"
+                },
+                {
+                    "filename": "sample/code_maven_128.png",
+                    "name": "image",
+                    "title": "A picture is worth 1000 words"
                 }
             ],
             "id": "page-2-url",

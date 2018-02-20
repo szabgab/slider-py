@@ -2,6 +2,7 @@ import argparse
 import re
 import os
 import yaml
+import shutil
 import json
 from jinja2 import Environment, FileSystemLoader
 
@@ -165,13 +166,19 @@ class Slider(object):
                         title = match.group(1)
                         include_file = match.group(2)
                         include_path = os.path.join('cases', include_file)
-                        with open(include_path, 'r') as fh:
-                            content = fh.read()
-                        self.tag['name'] = 'include'
-                        self.tag['filename'] = include_file
-                        self.tag['content'] = [content]
-                        self.tag['title'] = title
-                        self.add_tag()
+                        file_name, file_extension = os.path.splitext(include_file)
+                        if file_extension in ['.png']:
+                            self.tag['name'] = 'image'
+                            self.tag['title'] = title
+                            self.tag['filename'] = include_file
+                        else:
+                            with open(include_path, 'r') as fh:
+                                content = fh.read()
+                            self.tag['name'] = 'include'
+                            self.tag['filename'] = include_file
+                            self.tag['content'] = [content]
+                            self.tag['title'] = title
+                            self.add_tag()
                         continue
 
                     self.tag['name'] = 'p'
@@ -254,6 +261,21 @@ class Slider(object):
             filename = os.path.join(in_dir, page['id'] + '.html')
             with open(filename, 'w') as fh:
                 fh.write(page['html'])
+
+        # copy image files
+        for page in self.chapter['pages']:
+            if 'content' not in page:  # TODO: shall we make sure there is alway a content?
+                continue
+
+            for c in page['content']:
+                if c['name'] == 'image':
+                    img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
+                    if not os.path.exists(img_dir):
+                        os.makedirs(img_dir)
+                    include_path = os.path.join('cases', c['filename'])
+                    #print(include_path)
+                    shutil.copy(include_path, img_dir)
+
 
 if __name__ == '__main__':
     main()

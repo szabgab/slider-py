@@ -31,3 +31,5 @@ It includes and external file:
 It will also have an image added:
 
 And some **bold text**.
+
+![A picture is worth 1000 words](sample/code_maven_128.png)
