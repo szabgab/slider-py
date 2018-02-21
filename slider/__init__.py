@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--md", help="Name of and md file")
     parser.add_argument("--dir", help="Path to the HTML directory")
     parser.add_argument("--templates", help="Directory of the HTML templates")
-
+    parser.add_argument("--static", help="Directory of the static files that will be copied to the html directory")
 
     args = parser.parse_args()
 
@@ -46,7 +46,7 @@ def main():
             print("--dir was missing")
             parser.print_help()
             exit(1)
-        slider = Slider(templates = args.templates)
+        slider = Slider(templates = args.templates, static = args.static)
         slider.parse(args.md)
         slider.generate_html_files(args.dir)
         exit()
