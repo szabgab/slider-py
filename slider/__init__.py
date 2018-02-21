@@ -56,11 +56,17 @@ def main():
 
 class Slider(object):
     def __init__(self, **kw):
+        self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
         if 'templates' in kw and kw['templates']:
             self.templates = kw['templates']
         else:
-            root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            self.templates = os.path.join(root, 'templates')
+            self.templates = os.path.join(self.root, 'templates')
+
+        if 'static' in kw and kw['static']:
+            self.static = kw['static']
+        else:
+            self.static = os.path.join(self.root, 'static')
 
     def process_yml(self, filename):
         with open(filename, 'r') as fh:
@@ -295,6 +301,12 @@ class Slider(object):
                     include_path = os.path.join(self.path_to_file, c['filename'])
                     #print(include_path)
                     shutil.copy(include_path, img_dir)
+
+        # copy static files
+        static_dir = os.path.join(self.root, self.static)
+        if os.path.exists(static_dir):
+            for entry in os.listdir(static_dir):
+                shutil.copy(os.path.join(self.root, self.static, entry), in_dir)
 
 
 if __name__ == '__main__':
