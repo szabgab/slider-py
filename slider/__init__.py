@@ -221,7 +221,8 @@ class Slider(object):
         return
 
     def generate_html(self):
-        env = Environment(loader=FileSystemLoader('templates'))
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env = Environment(loader=FileSystemLoader(os.path.join(root, 'templates')))
         pages = []
 
         def _replace_links(html):
