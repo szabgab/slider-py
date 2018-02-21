@@ -282,6 +282,11 @@ class Slider(object):
         return pages
 
     def generate_html_files(self, in_dir):
+        work_dir = os.getcwd()
+        html_path = os.path.join(work_dir, in_dir)
+
+        if not os.path.exists(html_path):
+                os.makedirs(html_path)
         pages = self.generate_html()
         for page in pages:
             filename = os.path.join(in_dir, page['id'] + '.html')
