@@ -243,7 +243,13 @@ class Slider(object):
             }
         )
         page_template = env.get_template('page.html')
-        for page in self.chapter['pages']:
+        for i in range(len(self.chapter['pages'])):
+            page = self.chapter['pages'][i]
+            if i > 0:
+                page['prev'] = self.chapter['pages'][i-1]
+            if i < len(self.chapter['pages'])-1:
+                page['next'] = self.chapter['pages'][i+1]
+
             html = page_template.render(
                 page = page
             )
