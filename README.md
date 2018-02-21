@@ -50,9 +50,9 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 
 TODO:
 
-* Images
+* Navigation link on the HTML pages
+* Navigation key-binding in JavaScript
+
+
 * Multiple files in one course
 * Extra text that is not included in the slide (or is optional)
-
-* Generate HTML and test it
-* Copy external file without including it in the pages
