@@ -255,7 +255,10 @@ class Slider(object):
             if i > 0:
                 page['prev'] = self.chapter['pages'][i-1]
             else:
-                page['prev'] = self.chapter
+                page['prev'] = {
+                    'id' : self.chapter['id'],
+                    'title' : self.chapter['title'],
+                }
             if i < len(self.chapter['pages'])-1:
                 page['next'] = self.chapter['pages'][i+1]
 
