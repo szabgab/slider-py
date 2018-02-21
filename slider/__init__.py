@@ -56,7 +56,7 @@ def main():
 
 class Slider(object):
     def __init__(self, **kw):
-        if 'templates' in kw:
+        if 'templates' in kw and kw['templates']:
             self.templates = kw['templates']
         else:
             root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -254,6 +254,8 @@ class Slider(object):
             page = self.chapter['pages'][i]
             if i > 0:
                 page['prev'] = self.chapter['pages'][i-1]
+            else:
+                page['prev'] = self.chapter
             if i < len(self.chapter['pages'])-1:
                 page['next'] = self.chapter['pages'][i+1]
 
