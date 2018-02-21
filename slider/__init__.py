@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--html", help="Create HTML files", action='store_true')
     parser.add_argument("--md", help="Name of and md file")
     parser.add_argument("--dir", help="Path to the HTML directory")
+    parser.add_argument("--templates", help="Directory of the HTML templates")
 
 
     args = parser.parse_args()
@@ -45,7 +46,7 @@ def main():
             print("--dir was missing")
             parser.print_help()
             exit(1)
-        slider = Slider()
+        slider = Slider(templates = args.templates)
         slider.parse(args.md)
         slider.generate_html_files(args.dir)
         exit()
@@ -54,6 +55,13 @@ def main():
 
 
 class Slider(object):
+    def __init__(self, **kw):
+        if 'templates' in kw:
+            self.templates = kw['templates']
+        else:
+            root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.templates = os.path.join(root, 'templates')
+
     def process_yml(self, filename):
         with open(filename, 'r') as fh:
             conf = yaml.load(fh)
@@ -221,8 +229,7 @@ class Slider(object):
         return
 
     def generate_html(self):
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        env = Environment(loader=FileSystemLoader(os.path.join(root, 'templates')))
+        env = Environment(loader=FileSystemLoader(self.templates))
         pages = []
 
         def _replace_links(html):

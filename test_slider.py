@@ -45,6 +45,21 @@ def test_cases_with_html(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
+    'all'
+])
+def test_templates(tmpdir, name):
+    slider = Slider(templates = os.path.join('cases', 'simple_templates'))
+
+    pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
+    with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
+        assert pages == json.load(fh)
+
+    target_dir = str(tmpdir)
+    print(target_dir)
+    slider.generate_html_files(target_dir)
+    compare_dirs(target_dir, os.path.join('cases', 'simple_html', name), name)
+
+@pytest.mark.parametrize("name", [
     'index', 'ul', 'ol', 'verbatim', 'p', 'include'
 ])
 def test_cases(name):
@@ -52,6 +67,8 @@ def test_cases(name):
     pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
+
+
 
 
 def test_multi():
