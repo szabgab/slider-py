@@ -303,10 +303,9 @@ class Slider(object):
                     shutil.copy(include_path, img_dir)
 
         # copy static files
-        static_dir = os.path.join(self.root, self.static)
-        if os.path.exists(static_dir):
-            for entry in os.listdir(static_dir):
-                shutil.copy(os.path.join(self.root, self.static, entry), in_dir)
+        if os.path.exists(self.static):
+            for entry in os.listdir(self.static):
+                shutil.copy(os.path.join(self.static, entry), in_dir)
 
 
 if __name__ == '__main__':
