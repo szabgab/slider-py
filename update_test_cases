@@ -1,0 +1,3 @@
+rm -rf cases/html/all/*; python slider/__init__.py --md cases/all.md --html --dir cases/html/all/
+rm -rf cases/html/chapter/*; python slider/__init__.py --md cases/chapter.md --html --dir cases/html/chapter/
+rm -rf cases/html/pages/*; python slider/__init__.py --md cases/pages.md --html --dir cases/html/pages/

@@ -74,3 +74,5 @@ rm -rf cases/html/all
 python slider/__init__.py --md cases/all.md --html --dir cases/html/all/
 ```
 
+update all the test cases:
+./update_test_cases
