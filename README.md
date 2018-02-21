@@ -9,7 +9,7 @@
 4) Generate mobi file from the slides
 
 
-Example:
+## Example
 
 
 ```
@@ -48,11 +48,29 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 
 ``` 
 
-TODO:
+## TODO
 
 * Navigation link on the HTML pages
 * Navigation key-binding in JavaScript
-
+* Web pages should be without extension
 
 * Multiple files in one course
+* Main page for multi-file case should be index.html
+
 * Extra text that is not included in the slide (or is optional)
+
+## Development suggestions:
+
+Generate html slides in a temporary local directory to look at the result
+
+```
+python slider/__init__.py --md cases/all.md --html --dir html
+```
+
+Update the expected results for a test case:
+
+```
+rm -rf cases/html/all
+python slider/__init__.py --md cases/all.md --html --dir cases/html/all/
+```
+
