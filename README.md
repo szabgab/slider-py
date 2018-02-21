@@ -64,7 +64,7 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 Generate html slides in a temporary local directory to look at the result
 
 ```
-python slider/__init__.py --md cases/all.md --html --dir html
+rm -rf html/*; python slider/__init__.py --md cases/all.md --html --dir html
 ```
 
 Update the expected results for a test case:
