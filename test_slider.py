@@ -1,9 +1,9 @@
 import pytest
-from slider import Slider, SliderError
 import json
-import filecmp
 import os
 
+from test_tools import compare_dirs
+from slider import Slider, SliderError
 
 def test_exceptions(tmpdir):
     slider = Slider()
@@ -60,12 +60,4 @@ def test_multi():
     data = slider.process_yml(os.path.join('cases', 'multi.yml'))
     assert data == {}
 
-def compare_dirs(left, right, name):
-    dcmp = filecmp.dircmp(left, right)
-    assert dcmp.left_only == []  # some unexpected files were generated
-    assert dcmp.right_only == [] # some expected files were NOT generated
-    if dcmp.diff_files != []:
-        for filename in dcmp.diff_files:
-            print("diff {}/{} {}".format(left, filename, os.path.join('cases', 'html', name, filename)))
-    assert dcmp.diff_files == [] # the content of some files is different
 
