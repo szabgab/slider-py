@@ -4,24 +4,28 @@ import json
 import filecmp
 import os
 
+
 def test_exceptions(tmpdir):
     slider = Slider()
+    path = os.path.join('cases', 'no-chapter-title.md')
     with pytest.raises(Exception) as exinfo:
-        slider.parse('cases/no-chapter-title.md')
+        slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Chapter title is missing in cases/no-chapter-title.md'
+    assert str(exinfo.value) == 'Chapter title is missing in {}'.format(path)
 
 
+    path = os.path.join('cases', 'no-chapter-id.md')
     with pytest.raises(Exception) as exinfo:
-        slider.parse('cases/no-chapter-id.md')
+        slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Chapter id is missing in cases/no-chapter-id.md'
+    assert str(exinfo.value) == 'Chapter id is missing in {}'.format(path)
 
 
+    path = os.path.join('cases', 'chapters.md')
     with pytest.raises(Exception) as exinfo:
-        slider.parse('cases/chapters.md')
+        slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Second chapter found in the same file in cases/chapters.md'
+    assert str(exinfo.value) == 'Second chapter found in the same file in {}'.format(path)
 
 
 @pytest.mark.parametrize("name", [
@@ -30,8 +34,8 @@ def test_exceptions(tmpdir):
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
 
-    pages = slider.parse('cases/{}.md'.format(name))
-    with open('cases/dom/{}.json'.format(name)) as fh:
+    pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
+    with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
     target_dir = str(tmpdir)
@@ -51,13 +55,13 @@ def test_cases_with_html(tmpdir, name):
 ])
 def test_cases(name):
     slider = Slider()
-    pages = slider.parse('cases/{}.md'.format(name))
-    with open('cases/dom/{}.json'.format(name)) as fh:
+    pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
+    with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
 
 def test_multi():
     slider = Slider()
 
-    data = slider.process_yml('cases/multi.yml')
+    data = slider.process_yml(os.path.join('cases', 'multi.yml'))
     assert data == {}
