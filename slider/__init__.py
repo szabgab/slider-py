@@ -82,7 +82,9 @@ class Slider(object):
 
         # TODO: error when md file is missing
         with open(filename) as fh:
+            line = 0
             for row in fh:
+                line += 1
                 row = row.rstrip('\n')
                 match = re.search(r'\A# (.*)\Z', row)
                 if match:
@@ -132,26 +134,26 @@ class Slider(object):
                         tag_name = 'ol'
 
                     if not self.page:
-                        raise SliderError('* Encountered outside of page {}'.format(filename))
+                        raise SliderError('* Encountered outside of page {} in line {}'.format(filename, line))
                     if not self.tag:
                         self.tag['name'] = tag_name
                         self.tag['content'] = []
                     if self.tag:
                         if self.tag['name'] != tag_name:
-                            raise SliderError('* Encountered outside of {} {} in {}'.format(tag_name, filename. self.page))
+                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, filename, self.page, line))
                         self.tag['content'].append(match.group(2))
                     continue
 
                 match = re.search(r'\A```\Z', row)
                 if match:
                     if not self.page:
-                        raise SliderError('``` outside of page {}'.format(filename))
+                        raise SliderError('``` outside of page {} in line {}'.format(filename, line))
                     if not self.tag:
                         self.tag['name'] = 'verbatim'
                         self.tag['content'] = ['\n']
                         continue
                     if self.tag['name'] != 'verbatim':
-                        raise SliderError('``` cannot be inside another tag {}'.format(filename))
+                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(filename, line))
                     self.add_tag()
                     continue
 
@@ -203,7 +205,7 @@ class Slider(object):
                     self.tag['content'][0] += row + "\n"
                     continue
 
-                raise SliderError('Unhandled row "{}" in {}'.format(row, filename))
+                raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, filename, line))
 
 
             self.add_page()
