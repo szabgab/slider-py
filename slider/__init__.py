@@ -86,6 +86,13 @@ class Slider(object):
             for row in fh:
                 line += 1
                 row = row.rstrip('\n')
+
+                if 'name' in self.tag and self.tag['name'] and self.tag['name'] == 'verbatim' and row != '```':
+                    # inside verbatim quote we should not parse anything
+                    self.tag['content'][0] += row + "\n"
+                    continue
+
+
                 match = re.search(r'\A# (.*)\Z', row)
                 if match:
                 # TODO: error if duplicate chapter title in the same file

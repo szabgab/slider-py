@@ -8,7 +8,7 @@
                 "content" : [
                     {
                         "name" : "verbatim",
-                        "content" : [ "\ncode\n    indentend line of this\nanother\n"
+                        "content" : [ "\n# comment\ncode\n    indentend line of this\nanother\n"
                         ]
                     }
                 ]
