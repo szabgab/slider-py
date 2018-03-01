@@ -30,6 +30,6 @@ It includes and external file:
 
 It will also have an image added:
 
-And some **bold text**.
+And some **bold text** and see if **two in a row** would also work.
 
 ![A picture is worth 1000 words](sample/code_maven_128.png)

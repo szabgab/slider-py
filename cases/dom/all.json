@@ -59,7 +59,7 @@
                 },
                 {
                     "content": [
-                        "\nAnd some **bold text**.\n"
+                        "\nAnd some **bold text** and see if **two in a row** would also work.\n"
                     ],
                     "name": "p"
                 },
