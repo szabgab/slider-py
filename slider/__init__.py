@@ -34,6 +34,7 @@ class Slider(object):
         self.page = {}
         self.tag = {}
         self.path_to_file = os.path.dirname(filename)
+        self.ids = set()
 
         # TODO: error when md file is missing
         with open(filename) as fh:
@@ -60,14 +61,18 @@ class Slider(object):
                 # TODO: error if there are duplicate chapter ids
                 match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
                 if match:
+                    id = match.group(1)
                     if self.page:
                         if 'id' in self.page:
                             raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), self.page)
-                        self.page['id'] = match.group(1)
+                        self.page['id'] = id
                     else:
                         if 'id' in self.chapter:
                             raise SliderError('Second chapter id found in the same file in {}'.format(filename))
-                        self.chapter['id'] = match.group(1)
+                        self.chapter['id'] = id
+                    if id in self.ids:
+                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, filename, line))
+                    self.ids.add(id)
                     continue
 
                 # {i: index field}
