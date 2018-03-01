@@ -50,7 +50,6 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 
 ## TODO
 
-* Navigation link on the HTML pages
 * Navigation key-binding in JavaScript
 * Web pages should be without extension
 

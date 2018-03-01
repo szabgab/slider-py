@@ -52,14 +52,11 @@ class Slider(object):
 
                 match = re.search(r'\A# (.*)\Z', row)
                 if match:
-                # TODO: error if duplicate chapter title in the same file
                     if 'title' in self.chapter:
                         raise SliderError('Second chapter found in the same file in {}'.format(filename))
                     self.chapter['title'] = match.group(1)
                     continue
 
-                # TODO: error if something follows a Chapter title that is not an id - probably not needed
-                # TODO: error if there are duplicate chapter ids
                 match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
                 if match:
                     id = match.group(1)
