@@ -59,7 +59,7 @@
                 },
                 {
                     "content": [
-                        "\nAnd some **bold text** and see if **two in a row** would also work.\n"
+                        "\nAnd some **bold text** and see if **two in a row** would also work.\nSome line with `embedded code` and `another code entry with single-star: 2 * 3` and nothing more.\nThen there is a mix of **bold**, `code` and **more bold**.\n"
                     ],
                     "name": "p"
                 },

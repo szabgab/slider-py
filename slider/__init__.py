@@ -210,6 +210,7 @@ class Slider(object):
         def _replace_links(html):
             html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
             html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
+            html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
             return html
 
         chapter_template = env.get_template('chapter.html')
