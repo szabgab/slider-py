@@ -56,7 +56,13 @@ def test_exceptions(tmpdir):
     with pytest.raises(Exception) as exinfo:
         slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Second page id found in the same file in {} in page 9'.format(path)
+    assert str(exinfo.value) == 'Second page id found in the same file in {} in line 9'.format(path)
+
+    path = os.path.join('cases', 'second_chapter_id.md')
+    with pytest.raises(Exception) as exinfo:
+        slider.parse(path)
+    assert exinfo.type == SliderError
+    assert str(exinfo.value) == 'Second chapter id found in the same file in {} in line 4'.format(path)
 
 @pytest.mark.parametrize("name", [
     'chapter', 'pages', 'all'
