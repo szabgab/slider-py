@@ -21,7 +21,9 @@ but before the verbatim text. It also has a [link](https://code-maven.com/).
 ```
 code
     indentend line of this
-another
+another line
+
+after empty line
 ```
 
 It includes and external file:

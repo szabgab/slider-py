@@ -33,7 +33,7 @@
                 },
                 {
                     "content": [
-                        "\ncode\n    indentend line of this\nanother\n"
+                        "\ncode\n    indentend line of this\nanother line\n\nafter empty line\n"
                     ],
                     "name": "verbatim"
                 },
