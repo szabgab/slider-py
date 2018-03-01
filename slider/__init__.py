@@ -182,10 +182,10 @@ class Slider(object):
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
         if not 'title' in self.chapter:
-            raise SliderError('Chapter title is missing in {}'.format(filename))
+            raise SliderError('Chapter title is missing in {}'.format(self.filename))
 
         if not 'id' in self.chapter:
-            raise SliderError('Chapter id is missing in {}'.format(filename))
+            raise SliderError('Chapter id is missing in {}'.format(self.filename))
 
         return self.chapter
 
