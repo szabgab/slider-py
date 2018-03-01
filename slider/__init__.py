@@ -35,12 +35,13 @@ class Slider(object):
         self.tag = {}
         self.path_to_file = os.path.dirname(filename)
         self.ids = set()
+        self.filename = filename
 
         # TODO: error when md file is missing
         with open(filename) as fh:
-            line = 0
+            self.line = 0
             for row in fh:
-                line += 1
+                self.line += 1
                 row = row.rstrip('\n')
 
                 if 'name' in self.tag and self.tag['name'] and self.tag['name'] == 'verbatim' and row != '```':
@@ -71,7 +72,7 @@ class Slider(object):
                             raise SliderError('Second chapter id found in the same file in {}'.format(filename))
                         self.chapter['id'] = id
                     if id in self.ids:
-                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, filename, line))
+                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, filename, self.line))
                     self.ids.add(id)
                     continue
 
@@ -101,26 +102,26 @@ class Slider(object):
                         tag_name = 'ol'
 
                     if not self.page:
-                        raise SliderError('* Encountered outside of page {} in line {}'.format(filename, line))
+                        raise SliderError('* Encountered outside of page {} in line {}'.format(filename, self.line))
                     if not self.tag:
                         self.tag['name'] = tag_name
                         self.tag['content'] = []
                     if self.tag:
                         if self.tag['name'] != tag_name:
-                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, filename, self.page, line))
+                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, filename, self.page, self.line))
                         self.tag['content'].append(match.group(2))
                     continue
 
                 match = re.search(r'\A```\Z', row)
                 if match:
                     if not self.page:
-                        raise SliderError('``` outside of page {} in line {}'.format(filename, line))
+                        raise SliderError('``` outside of page {} in line {}'.format(filename, self.line))
                     if not self.tag:
                         self.tag['name'] = 'verbatim'
                         self.tag['content'] = ['\n']
                         continue
                     if self.tag['name'] != 'verbatim':
-                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(filename, line))
+                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(filename, self.line))
                     self.add_tag()
                     continue
 
@@ -199,6 +200,8 @@ class Slider(object):
         self.add_tag()
         if self.page:
             # TODO: check if page has a title, id etc
+            if 'id' not in self.page:
+                raise SliderError('Page id is missing in {} in line {}'.format(self.filename, self.line))
             self.chapter['pages'].append(self.page)
             self.page = {}
         return
