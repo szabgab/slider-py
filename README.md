@@ -31,18 +31,19 @@
 
 
    ```
-   Verbatim for code
+   Verbatim for code between triple backticks.
    ``` 
 
 Free Paragraph text.
 
+**bold between a pair of double-stars**
+
+`inline code example between single backticks`
 
 HTML Links: [slides](https://code-maven.com/slides/) that will be used as links anywhere except in verbatim text 
 
 ![Title](path/to/file.py)    # include external file
 ![](path/to/file.py)         # include external file use filename as title
-
-**bold**
 
 ![Title](path/to/file.png)    # include image
 
