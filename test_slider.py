@@ -34,6 +34,11 @@ def test_exceptions(tmpdir):
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'The id page-1-url found twice in file {} in line 11'.format(path)
 
+    path = os.path.join('cases', 'duplicate_ids.md')
+    with pytest.raises(Exception) as exinfo:
+        slider.parse(path)
+    assert exinfo.type == SliderError
+    assert str(exinfo.value) == 'The id chapter-url found twice in file {} in line 8'.format(path)
 
 @pytest.mark.parametrize("name", [
     'chapter', 'pages', 'all'
