@@ -1,4 +1,5 @@
 import filecmp
+import os
 
 def compare_dirs(left, right, name):
     dcmp = filecmp.dircmp(left, right)
