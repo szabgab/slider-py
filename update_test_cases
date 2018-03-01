@@ -1,3 +1,11 @@
+for name in all chapter include index ol p pages ul verbatim;
+do 
+    python slider.py --md cases/$name.md --parse > cases/dom/$name.json
+done
+
+
+
+
 rm -rf cases/html/all/*; python slider.py --md cases/all.md --html --dir cases/html/all/
 rm -rf cases/html/chapter/*; python slider.py --md cases/chapter.md --html --dir cases/html/chapter/
 rm -rf cases/html/pages/*; python slider.py --md cases/pages.md --html --dir cases/html/pages/
