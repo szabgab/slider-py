@@ -52,6 +52,12 @@ def test_exceptions(tmpdir):
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Chapter id is missing in {}'.format(path)
 
+    path = os.path.join('cases', 'second_page_id.md')
+    with pytest.raises(Exception) as exinfo:
+        slider.parse(path)
+    assert exinfo.type == SliderError
+    assert str(exinfo.value) == 'Second page id found in the same file in {} in page 9'.format(path)
+
 @pytest.mark.parametrize("name", [
     'chapter', 'pages', 'all'
 ])

@@ -65,7 +65,7 @@ class Slider(object):
                     id = match.group(1)
                     if self.page:
                         if 'id' in self.page:
-                            raise SliderError('Second page id found in the same file in {} in page {}'.format(filename), self.page)
+                            raise SliderError('Second page id found in the same file in {} in page {}'.format(filename, self.line))
                         self.page['id'] = id
                     else:
                         if 'id' in self.chapter:
