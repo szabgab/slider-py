@@ -1,5 +1,5 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-path",
-        "pages" : []
+    "id": "chapter-path",
+    "pages": [],
+    "title": "Chapter Title"
 }

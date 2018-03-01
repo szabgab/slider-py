@@ -1,22 +1,22 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title"   : "Page One Title",
-                "id"      : "page-1-url",
-                "content" : [
-                    {
-                        "name" : "verbatim",
-                        "content" : [ "\n# comment\ncode\n    indentend line of this\nanother\n"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url"
-            }
-        ]
-    }
-
+    "id": "chapter-url",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "\n# comment\ncode\n    indentend line of this\nanother\n"
+                    ],
+                    "name": "verbatim"
+                }
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}

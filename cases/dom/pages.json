@@ -1,15 +1,14 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title" : "Page One Title",
-                "id"    : "page-1-url"
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url"
-            }
-        ]
-    }
-
+    "id": "chapter-url",
+    "pages": [
+        {
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}

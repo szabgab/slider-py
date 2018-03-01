@@ -1,22 +1,22 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title"   : "Page One Title",
-                "id"      : "page-1-url",
-                "content" : [
-                    {
-                        "name" : "p",
-                        "content" : ["\nFirst line\n    Indented line\n3rd line\n"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url"
-            }
-        ]
-    }
-
+    "id": "chapter-url",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "\nFirst line\n    Indented line\n3rd line\n"
+                    ],
+                    "name": "p"
+                }
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}

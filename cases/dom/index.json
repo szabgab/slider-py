@@ -1,21 +1,28 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title" : "Page One Title",
-                "id"    : "page-1-url",
-                "i" : [
-                    ["subject matter"]
+    "id": "chapter-url",
+    "pages": [
+        {
+            "i": [
+                [
+                    "subject matter"
                 ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url",
-                "i": [
-                    ["an other", "sub ject"],
-                    ["index field"]
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "i": [
+                [
+                    "an other",
+                    "sub ject"
+                ],
+                [
+                    "index field"
                 ]
-            }
-        ]
-    }
+            ],
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}

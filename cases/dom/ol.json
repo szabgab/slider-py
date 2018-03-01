@@ -1,24 +1,24 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title"   : "Page One Title",
-                "id"      : "page-1-url",
-                "content" : [
-                    {
-                        "name" : "ol",
-                        "content" : [
-                            "Several Bullet",
-                            "Points",
-                            "There is a 3rd point"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url"
-            }
-        ]
-    }
+    "id": "chapter-url",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "Several Bullet",
+                        "Points",
+                        "There is a 3rd point"
+                    ],
+                    "name": "ol"
+                }
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}

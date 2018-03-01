@@ -1,31 +1,34 @@
 {
-        "title" : "Chapter Title",
-        "id"    : "chapter-url",
-        "pages" : [
-            {
-                "title"   : "Page One Title",
-                "id"      : "page-1-url",
-                "content" : [
-                    {
-                        "name" : "include",
-                        "filename" : "sample/do.py",
-                        "title" : "This Title",
-                        "content" : ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"]
-                    }
-                ]
-            },
-            {
-                "title": "Page Two Title",
-                "id": "page-2-url",
-                "content": [
-                    {
-                        "name": "include",
-                        "filename": "sample/do.py",
-                        "title": "",
-                        "content": ["import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"]
-                    }
-                ]
-            }
-        ]
-    }
-
+    "id": "chapter-url",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"
+                    ],
+                    "filename": "sample/do.py",
+                    "name": "include",
+                    "title": "This Title"
+                }
+            ],
+            "id": "page-1-url",
+            "title": "Page One Title"
+        },
+        {
+            "content": [
+                {
+                    "content": [
+                        "import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"
+                    ],
+                    "filename": "sample/do.py",
+                    "name": "include",
+                    "title": ""
+                }
+            ],
+            "id": "page-2-url",
+            "title": "Page Two Title"
+        }
+    ],
+    "title": "Chapter Title"
+}
