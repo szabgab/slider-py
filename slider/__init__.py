@@ -175,7 +175,7 @@ class Slider(object):
                     self.tag['content'][0] += row + "\n"
                     continue
 
-                raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, filename, line))
+                raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, filename, self.line))
 
 
             self.add_page()
