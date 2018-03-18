@@ -37,3 +37,10 @@ Some line with `embedded code` and `another code entry with single-star: 2 * 3` 
 Then there is a mix of **bold**, `code` and **more bold**.
 
 ![A picture is worth 1000 words](sample/code_maven_128.png)
+
+## Page Three Title
+{id: page-3-url}
+
+Free text immediately followed by
+* a bullet point
+

@@ -71,6 +71,24 @@
             ],
             "id": "page-2-url",
             "title": "Page Two Title"
+        },
+        {
+            "content": [
+                {
+                    "content": [
+                        "\nFree text immediately followed by\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "a bullet point"
+                    ],
+                    "name": "ul"
+                }
+            ],
+            "id": "page-3-url",
+            "title": "Page Three Title"
         }
     ],
     "title": "Chapter Title"

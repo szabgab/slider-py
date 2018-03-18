@@ -104,6 +104,11 @@ class Slider(object):
                         self.tag['name'] = tag_name
                         self.tag['content'] = []
                     if self.tag:
+                        if self.tag['name'] == 'p':
+                            self.add_tag()
+                            self.tag['name'] = tag_name
+                            self.tag['content'] = []
+
                         if self.tag['name'] != tag_name:
                             raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, filename, self.page, self.line))
                         self.tag['content'].append(match.group(2))
