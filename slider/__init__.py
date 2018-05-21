@@ -158,6 +158,10 @@ class Slider(object):
                             self.tag['name'] = 'image'
                             self.tag['title'] = title
                             self.tag['filename'] = include_file
+                        elif file_extension in ['.mp4']:
+                            self.tag['name'] = 'video'
+                            self.tag['title'] = title
+                            self.tag['filename'] = include_file
                         else:
                             with open(include_path, 'r') as fh:
                                 content = fh.read()
@@ -274,7 +278,7 @@ class Slider(object):
                 continue
 
             for c in page['content']:
-                if c['name'] == 'image':
+                if c['name'] == 'image' or c['name'] == 'video':
                     img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
                     if not os.path.exists(img_dir):
                         os.makedirs(img_dir)
