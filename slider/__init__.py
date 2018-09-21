@@ -92,10 +92,10 @@ class Slider(object):
                     continue
 
                 # ul, ol
-                match = re.search(r'\A([\*1]) (.*)\Z', row)
+                match = re.search(r'\A(\*|1.) (.*)\Z', row)
                 if match:
                     tag_name = 'ul'
-                    if match.group(1) == '1':
+                    if match.group(1) == '1.':
                         tag_name = 'ol'
 
                     if not self.page:

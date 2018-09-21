@@ -3,11 +3,12 @@
 [![Coverage Status](https://coveralls.io/repos/github/szabgab/slider-py/badge.svg?branch=master)](https://coveralls.io/github/szabgab/slider-py?branch=master)
 
 
-1) Parse a simplified MarkDown that is used to create my slides.
+1) Parse a simplified MarkDown that is used to create my slides.  (TODO make the format a subset of Markua)
 2) Generate HTML files from the slides
 3) Generate PDF from the slides
 4) Generate mobi file from the slides
 
+See the [slide sources](https://github.com/szabgab/slides) and the generated [slides](https://code-maven.com/slides/)
 
 ## Example
 
@@ -25,14 +26,14 @@
 * Points
 
 
-1 Numbered
-1 Bullet
-1 Points 
+1. Numbered
+1. Bullet
+1. Points
 
 
    ```
    Verbatim for code between triple backticks.
-   ``` 
+   ```
 
 Free Paragraph text.
 
@@ -40,14 +41,14 @@ Free Paragraph text.
 
 `inline code example between single backticks`
 
-HTML Links: [slides](https://code-maven.com/slides/) that will be used as links anywhere except in verbatim text 
+HTML Links: [slides](https://code-maven.com/slides/) that will be used as links anywhere except in verbatim text
 
 ![Title](path/to/file.py)    # include external file
 ![](path/to/file.py)         # include external file use filename as title
 
 ![Title](path/to/file.png)    # include image
 
-``` 
+```
 
 ## TODO
 
