@@ -154,7 +154,7 @@ class Slider(object):
                         include_file = match.group(2)
                         include_path = os.path.join(self.path_to_file, include_file)
                         file_name, file_extension = os.path.splitext(include_file)
-                        if file_extension in ['.png', '.jpg']:
+                        if file_extension in ['.png', '.jpg', '.svg']:
                             self.tag['name'] = 'image'
                             self.tag['title'] = title
                             self.tag['filename'] = include_file
