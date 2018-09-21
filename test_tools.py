@@ -7,5 +7,5 @@ def compare_dirs(left, right, name):
     assert dcmp.right_only == [], 'some expected files were NOT generated'
     if dcmp.diff_files != []:
         for filename in dcmp.diff_files:
-            print("diff {}/{} {}".format(left, filename, os.path.join('cases', 'html', name, filename)))
-    assert dcmp.diff_files == [], 'the content of some files is different'
+            print("diff {}/{} {}/{}".format(left, filename, right, filename))
+    assert dcmp.diff_files == [], 'the content of some files is different. See the diff-lines in the output.'
