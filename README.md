@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/szabgab/slider-py/badge.svg?branch=master)](https://coveralls.io/github/szabgab/slider-py?branch=master)
 
 
-1) Parse a simplified MarkDown that is used to create my slides.  (TODO make the format a subset of Markua)
+1) Parse a simplified MarkDown that is used to create my slides.  (TODO make the format a subset of [Markua](https://leanpub.com/markua/read))
 2) Generate HTML files from the slides
 3) Generate PDF from the slides
 4) Generate mobi file from the slides
@@ -12,6 +12,7 @@ See the [slide sources](https://github.com/szabgab/slides) and the generated [sl
 
 ## Example
 
+Create a director (e.g. 'example') and in there a file called 'main.md' with the following content.
 
 ```
 # Chapter Title
@@ -49,6 +50,14 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 ![Title](path/to/file.png)    # include image
 
 ```
+
+Then run
+
+```
+python slider.py --md example/main.md --html --dir html/
+```
+
+The results shoule be in the 'html' directory.
 
 ## TODO
 
