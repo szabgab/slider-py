@@ -25,7 +25,7 @@ class Slider(object):
 
     def process_yml(self, filename):
         with open(filename, 'r') as fh:
-            conf = yaml.load(fh)
+            conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
 
     def parse(self, filename):
