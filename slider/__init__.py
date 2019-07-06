@@ -24,7 +24,7 @@ class Slider(object):
             self.static = os.path.join(self.root, 'static')
 
     def process_yml(self, filename):
-        with open(filename, 'r') as fh:
+        with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
 
@@ -163,7 +163,7 @@ class Slider(object):
                             self.tag['title'] = title
                             self.tag['filename'] = include_file
                         else:
-                            with open(include_path, 'r') as fh:
+                            with open(include_path, 'r', encoding="utf-8") as fh:
                                 content = fh.read()
                             self.tag['name'] = 'include'
                             self.tag['filename'] = include_file
@@ -269,7 +269,7 @@ class Slider(object):
         pages = self.generate_html()
         for page in pages:
             filename = os.path.join(in_dir, page['id'] + '.html')
-            with open(filename, 'w') as fh:
+            with open(filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
         # copy image files
