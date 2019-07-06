@@ -38,7 +38,7 @@ class Slider(object):
         self.filename = filename
 
         # TODO: error when md file is missing
-        with open(filename) as fh:
+        with open(filename, encoding="utf-8") as fh:
             self.line = 0
             for row in fh:
                 self.line += 1
