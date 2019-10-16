@@ -292,7 +292,7 @@ class Slider(object):
 
         info = {
             "title": self.chapter['title'],
-            "pages": len(pages),
+            "cnt": len(pages),
         }
         filename = os.path.join(in_dir, 'info.yaml')
         with open(filename, 'w', encoding="utf-8") as fh:
