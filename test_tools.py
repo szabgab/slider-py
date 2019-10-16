@@ -3,7 +3,7 @@ import os
 
 def compare_dirs(left, right, name):
     dcmp = filecmp.dircmp(left, right)
-    assert dcmp.left_only == [], 'some unexpected files were generated'
+    assert dcmp.left_only == ['info.yaml'], 'some unexpected files were generated'
     assert dcmp.right_only == [], 'some expected files were NOT generated'
     if dcmp.diff_files != []:
         for filename in dcmp.diff_files:

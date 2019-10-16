@@ -263,7 +263,6 @@ class Slider(object):
     def generate_html_files(self, in_dir):
         work_dir = os.getcwd()
         html_path = os.path.join(work_dir, in_dir)
-
         if not os.path.exists(html_path):
                 os.makedirs(html_path)
         pages = self.generate_html()
@@ -290,4 +289,12 @@ class Slider(object):
         if os.path.exists(self.static):
             for entry in os.listdir(self.static):
                 shutil.copy(os.path.join(self.static, entry), in_dir)
+
+        info = {
+            "title": self.chapter['title'],
+            "pages": len(pages),
+        }
+        filename = os.path.join(in_dir, 'info.yaml')
+        with open(filename, 'w', encoding="utf-8") as fh:
+            fh.write(yaml.dump(info, default_flow_style=False))
 
