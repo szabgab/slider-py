@@ -2,6 +2,7 @@ import re
 import os
 import yaml
 import shutil
+import datetime
 from jinja2 import Environment, FileSystemLoader
 
 class SliderError(Exception):
@@ -12,6 +13,7 @@ class SliderError(Exception):
 class Slider(object):
     def __init__(self, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.timestamp = datetime.datetime.now()
 
         if 'templates' in kw and kw['templates']:
             self.templates = kw['templates']
@@ -225,7 +227,8 @@ class Slider(object):
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
             title = self.chapter['title'],
-            pages = self.chapter['pages']
+            pages = self.chapter['pages'],
+            timestamp = self.timestamp,
         )
         html = _replace_links(html)
         pages.append(
@@ -248,7 +251,8 @@ class Slider(object):
                 page['next'] = self.chapter['pages'][i+1]
 
             html = page_template.render(
-                page = page
+                page = page,
+                timestamp = self.timestamp,
             )
             html = _replace_links(html)
             pages.append(
