@@ -44,3 +44,8 @@ Then there is a mix of **bold**, `code` and **more bold**.
 Free text immediately followed by
 * a bullet point
 
+## Fake video
+{id: vake-video}
+
+![Some file instead of a real video](sample/not_real.mp4)
+

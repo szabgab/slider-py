@@ -89,6 +89,17 @@
             ],
             "id": "page-3-url",
             "title": "Page Three Title"
+        },
+        {
+            "content": [
+                {
+                    "filename": "sample/not_real.mp4",
+                    "name": "video",
+                    "title": "Some file instead of a real video"
+                }
+            ],
+            "id": "vake-video",
+            "title": "Fake video"
         }
     ],
     "title": "Chapter Title"
