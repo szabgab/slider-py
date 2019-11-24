@@ -181,6 +181,16 @@ class Slider(object):
         return False
 
 
+    def check_requirements(self):
+        # TODO: error if id already exists anywhere in the slides (chapters, pages)
+
+        if not 'title' in self.chapter:
+            raise SliderError('Chapter title is missing in {}'.format(self.filename))
+
+        if not 'id' in self.chapter:
+            raise SliderError('Chapter id is missing in {}'.format(self.filename))
+
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -230,13 +240,7 @@ class Slider(object):
 
             self.add_page()
 
-        # TODO: error if id already exists anywhere in the slides (chapters, pages)
-
-        if not 'title' in self.chapter:
-            raise SliderError('Chapter title is missing in {}'.format(self.filename))
-
-        if not 'id' in self.chapter:
-            raise SliderError('Chapter id is missing in {}'.format(self.filename))
+        self.check_requirements()
 
         return self.chapter
 
