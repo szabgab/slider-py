@@ -1,5 +1,6 @@
 import filecmp
 import os
+from contextlib import contextmanager
 
 def compare_dirs(left, right, name):
     print("Left: {} Right: {} name: {}".format(left, right, name))
@@ -12,3 +13,14 @@ def compare_dirs(left, right, name):
         for filename in dcmp.diff_files:
             print("diff {}/{} {}/{}".format(left, filename, right, filename))
     assert dcmp.diff_files == [], 'the content of some files is different. See the diff-lines in the output.'
+
+
+# See https://code-maven.com/python-context-tools
+@contextmanager
+def cwd(path):
+    oldpwd = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(oldpwd)
