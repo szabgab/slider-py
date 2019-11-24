@@ -165,6 +165,22 @@ class Slider(object):
         return False
 
 
+    def is_verbatim(self, row):
+        match = re.search(r'\A```\Z', row)
+        if match:
+            if not self.page:
+                raise SliderError('``` outside of page {} in line {}'.format(self.filename, self.line))
+            if not self.tag:
+                self.tag['name'] = 'verbatim'
+                self.tag['content'] = ['\n']
+                return True
+            if self.tag['name'] != 'verbatim':
+                raise SliderError('``` cannot be inside another tag {} in line {}'.format(self.filename, self.line))
+            self.add_tag()
+            return True
+        return False
+
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -201,32 +217,18 @@ class Slider(object):
                 if self.is_list(row):
                     continue
 
-                match = re.search(r'\A```\Z', row)
-                if match:
-                    if not self.page:
-                        raise SliderError('``` outside of page {} in line {}'.format(self.filename, self.line))
-                    if not self.tag:
-                        self.tag['name'] = 'verbatim'
-                        self.tag['content'] = ['\n']
-                        continue
-                    if self.tag['name'] != 'verbatim':
-                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(self.filename, self.line))
-                    self.add_tag()
+                if self.is_verbatim(row):
                     continue
-
 
                 if self.is_empty(row):
                     continue
-
 
                 if self.is_free_text(row):
                     continue
 
                 raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, self.filename, self.line))
 
-
             self.add_page()
-
 
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
