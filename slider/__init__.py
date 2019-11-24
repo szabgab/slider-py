@@ -1,1 +1,1 @@
-from .parser import Slider, SliderError
+from .parser import Slider, SliderError, HTML

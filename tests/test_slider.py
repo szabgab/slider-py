@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools import compare_dirs
-from slider import Slider, SliderError
+from slider import Slider, SliderError, HTML
 
 def test_exceptions():
     slider = Slider()
@@ -78,13 +78,19 @@ def test_exceptions():
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
 
-    pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
+    md_file = os.path.join('cases', '{}.md'.format(name))
+    pages = slider.parse(md_file)
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
     target_dir = str(tmpdir)
     print(target_dir)
-    slider.generate_html_files(target_dir)
+
+    html = HTML(
+        chapter  = pages,
+        filename = md_file,
+    )
+    html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'html', name), name)
 
 
@@ -92,16 +98,24 @@ def test_cases_with_html(tmpdir, name):
     'all'
 ])
 def test_templates(tmpdir, name):
-    slider = Slider(templates = os.path.join('cases', 'simple_templates'))
+    slider = Slider()
 
-    pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
+    md_file = os.path.join('cases', '{}.md'.format(name))
+    pages = slider.parse(md_file)
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
     target_dir = str(tmpdir)
     print(target_dir)
-    slider.generate_html_files(target_dir)
+
+    html = HTML(
+        templates = os.path.join('cases', 'simple_templates'),
+        chapter   = pages,
+        filename  = md_file,
+    )
+    html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'simple_html', name), name)
+
 
 @pytest.mark.parametrize("name", [
     'index', 'ul', 'ol', 'verbatim', 'p', 'include'
@@ -111,8 +125,6 @@ def test_cases(name):
     pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
-
-
 
 
 def test_multi():
