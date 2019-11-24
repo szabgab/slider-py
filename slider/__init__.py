@@ -39,6 +39,24 @@ class Slider(object):
             return True
         return False
 
+    def is_id(self, row):
+        match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
+        if match:
+            id = match.group(1)
+            if self.page:
+                if 'id' in self.page:
+                    raise SliderError('Second page id found in the same file in {} in line {}'.format(self.filename, self.line))
+                self.page['id'] = id
+            else:
+                if 'id' in self.chapter:
+                    raise SliderError('Second chapter id found in the same file in {} in line {}'.format(self.filename, self.line))
+                self.chapter['id'] = id
+            if id in self.ids:
+                raise SliderError('The id {} found twice in file {} in line {}'.format(id, self.filename, self.line))
+            self.ids.add(id)
+            return True
+        return False
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -63,20 +81,7 @@ class Slider(object):
                 if self.is_title(row):
                     continue
 
-                match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
-                if match:
-                    id = match.group(1)
-                    if self.page:
-                        if 'id' in self.page:
-                            raise SliderError('Second page id found in the same file in {} in line {}'.format(self.filename, self.line))
-                        self.page['id'] = id
-                    else:
-                        if 'id' in self.chapter:
-                            raise SliderError('Second chapter id found in the same file in {} in line {}'.format(self.filename, self.line))
-                        self.chapter['id'] = id
-                    if id in self.ids:
-                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, self.filename, self.line))
-                    self.ids.add(id)
+                if self.is_id(row):
                     continue
 
                 # {i: index field}
