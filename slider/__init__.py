@@ -74,6 +74,15 @@ class Slider(object):
         return False
 
 
+    def is_page_title(self, row):
+        match = re.search(r'\A## (.*)\Z', row)
+        if match:
+            self.add_page()
+            self.page['title'] = match.group(1)
+            return True
+        return False
+
+
     def is_list(self, row):
         # ul, ol
         match = re.search(r'\A(\*|1.) (.*)\Z', row)
@@ -130,11 +139,7 @@ class Slider(object):
                 if self.is_index(row):
                     continue
 
-
-                match = re.search(r'\A## (.*)\Z', row)
-                if match:
-                    self.add_page()
-                    self.page['title'] = match.group(1)
+                if self.is_page_title(row):
                     continue
 
                 if self.is_list(row):
