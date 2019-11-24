@@ -3,6 +3,13 @@ do
     python slider.py --md cases/$name.md --parse > cases/dom/$name.json
 done
 
-rm -rf cases/html/all/*; python slider.py --md cases/all.md --html --dir cases/html/all/
-rm -rf cases/html/chapter/*; python slider.py --md cases/chapter.md --html --dir cases/html/chapter/
-rm -rf cases/html/pages/*; python slider.py --md cases/pages.md --html --dir cases/html/pages/
+for name in all chapter pages;
+do
+    rm -rf cases/html/$name/*; python slider.py --md cases/$name.md --html --dir cases/html/$name/
+done
+
+
+for name in all;
+do
+    rm -rf cases/simple_html/$name/*; python slider.py --templates cases/simple_templates --md cases/$name.md --html --dir cases/simple_html/$name/
+done
