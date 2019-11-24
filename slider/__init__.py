@@ -127,6 +127,44 @@ class Slider(object):
         return False
 
 
+    def is_free_text(self, row):
+        # free text
+        if not self.tag:
+            # include
+            # ![Title](sample/do.py)
+            match = re.search(r'\A\!\[([^]]*)\]\(([^)]+)\)\Z', row)
+            if match:
+                title = match.group(1)
+                include_file = match.group(2)
+                include_path = os.path.join(self.path_to_file, include_file)
+                file_name, file_extension = os.path.splitext(include_file)
+                if file_extension in ['.png', '.jpg', '.svg']:
+                    self.tag['name'] = 'image'
+                    self.tag['title'] = title
+                    self.tag['filename'] = include_file
+                elif file_extension in ['.mp4']:
+                    self.tag['name'] = 'video'
+                    self.tag['title'] = title
+                    self.tag['filename'] = include_file
+                else:
+                    with open(include_path, 'r', encoding="utf-8") as fh:
+                        content = fh.read()
+                    self.tag['name'] = 'include'
+                    self.tag['filename'] = include_file
+                    self.tag['content'] = [content]
+                    self.tag['title'] = title
+                    self.add_tag()
+                return True
+
+            self.tag['name'] = 'p'
+            self.tag['content'] = ['\n']
+
+        if self.tag['name'] == 'verbatim' or self.tag['name'] == 'p':
+            self.tag['content'][0] += row + "\n"
+            return True
+        return False
+
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -181,39 +219,7 @@ class Slider(object):
                     continue
 
 
-                # free text
-                if not self.tag:
-                    # include
-                    # ![Title](sample/do.py)
-                    match = re.search(r'\A\!\[([^]]*)\]\(([^)]+)\)\Z', row)
-                    if match:
-                        title = match.group(1)
-                        include_file = match.group(2)
-                        include_path = os.path.join(self.path_to_file, include_file)
-                        file_name, file_extension = os.path.splitext(include_file)
-                        if file_extension in ['.png', '.jpg', '.svg']:
-                            self.tag['name'] = 'image'
-                            self.tag['title'] = title
-                            self.tag['filename'] = include_file
-                        elif file_extension in ['.mp4']:
-                            self.tag['name'] = 'video'
-                            self.tag['title'] = title
-                            self.tag['filename'] = include_file
-                        else:
-                            with open(include_path, 'r', encoding="utf-8") as fh:
-                                content = fh.read()
-                            self.tag['name'] = 'include'
-                            self.tag['filename'] = include_file
-                            self.tag['content'] = [content]
-                            self.tag['title'] = title
-                            self.add_tag()
-                        continue
-
-                    self.tag['name'] = 'p'
-                    self.tag['content'] = ['\n']
-
-                if self.tag['name'] == 'verbatim' or self.tag['name'] == 'p':
-                    self.tag['content'][0] += row + "\n"
+                if self.is_free_text(row):
                     continue
 
                 raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, self.filename, self.line))
