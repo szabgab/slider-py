@@ -40,7 +40,7 @@ class Slider(object):
         self.filename = filename
 
         # TODO: error when md file is missing
-        with open(filename, encoding="utf-8") as fh:
+        with open(self.filename, encoding="utf-8") as fh:
             self.line = 0
             for row in fh:
                 self.line += 1
@@ -55,7 +55,7 @@ class Slider(object):
                 match = re.search(r'\A# (.*)\Z', row)
                 if match:
                     if 'title' in self.chapter:
-                        raise SliderError('Second chapter found in the same file in {}'.format(filename))
+                        raise SliderError('Second chapter found in the same file in {}'.format(self.filename))
                     self.chapter['title'] = match.group(1)
                     continue
 
@@ -71,7 +71,7 @@ class Slider(object):
                             raise SliderError('Second chapter id found in the same file in {} in line {}'.format(self.filename, self.line))
                         self.chapter['id'] = id
                     if id in self.ids:
-                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, filename, self.line))
+                        raise SliderError('The id {} found twice in file {} in line {}'.format(id, self.filename, self.line))
                     self.ids.add(id)
                     continue
 
@@ -101,7 +101,7 @@ class Slider(object):
                         tag_name = 'ol'
 
                     if not self.page:
-                        raise SliderError('* Encountered outside of page {} in line {}'.format(filename, self.line))
+                        raise SliderError('* Encountered outside of page {} in line {}'.format(self.filename, self.line))
                     if not self.tag:
                         self.tag['name'] = tag_name
                         self.tag['content'] = []
@@ -112,20 +112,20 @@ class Slider(object):
                             self.tag['content'] = []
 
                         if self.tag['name'] != tag_name:
-                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, filename, self.page, self.line))
+                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, self.filename, self.page, self.line))
                         self.tag['content'].append(match.group(2))
                     continue
 
                 match = re.search(r'\A```\Z', row)
                 if match:
                     if not self.page:
-                        raise SliderError('``` outside of page {} in line {}'.format(filename, self.line))
+                        raise SliderError('``` outside of page {} in line {}'.format(self.filename, self.line))
                     if not self.tag:
                         self.tag['name'] = 'verbatim'
                         self.tag['content'] = ['\n']
                         continue
                     if self.tag['name'] != 'verbatim':
-                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(filename, self.line))
+                        raise SliderError('``` cannot be inside another tag {} in line {}'.format(self.filename, self.line))
                     self.add_tag()
                     continue
 
@@ -181,7 +181,7 @@ class Slider(object):
                     self.tag['content'][0] += row + "\n"
                     continue
 
-                raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, filename, self.line))
+                raise SliderError('Unhandled row "{}" in {} in line {}'.format(row, self.filename, self.line))
 
 
             self.add_page()
@@ -271,8 +271,8 @@ class Slider(object):
                 os.makedirs(html_path)
         pages = self.generate_html()
         for page in pages:
-            filename = os.path.join(in_dir, page['id'] + '.html')
-            with open(filename, 'w', encoding="utf-8") as fh:
+            html_filename = os.path.join(in_dir, page['id'] + '.html')
+            with open(html_filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
         # copy image files
@@ -298,7 +298,7 @@ class Slider(object):
             "title": self.chapter['title'],
             "cnt": len(pages),
         }
-        filename = os.path.join(in_dir, 'info.yaml')
-        with open(filename, 'w', encoding="utf-8") as fh:
+        info_filename = os.path.join(in_dir, 'info.yaml')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
             fh.write(yaml.dump(info, default_flow_style=False))
 
