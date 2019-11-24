@@ -109,6 +109,24 @@ class Slider(object):
         return False
 
 
+    def is_empty(self, row):
+        # empty row ends the ol, ul tags
+        # empty row is included in the verbatim tag
+        match = re.search(r'\A\s*\Z', row)
+        if match:
+            if self.tag:
+                if self.tag['name'] == 'verbatim':
+                    if self.tag['name'] == 'verbatim':
+                        self.tag['content'][0] += "\n"
+                    return True
+                if self.tag['name'] == 'p':
+                    self.add_tag()
+
+            self.add_tag()
+            return True
+        return False
+
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -159,19 +177,7 @@ class Slider(object):
                     continue
 
 
-                # empty row ends the ol, ul tags
-                # empty row is included in the verbatim tag
-                match = re.search(r'\A\s*\Z', row)
-                if match:
-                    if self.tag:
-                        if self.tag['name'] == 'verbatim':
-                            if self.tag['name'] == 'verbatim':
-                                self.tag['content'][0] += "\n"
-                            continue
-                        if self.tag['name'] == 'p':
-                            self.add_tag()
-
-                    self.add_tag()
+                if self.is_empty(row):
                     continue
 
 
