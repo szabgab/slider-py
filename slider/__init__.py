@@ -74,6 +74,32 @@ class Slider(object):
         return False
 
 
+    def is_list(self, row):
+        # ul, ol
+        match = re.search(r'\A(\*|1.) (.*)\Z', row)
+        if match:
+            tag_name = 'ul'
+            if match.group(1) == '1.':
+                tag_name = 'ol'
+
+            if not self.page:
+                raise SliderError('* Encountered outside of page {} in line {}'.format(self.filename, self.line))
+            if not self.tag:
+                self.tag['name'] = tag_name
+                self.tag['content'] = []
+            if self.tag:
+                if self.tag['name'] == 'p':
+                    self.add_tag()
+                    self.tag['name'] = tag_name
+                    self.tag['content'] = []
+
+                if self.tag['name'] != tag_name:
+                    raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, self.filename, self.page, self.line))
+                self.tag['content'].append(match.group(2))
+            return True
+        return False
+
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -111,27 +137,7 @@ class Slider(object):
                     self.page['title'] = match.group(1)
                     continue
 
-                # ul, ol
-                match = re.search(r'\A(\*|1.) (.*)\Z', row)
-                if match:
-                    tag_name = 'ul'
-                    if match.group(1) == '1.':
-                        tag_name = 'ol'
-
-                    if not self.page:
-                        raise SliderError('* Encountered outside of page {} in line {}'.format(self.filename, self.line))
-                    if not self.tag:
-                        self.tag['name'] = tag_name
-                        self.tag['content'] = []
-                    if self.tag:
-                        if self.tag['name'] == 'p':
-                            self.add_tag()
-                            self.tag['name'] = tag_name
-                            self.tag['content'] = []
-
-                        if self.tag['name'] != tag_name:
-                            raise SliderError('* Encountered outside of {} {} in {} in line {}'.format(tag_name, self.filename, self.page, self.line))
-                        self.tag['content'].append(match.group(2))
+                if self.is_list(row):
                     continue
 
                 match = re.search(r'\A```\Z', row)
