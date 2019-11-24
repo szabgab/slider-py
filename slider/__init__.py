@@ -9,7 +9,6 @@ class SliderError(Exception):
     pass
 
 
-
 class Slider(object):
     def __init__(self, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,10 +24,12 @@ class Slider(object):
         else:
             self.static = os.path.join(self.root, 'static')
 
+
     def process_yml(self, filename):
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
+
 
     def is_chapter_title(self, row):
         match = re.search(r'\A# (.*)\Z', row)
@@ -38,6 +39,7 @@ class Slider(object):
             self.chapter['title'] = match.group(1)
             return True
         return False
+
 
     def is_id(self, row):
         match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
@@ -56,6 +58,21 @@ class Slider(object):
             self.ids.add(id)
             return True
         return False
+
+
+    def is_index(self, row):
+        # {i: index field}
+        # {i: index!field}
+        match = re.search(r'\A\{i:\s+(.+)\}\s*\Z', row)
+        #match = re.search(r'\A\{i:\s+(.+)', row)
+        if match:
+            if not 'i' in self.page:
+                self.page['i'] = []
+            fields = match.group(1).split('!')
+            self.page['i'].append(fields)
+            return True
+        return False
+
 
     def parse(self, filename):
         self.chapter = {}
@@ -84,15 +101,7 @@ class Slider(object):
                 if self.is_id(row):
                     continue
 
-                # {i: index field}
-                # {i: index!field}
-                match = re.search(r'\A\{i:\s+(.+)\}\s*\Z', row)
-                #match = re.search(r'\A\{i:\s+(.+)', row)
-                if match:
-                    if not 'i' in self.page:
-                        self.page['i'] = []
-                    fields = match.group(1).split('!')
-                    self.page['i'].append(fields)
+                if self.is_index(row):
                     continue
 
 
