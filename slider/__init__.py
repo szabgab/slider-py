@@ -30,7 +30,7 @@ class Slider(object):
             conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
 
-    def is_title(self, row):
+    def is_chapter_title(self, row):
         match = re.search(r'\A# (.*)\Z', row)
         if match:
             if 'title' in self.chapter:
@@ -78,7 +78,7 @@ class Slider(object):
                     self.tag['content'][0] += row + "\n"
                     continue
 
-                if self.is_title(row):
+                if self.is_chapter_title(row):
                     continue
 
                 if self.is_id(row):
