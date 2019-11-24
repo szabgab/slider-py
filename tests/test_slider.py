@@ -8,8 +8,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tools import compare_dirs
 from slider import Slider, SliderError
 
-def test_exceptions(tmpdir):
+def test_exceptions():
     slider = Slider()
+
     path = os.path.join('cases', 'no-chapter-title.md')
     with pytest.raises(Exception) as exinfo:
         slider.parse(path)
