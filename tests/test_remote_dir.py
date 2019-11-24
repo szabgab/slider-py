@@ -1,5 +1,5 @@
 import os
-from test_tools import compare_dirs
+from tools import compare_dirs
 
 def test_other_dir(tmpdir):
     root = str(tmpdir)

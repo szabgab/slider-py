@@ -5,7 +5,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from test_tools import compare_dirs
+from tools import compare_dirs
 from slider import Slider, SliderError
 
 def test_exceptions(tmpdir):
