@@ -30,6 +30,15 @@ class Slider(object):
             conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
 
+    def is_title(self, row):
+        match = re.search(r'\A# (.*)\Z', row)
+        if match:
+            if 'title' in self.chapter:
+                raise SliderError('Second chapter found in the same file in {}'.format(self.filename))
+            self.chapter['title'] = match.group(1)
+            return True
+        return False
+
     def parse(self, filename):
         self.chapter = {}
         self.chapter['pages'] = []
@@ -51,12 +60,7 @@ class Slider(object):
                     self.tag['content'][0] += row + "\n"
                     continue
 
-
-                match = re.search(r'\A# (.*)\Z', row)
-                if match:
-                    if 'title' in self.chapter:
-                        raise SliderError('Second chapter found in the same file in {}'.format(self.filename))
-                    self.chapter['title'] = match.group(1)
+                if self.is_title(row):
                     continue
 
                 match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
