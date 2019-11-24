@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from slider import Slider
+from slider import Slider, HTML
 
 def main():
     '''
@@ -40,9 +40,15 @@ def main():
             print("--dir was missing")
             parser.print_help()
             exit(1)
-        slider = Slider(templates = args.templates, static = args.static)
-        slider.parse(args.md)
-        slider.generate_html_files(args.dir)
+        slider = Slider()
+        pages = slider.parse(args.md)
+        html = HTML(
+            templates = args.templates,
+            static = args.static,
+            chapter = pages,
+            filename = args.md,
+        )
+        html.generate_html_files(args.dir)
         exit()
 
     parser.print_help()
