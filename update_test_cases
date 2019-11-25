@@ -19,7 +19,7 @@ done
 
 
 # create files without extension
-for name in all;
+for name in all index;
 do
     rm -rf cases/plain_html/$name/*
     python slider.py --md cases/$name.md --html --dir cases/plain_html/$name/

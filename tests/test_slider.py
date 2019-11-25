@@ -119,7 +119,7 @@ def test_templates(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'all'
+    'all', 'index'
 ])
 def test_no_extension(tmpdir, name):
     slider = Slider()
