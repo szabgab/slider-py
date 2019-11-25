@@ -18,7 +18,10 @@ class HTML(object):
 
         self.path_to_file = os.path.dirname(kw['filename'])
 
-        self.ext = kw.get('ext')
+        if 'ext' in kw and kw['ext'] is not None:
+            self.ext = '.' + kw['ext']
+        else:
+            self.ext = ''
 
         if 'templates' in kw and kw['templates']:
             self.templates = kw['templates']
@@ -42,14 +45,11 @@ class HTML(object):
             return html
 
         chapter_template = env.get_template('chapter.html')
-        extension = ''
-        if self.ext:
-            extension = '.' + self.ext
         html = chapter_template.render(
             title = self.chapter['title'],
             pages = self.chapter['pages'],
             timestamp = self.timestamp,
-            extension  = extension,
+            extension  = self.ext,
         )
         html = _replace_links(html)
         pages.append(
@@ -92,9 +92,7 @@ class HTML(object):
                 os.makedirs(html_path)
         pages = self.generate_html()
         for page in pages:
-            html_filename = os.path.join(in_dir, page['id'])
-            if self.ext is not None:
-                html_filename += '.' + self.ext
+            html_filename = os.path.join(in_dir, page['id'] + self.ext)
             with open(html_filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
