@@ -4,6 +4,7 @@ import yaml
 import shutil
 import datetime
 from jinja2 import Environment, FileSystemLoader
+import jinja2
 
 class SliderError(Exception):
     pass
@@ -44,6 +45,8 @@ class HTML(object):
             html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
             return html
 
+        keywords = {}
+
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
             title = self.chapter['title'],
@@ -58,6 +61,7 @@ class HTML(object):
                 'html' : html,
             }
         )
+
         page_template = env.get_template('page.html')
         for i in range(len(self.chapter['pages'])):
             page = self.chapter['pages'][i]
@@ -73,6 +77,20 @@ class HTML(object):
 
             if 'i' in page:
                 page['keywords'] = page['i']
+                for pair in page['i']:
+                    main_key = pair[0]
+                    sub_key = ''
+                    if len(pair) > 1:
+                        sub_key = pair[1]
+                    if main_key not in keywords:
+                        keywords[main_key] = {}
+                    if sub_key not in keywords[main_key]:
+                        keywords[main_key][sub_key] = []
+                    keywords[main_key][sub_key].append({
+                        'id': page['id'],
+                        'title': page['title'],
+                    })
+
             html = page_template.render(
                 page = page,
                 timestamp = self.timestamp,
@@ -85,6 +103,24 @@ class HTML(object):
                     'html' : html,
                 }
             )
+
+        try:
+            keywords_template = env.get_template('keywords.html')
+            html = keywords_template.render(
+                keywords  = keywords,
+                timestamp = self.timestamp,
+                extension = self.ext,
+                title     = 'Keywords',
+            )
+            html = _replace_links(html)
+            pages.append(
+                {
+                    'id'   : 'keywords',
+                    'html' : html,
+                }
+            )
+        except jinja2.exceptions.TemplateNotFound:
+            print("Template keywords.html not found")
 
         return pages
 
