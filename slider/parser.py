@@ -74,6 +74,7 @@ class HTML(object):
             html = page_template.render(
                 page = page,
                 timestamp = self.timestamp,
+                extension  = self.ext,
             )
             html = _replace_links(html)
             pages.append(
