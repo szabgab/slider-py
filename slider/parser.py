@@ -5,12 +5,13 @@ import yaml
 class SliderError(Exception):
     pass
 
-class Slider(object):
-
+class MultiSlider(object):
     def process_yml(self, filename):
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
         return {}
+
+class Slider(object):
 
 
     def is_chapter_title(self, row):

@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from .parser import Slider, SliderError
+from .parser import MultiSlider, Slider, SliderError
 from .html import HTML
 
 def main():

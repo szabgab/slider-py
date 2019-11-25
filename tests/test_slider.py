@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools import compare_dirs
-from slider import Slider, SliderError, HTML
+from slider import MultiSlider, Slider, SliderError, HTML
 
 def test_exceptions():
     slider = Slider()
@@ -151,9 +151,9 @@ def test_cases(name):
 
 
 def test_multi():
-    slider = Slider()
+    multi_slider = MultiSlider()
 
-    data = slider.process_yml(os.path.join('cases', 'multi.yml'))
+    data = multi_slider.process_yml(os.path.join('cases', 'multi.yml'))
     assert data == {}
 
 

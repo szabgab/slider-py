@@ -4,7 +4,7 @@ import json
 from tools import compare_dirs, cwd
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from slider import Slider, SliderError, HTML
+from slider import MultiSlider, Slider, SliderError, HTML
 
 def test_other_dir(tmpdir):
     root = str(tmpdir)
@@ -29,5 +29,10 @@ def test_other_dir(tmpdir):
         html.generate_html_files(target_dir)
         compare_dirs(target_dir, os.path.join(original, 'cases', 'html', 'all'), 'all')
 
-        data = slider.process_yml(os.path.join(original, 'cases', 'multi.yml'))
+def test_other_dir_multi(tmpdir):
+    root = str(tmpdir)
+    original = os.getcwd()
+    with cwd(root):
+        multi_slider = MultiSlider()
+        data = multi_slider.process_yml(os.path.join(original, 'cases', 'multi.yml'))
         assert data == {}
