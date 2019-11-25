@@ -2,6 +2,7 @@ import sys
 import pytest
 import json
 import os
+import yaml
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -151,9 +152,14 @@ def test_cases(name):
 
 
 def test_multi():
+    yml_file = os.path.join('cases', 'multi.yml')
+
+    with open(yml_file, 'r', encoding="utf-8") as fh:
+        expected = yaml.load(fh, Loader=yaml.FullLoader)
+
     multi_slider = MultiSlider()
 
-    data = multi_slider.process_yml(os.path.join('cases', 'multi.yml'))
-    assert data == {}
+    data = multi_slider.process_yml(yml_file)
+    assert data == expected
 
 

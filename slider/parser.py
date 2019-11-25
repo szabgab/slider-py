@@ -9,11 +9,9 @@ class MultiSlider(object):
     def process_yml(self, filename):
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
-        return {}
+        return conf
 
 class Slider(object):
-
-
     def is_chapter_title(self, row):
         match = re.search(r'\A# (.*)\Z', row)
         if match:
