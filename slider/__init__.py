@@ -53,13 +53,11 @@ def main():
     if args.parse:
         if args.yaml:
             json_str = json.dumps(book, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-            print(json_str)
-            exit()
-
         if args.md:
             json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-            print(json_str)
-            exit()
+
+        print(json_str)
+        exit()
 
 
     if args.html:
@@ -77,10 +75,10 @@ def main():
         if args.md:
             html = HTML(
                 templates = args.templates,
-                static = args.static,
-                chapter = dom,
-                filename = args.md,
-                ext      = args.ext,
+                static    = args.static,
+                chapter   = dom,
+                filename  = args.md,
+                ext       = args.ext,
             )
             html.generate_html_files(args.dir)
             exit()
