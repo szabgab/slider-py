@@ -6,5 +6,5 @@ copyright: Gabor Szabo https://szabgab.com/
 version: 0.01
 name: slide_processing
 files:
-  - cases/chapter.xml
+  - cases/chapter.md
   - cases/all.md

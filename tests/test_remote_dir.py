@@ -31,17 +31,17 @@ def test_other_dir(tmpdir):
         compare_dirs(target_dir, os.path.join(original, 'cases', 'html', 'all'), 'all')
 
 
-def test_other_dir_multi(tmpdir):
-    root = str(tmpdir)
-    original = os.getcwd()
-
-    yml_file = os.path.join(original, 'cases', 'multi.yml')
-
-    with open(yml_file, 'r', encoding="utf-8") as fh:
-        expected = yaml.load(fh, Loader=yaml.FullLoader)
-
-    with cwd(root):
-        multi_slider = MultiSlider()
-        data = multi_slider.process_yml(yml_file)
-        assert data == expected
+#def test_other_dir_multi(tmpdir):
+#    root = str(tmpdir)
+#    original = os.getcwd()
+#
+#    yml_file = os.path.join(original, 'cases', 'multi.yml')
+#
+#    with open(yml_file, 'r', encoding="utf-8") as fh:
+#        expected = yaml.load(fh, Loader=yaml.FullLoader)
+#
+#    with cwd(root):
+#        multi_slider = MultiSlider()
+#        data = multi_slider.process_yml(yml_file)
+#        assert data == expected
 

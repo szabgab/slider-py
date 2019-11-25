@@ -157,6 +157,12 @@ def test_multi():
     with open(yml_file, 'r', encoding="utf-8") as fh:
         expected = yaml.load(fh, Loader=yaml.FullLoader)
 
+    expected['pages'] = []
+    for name in ['chapter', 'all']:
+        js_file = "cases/dom/{}.json".format(name)
+        with open(js_file) as fh:
+            expected['pages'].append(json.load(fh))
+
     multi_slider = MultiSlider()
 
     data = multi_slider.process_yml(yml_file)

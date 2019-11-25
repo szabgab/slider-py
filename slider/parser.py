@@ -9,6 +9,14 @@ class MultiSlider(object):
     def process_yml(self, filename):
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
+
+        conf['pages'] = []
+
+        for md_file in conf['files']:
+            slider = Slider()
+            pages = slider.parse(md_file)
+            conf['pages'].append(pages)
+
         return conf
 
 class Slider(object):
