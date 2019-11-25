@@ -10,8 +10,9 @@ do
 done
 
 
+# create simple_html files without extension to test that as well
 for name in all;
 do
     rm -rf cases/simple_html/$name/*
-    python slider.py --templates cases/simple_templates --md cases/$name.md --html --dir cases/simple_html/$name/ --ext html
+    python slider.py --templates cases/simple_templates --md cases/$name.md --html --dir cases/simple_html/$name/
 done
