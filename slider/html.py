@@ -1,10 +1,9 @@
 import datetime
+import jinja2
 import os
 import re
 import shutil
 import yaml
-from jinja2 import Environment, FileSystemLoader
-import jinja2
 
 class HTML(object):
     def __init__(self, **kw):
@@ -33,7 +32,7 @@ class HTML(object):
 
 
     def generate_html(self):
-        env = Environment(loader=FileSystemLoader(self.templates))
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         pages = []
 
         def _replace_links(html):
