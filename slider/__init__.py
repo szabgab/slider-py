@@ -14,7 +14,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--parse", help="Create DOM of md file as JSON file", action='store_true')
     parser.add_argument("--html", help="Create HTML files", action='store_true')
-    parser.add_argument("--md", help="Name of and md file")
+    parser.add_argument("--yaml", help="Name of the yaml file")
+    parser.add_argument("--md", help="Name of an md file")
     parser.add_argument("--dir", help="Path to the HTML directory")
     parser.add_argument("--templates", help="Directory of the HTML templates")
     parser.add_argument("--static", help="Directory of the static files that will be copied to the html directory")
@@ -23,15 +24,23 @@ def main():
     args = parser.parse_args()
 
     if args.parse:
-        if not args.md:
-            print("--md was missing")
-            parser.print_help()
-            exit(1)
-        slider = Slider()
-        dom = slider.parse(args.md)
-        json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-        print(json_str)
-        exit()
+        if args.yaml:
+            multi_slider = MultiSlider()
+            book = multi_slider.process_yml(args.yaml)
+            json_str = json.dumps(book, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+            print(json_str)
+            exit()
+
+        if args.md:
+            slider = Slider()
+            dom = slider.parse(args.md)
+            json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+            print(json_str)
+            exit()
+
+        print("--md was missing")
+        parser.print_help()
+        exit(1)
 
     if args.html:
         if not args.md:
