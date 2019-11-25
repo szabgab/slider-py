@@ -43,25 +43,27 @@ def get_params():
 def main():
     args = get_params()
 
+    if args.yaml:
+        multi_slider = MultiSlider()
+        book = multi_slider.process_yml(args.yaml)
+    if args.md:
+        slider = Slider()
+        dom = slider.parse(args.md)
+
     if args.parse:
         if args.yaml:
-            multi_slider = MultiSlider()
-            book = multi_slider.process_yml(args.yaml)
             json_str = json.dumps(book, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
             print(json_str)
             exit()
 
         if args.md:
-            slider = Slider()
-            dom = slider.parse(args.md)
             json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
             print(json_str)
             exit()
 
+
     if args.html:
         if args.yaml:
-            multi_slider = MultiSlider()
-            book = multi_slider.process_yml(args.yaml)
             html = HTML(
                 templates = args.templates,
                 static    = args.static,
@@ -73,12 +75,10 @@ def main():
             exit()
 
         if args.md:
-            slider = Slider()
-            pages = slider.parse(args.md)
             html = HTML(
                 templates = args.templates,
                 static = args.static,
-                chapter = pages,
+                chapter = dom,
                 filename = args.md,
                 ext      = args.ext,
             )
