@@ -47,6 +47,20 @@ def main():
             print("--dir was missing")
             parser.print_help()
             exit(1)
+
+        if args.yaml:
+            multi_slider = MultiSlider()
+            book = multi_slider.process_yml(args.yaml)
+            html = HTML(
+                templates = args.templates,
+                static    = args.static,
+                book      = book,
+                filename  = args.md,
+                ext       = args.ext,
+            )
+            html.generate_html_files(args.dir)
+            exit()
+
         if args.md:
             slider = Slider()
             pages = slider.parse(args.md)
