@@ -17,6 +17,7 @@ def main():
     parser.add_argument("--dir", help="Path to the HTML directory")
     parser.add_argument("--templates", help="Directory of the HTML templates")
     parser.add_argument("--static", help="Directory of the static files that will be copied to the html directory")
+    parser.add_argument("--ext", help="File extension. Defaults to no extension.")
 
     args = parser.parse_args()
 
@@ -47,6 +48,7 @@ def main():
             static = args.static,
             chapter = pages,
             filename = args.md,
+            ext      = args.ext,
         )
         html.generate_html_files(args.dir)
         exit()

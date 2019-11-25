@@ -89,6 +89,7 @@ def test_cases_with_html(tmpdir, name):
     html = HTML(
         chapter  = pages,
         filename = md_file,
+        ext      = 'html',
     )
     html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'html', name), name)
@@ -112,6 +113,7 @@ def test_templates(tmpdir, name):
         templates = os.path.join('cases', 'simple_templates'),
         chapter   = pages,
         filename  = md_file,
+        ext       = 'html',
     )
     html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'simple_html', name), name)

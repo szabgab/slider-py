@@ -18,6 +18,8 @@ class HTML(object):
 
         self.path_to_file = os.path.dirname(kw['filename'])
 
+        self.ext = kw.get('ext')
+
         if 'templates' in kw and kw['templates']:
             self.templates = kw['templates']
         else:
@@ -86,7 +88,9 @@ class HTML(object):
                 os.makedirs(html_path)
         pages = self.generate_html()
         for page in pages:
-            html_filename = os.path.join(in_dir, page['id'] + '.html')
+            html_filename = os.path.join(in_dir, page['id'])
+            if self.ext is not None:
+                html_filename += '.' + self.ext
             with open(html_filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
