@@ -61,12 +61,10 @@ The results shoule be in the 'html' directory.
 
 ## TODO
 
-* Navigation key-binding in JavaScript
-* Web pages should be without extension
-
+* Navigation key-binding in JavaScript (can be in other templating system)
+* Collect indexes and create keywords page
 * Multiple files in one course
 * Main page for multi-file case should be index.html
-
 * Extra text that is not included in the slide (or is optional)
 
 ## Development suggestions:
