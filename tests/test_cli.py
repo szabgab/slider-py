@@ -46,6 +46,17 @@ def test_cli_empty_html():
     print(err)
     assert code == 1
     assert 'usage: slider.py' in out.decode('utf-8')
+    assert '--dir was missing' in out.decode('utf-8')
+    assert err == b''
+
+def test_cli_empty_html_dir(tmpdir):
+    temp_dir = str(tmpdir)
+    cmd = [sys.executable, "slider.py", '--html', "--dir", temp_dir]
+    out, err, code = qx(cmd)
+    #print(out)
+    print(err)
+    assert code == 1
+    assert 'usage: slider.py' in out.decode('utf-8')
     assert '--md was missing' in out.decode('utf-8')
     assert err == b''
 

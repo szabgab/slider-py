@@ -43,12 +43,12 @@ def main():
         exit(1)
 
     if args.html:
-        if not args.md:
-            print("--md was missing")
-            parser.print_help()
-            exit(1)
         if not args.dir:
             print("--dir was missing")
+            parser.print_help()
+            exit(1)
+        if not args.md:
+            print("--md was missing")
             parser.print_help()
             exit(1)
         slider = Slider()
