@@ -4,7 +4,8 @@ import json
 from .parser import MultiSlider, Slider, SliderError
 from .html import HTML
 
-def main():
+
+def get_params():
     '''
     Use cases:
     --parse --md cases/all.md
@@ -35,6 +36,12 @@ def main():
         print("--md or --yaml is required")
         parser.print_help()
         exit(1)
+
+    return args
+
+
+def main():
+    args = get_params()
 
     if args.parse:
         if args.yaml:
