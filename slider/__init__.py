@@ -31,6 +31,10 @@ def main():
         print("--dir was missing")
         parser.print_help()
         exit(1)
+    if not args.yaml and not args.md:
+        print("--md or --yaml is required")
+        parser.print_help()
+        exit(1)
 
     if args.parse:
         if args.yaml:
@@ -46,10 +50,6 @@ def main():
             json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
             print(json_str)
             exit()
-
-        print("--md or --yaml is required")
-        parser.print_help()
-        exit(1)
 
     if args.html:
         if args.yaml:
@@ -77,10 +77,4 @@ def main():
             )
             html.generate_html_files(args.dir)
             exit()
-
-        print("--md or --yaml is required")
-        parser.print_help()
-        exit(1)
-
-
 
