@@ -42,10 +42,14 @@ class HTML(object):
             return html
 
         chapter_template = env.get_template('chapter.html')
+        extension = ''
+        if self.ext:
+            extension = '.' + self.ext
         html = chapter_template.render(
             title = self.chapter['title'],
             pages = self.chapter['pages'],
             timestamp = self.timestamp,
+            extension  = extension,
         )
         html = _replace_links(html)
         pages.append(
