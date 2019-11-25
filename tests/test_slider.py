@@ -119,6 +119,28 @@ def test_templates(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
+    'all'
+])
+def test_no_extension(tmpdir, name):
+    slider = Slider()
+
+    md_file = os.path.join('cases', '{}.md'.format(name))
+    pages = slider.parse(md_file)
+    with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
+        assert pages == json.load(fh)
+
+    target_dir = str(tmpdir)
+    print(target_dir)
+
+    html = HTML(
+        chapter   = pages,
+        filename  = md_file,
+    )
+    html.generate_html_files(target_dir)
+    compare_dirs(target_dir, os.path.join('cases', 'plain_html', name), name)
+
+
+@pytest.mark.parametrize("name", [
     'index', 'ul', 'ol', 'verbatim', 'p', 'include'
 ])
 def test_cases(name):
