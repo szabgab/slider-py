@@ -23,6 +23,15 @@ def main():
 
     args = parser.parse_args()
 
+    if not args.parse and not args.html:
+        parser.print_help()
+        exit()
+
+    if args.html and not args.dir:
+        print("--dir was missing")
+        parser.print_help()
+        exit(1)
+
     if args.parse:
         if args.yaml:
             multi_slider = MultiSlider()
@@ -43,11 +52,6 @@ def main():
         exit(1)
 
     if args.html:
-        if not args.dir:
-            print("--dir was missing")
-            parser.print_help()
-            exit(1)
-
         if args.yaml:
             multi_slider = MultiSlider()
             book = multi_slider.process_yml(args.yaml)
@@ -78,6 +82,5 @@ def main():
         parser.print_help()
         exit(1)
 
-    parser.print_help()
 
 
