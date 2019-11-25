@@ -47,21 +47,22 @@ def main():
             print("--dir was missing")
             parser.print_help()
             exit(1)
-        if not args.md:
-            print("--md was missing")
-            parser.print_help()
-            exit(1)
-        slider = Slider()
-        pages = slider.parse(args.md)
-        html = HTML(
-            templates = args.templates,
-            static = args.static,
-            chapter = pages,
-            filename = args.md,
-            ext      = args.ext,
-        )
-        html.generate_html_files(args.dir)
-        exit()
+        if args.md:
+            slider = Slider()
+            pages = slider.parse(args.md)
+            html = HTML(
+                templates = args.templates,
+                static = args.static,
+                chapter = pages,
+                filename = args.md,
+                ext      = args.ext,
+            )
+            html.generate_html_files(args.dir)
+            exit()
+
+        print("--md was missing")
+        parser.print_help()
+        exit(1)
 
     parser.print_help()
 
