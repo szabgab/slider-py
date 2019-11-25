@@ -45,7 +45,7 @@ Free text immediately followed by
 * a bullet point
 
 ## Fake video
-{id: vake-video}
+{id: fake-video}
 
 ![Some file instead of a real video](sample/not_real.mp4)
 
