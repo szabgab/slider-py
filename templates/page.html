@@ -17,6 +17,10 @@
    <a id='next' href="{{ page.next.id }}{{ extension }}">Next: {{ page.next.title }}</a>
 {% endif %}
 
+{% for word in page.keywords %}
+   <span>{{ word[0] }}{% if word[1] %} - {{ word[1] }}{% endif %}</span>
+{% endfor %}
+
 {% for c in page.content %}
   {% if c.name == 'ol' %}
       <ol>

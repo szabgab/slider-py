@@ -71,10 +71,12 @@ class HTML(object):
             if i < len(self.chapter['pages'])-1:
                 page['next'] = self.chapter['pages'][i+1]
 
+            if 'i' in page:
+                page['keywords'] = page['i']
             html = page_template.render(
                 page = page,
                 timestamp = self.timestamp,
-                extension  = self.ext,
+                extension = self.ext,
             )
             html = _replace_links(html)
             pages.append(
