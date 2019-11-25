@@ -36,7 +36,7 @@ def test_cli_empty_parse():
     print(err)
     assert code == 1
     assert 'usage: slider.py' in out.decode('utf-8')
-    assert '--md was missing' in out.decode('utf-8')
+    assert '--md or --yaml is required' in out.decode('utf-8')
     assert err == b''
 
 def test_cli_empty_html():
@@ -57,7 +57,7 @@ def test_cli_empty_html_dir(tmpdir):
     print(err)
     assert code == 1
     assert 'usage: slider.py' in out.decode('utf-8')
-    assert '--md was missing' in out.decode('utf-8')
+    assert '--md or --yaml is required' in out.decode('utf-8')
     assert err == b''
 
 def test_cli_empty_html_md():

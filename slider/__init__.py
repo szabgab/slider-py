@@ -47,7 +47,7 @@ def main():
             print(json_str)
             exit()
 
-        print("--md was missing")
+        print("--md or --yaml is required")
         parser.print_help()
         exit(1)
 
@@ -78,7 +78,7 @@ def main():
             html.generate_html_files(args.dir)
             exit()
 
-        print("--md was missing")
+        print("--md or --yaml is required")
         parser.print_help()
         exit(1)
 
