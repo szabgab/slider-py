@@ -7,6 +7,7 @@ class SliderError(Exception):
 
 class MultiSlider(object):
     def process_yml(self, filename):
+        root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
 
@@ -14,7 +15,7 @@ class MultiSlider(object):
 
         for md_file in conf['files']:
             slider = Slider()
-            pages = slider.parse(md_file)
+            pages = slider.parse(os.path.join(root, md_file))
             conf['pages'].append(pages)
 
         return conf
