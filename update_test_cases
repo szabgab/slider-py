@@ -1,6 +1,6 @@
 for name in all chapter include index ol p pages ul verbatim;
 do
-    python slider.py --md cases/$name.md --parse > cases/dom/$name.json --ext html
+    python slider.py --md cases/$name.md --parse > cases/dom/$name.json
 done
 
 for name in all chapter pages;
