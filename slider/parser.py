@@ -155,6 +155,41 @@ class Slider(object):
         return False
 
 
+    def is_block(self, row):
+        blocks = ['aside', 'blockquote', 'blurb', 'exercise', 'quiz']
+        blocks_str = '|'.join(blocks)
+        regex = r'\A\{/(' + blocks_str + ')\}\Z'
+        match = re.search(regex, row)
+        if match:
+            if not self.tag:
+                raise SliderError('{} before it was started page {} in line {}'.format(row, self.filename, self.line))
+            if self.tag['name'] != match.group(1):
+                raise SliderError('Ending {} while we are in {}. page {} in line {}'.format(row, self.tag['name'], self.filename, self.line))
+            self.add_tag()
+            return True
+
+        regex = r'\A\{(' + blocks_str + ')\}\Z'
+        match = re.search(regex, row)
+        if match:
+            if not self.page:
+                raise SliderError('Starting {} outside of page {} in line {}'.format(row, self.filename, self.line))
+            if self.tag:
+                raise SliderError('Starting {} inside another tag: {} of page {} in line {}'.format(row, self.tag['name'], self.filename, self.line))
+            self.tag['name'] = match.group(1)
+            self.tag['content'] = ['\n']
+            return True
+
+        if self.tag and self.tag['name'] in blocks:
+            m = re.search(r'\* (.*)', row)
+            if m:
+                self.tag['content'].append('<li>' + m.group(1) + '</li>')
+            else:
+                self.tag['content'].append(row)
+            return True
+
+        return False
+
+
     def is_verbatim(self, row):
         match = re.search(r'\A```\Z', row)
         if match:
@@ -200,6 +235,9 @@ class Slider(object):
                 if 'name' in self.tag and self.tag['name'] and self.tag['name'] == 'verbatim' and row != '```':
                     # inside verbatim quote we should not parse anything
                     self.tag['content'][0] += row + "\n"
+                    continue
+
+                if self.is_block(row):
                     continue
 
                 if self.is_chapter_title(row):

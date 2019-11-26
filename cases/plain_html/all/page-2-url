@@ -36,7 +36,9 @@
   
   
   
+  
 
+  
   
   
   
@@ -67,7 +69,9 @@ after empty line
   
   
   
+  
 
+  
   
   
   
@@ -81,6 +85,7 @@ It includes and external file:
   
   
 
+  
   
   
   
@@ -107,6 +112,7 @@ if __name__ == '__main__':
   
   
   
+  
       <p>
           
 It will also have an image added:
@@ -116,6 +122,7 @@ It will also have an image added:
   
   
 
+  
   
   
   
@@ -131,6 +138,7 @@ Then there is a mix of <b>bold</b>, <span class="code">code</span> and <b>more b
   
   
 
+  
   
   
   

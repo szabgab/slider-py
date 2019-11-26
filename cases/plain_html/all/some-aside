@@ -22,6 +22,7 @@
   
   
   
+  
       <p>
           
 Free text before aside
@@ -35,47 +36,32 @@ Free text before aside
   
   
   
-      <p>
+      <div class="aside">
           
-{aside}
-Text at beginning aside with some <b>bold</b> embedding and a <a href="https://he.code-maven.com/">link</a>.
+              
 
-      </p>
-  
-  
-  
-
-  
-  
-      <ul>
           
-          <li>Bullet</li>
+              <li>embedding and a <a href="https://he.code-maven.com/">link</a>.</li>
           
-          <li>Points</li>
+              
           
-          <li>In aside</li>
+              <li>Bullet</li>
           
-      </ul>
-  
+              <li>Points</li>
+          
+              <li>In aside</li>
+          
+              
+          
+              Text at end of aside
+          
+      </div>
   
   
   
   
 
   
-  
-  
-  
-      <p>
-          
-Text at end of aside
-{/aside}
-
-      </p>
-  
-  
-  
-
   
   
   

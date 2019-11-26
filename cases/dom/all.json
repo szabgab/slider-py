@@ -111,23 +111,16 @@
                 },
                 {
                     "content": [
-                        "\n{aside}\nText at beginning aside with some **bold** embedding and a [link](https://he.code-maven.com/).\n"
+                        "\n",
+                        "<li>embedding and a [link](https://he.code-maven.com/).</li>",
+                        "",
+                        "<li>Bullet</li>",
+                        "<li>Points</li>",
+                        "<li>In aside</li>",
+                        "",
+                        "Text at end of aside"
                     ],
-                    "name": "p"
-                },
-                {
-                    "content": [
-                        "Bullet",
-                        "Points",
-                        "In aside"
-                    ],
-                    "name": "ul"
-                },
-                {
-                    "content": [
-                        "\nText at end of aside\n{/aside}\n"
-                    ],
-                    "name": "p"
+                    "name": "aside"
                 },
                 {
                     "content": [
