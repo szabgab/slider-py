@@ -15,7 +15,7 @@
 * Without
 * Numbers. There is a 3rd point
 
-Some free text after the bullet points 
+Some free text after the bullet points
 but before the verbatim text. It also has a [link](https://code-maven.com/).
 
 ```

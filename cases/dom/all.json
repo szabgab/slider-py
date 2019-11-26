@@ -27,7 +27,7 @@
                 },
                 {
                     "content": [
-                        "\nSome free text after the bullet points \nbut before the verbatim text. It also has a [link](https://code-maven.com/).\n"
+                        "\nSome free text after the bullet points\nbut before the verbatim text. It also has a [link](https://code-maven.com/).\n"
                     ],
                     "name": "p"
                 },
