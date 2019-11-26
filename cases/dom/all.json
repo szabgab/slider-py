@@ -112,11 +112,13 @@
                 {
                     "content": [
                         "\n",
-                        "<li>embedding and a [link](https://he.code-maven.com/).</li>",
+                        "Text at beginning aside with some **bold** embedding and a [link](https://he.code-maven.com/).",
                         "",
+                        "<ul>",
                         "<li>Bullet</li>",
                         "<li>Points</li>",
                         "<li>In aside</li>",
+                        "</ul>",
                         "",
                         "Text at end of aside"
                     ],

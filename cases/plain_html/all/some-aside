@@ -41,15 +41,19 @@ Free text before aside
               
 
           
-              <li>embedding and a <a href="https://he.code-maven.com/">link</a>.</li>
+              Text at beginning aside with some <b>bold</b> embedding and a <a href="https://he.code-maven.com/">link</a>.
           
               
+          
+              <ul>
           
               <li>Bullet</li>
           
               <li>Points</li>
           
               <li>In aside</li>
+          
+              </ul>
           
               
           

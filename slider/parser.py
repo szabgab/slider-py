@@ -158,7 +158,7 @@ class Slider(object):
     def is_block(self, row):
         blocks = ['aside', 'blockquote', 'blurb', 'exercise', 'quiz']
         blocks_str = '|'.join(blocks)
-        regex = r'\A\{/(' + blocks_str + ')\}\Z'
+        regex = r'\A\{/(' + blocks_str + ')}\Z'
         match = re.search(regex, row)
         if match:
             if not self.tag:
@@ -168,7 +168,7 @@ class Slider(object):
             self.add_tag()
             return True
 
-        regex = r'\A\{(' + blocks_str + ')\}\Z'
+        regex = r'\A\{(' + blocks_str + ')}\Z'
         match = re.search(regex, row)
         if match:
             if not self.page:
@@ -180,10 +180,15 @@ class Slider(object):
             return True
 
         if self.tag and self.tag['name'] in blocks:
-            m = re.search(r'\* (.*)', row)
+            m = re.search(r'\A\* (.*)', row)
             if m:
+                if 'internal' not in self.tag:
+                    self.tag['internal'] = '</ul>'
+                    self.tag['content'].append('<ul>')
                 self.tag['content'].append('<li>' + m.group(1) + '</li>')
             else:
+                if 'internal' in self.tag:
+                    self.tag['content'].append(self.tag.pop('internal'))
                 self.tag['content'].append(row)
             return True
 

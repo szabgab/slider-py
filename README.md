@@ -49,6 +49,13 @@ HTML Links: [slides](https://code-maven.com/slides/) that will be used as links 
 
 ![Title](path/to/file.png)    # include image
 
+
+{aside}
+In the asides, we support [links](http://some-page.com), **bold** and
+
+* unordered
+* list
+{/aside}
 ```
 
 Then run
@@ -62,14 +69,12 @@ The results shoule be in the 'html' directory.
 ## TODO
 
 * Navigation key-binding in JavaScript (can be in other templating system)
-* Multiple files in one course
 * make sure the same id does not exists in different pages
 * makes sure index is not an id in the multiSlider case
 * make sure keywords is not an id
 * make sure examples is not an id
 * other conflicts?
 * Main page for multi-file case should be index.html
-* Extra text that is not included in the slide (or is optional)
 
 ## Development suggestions:
 
