@@ -67,9 +67,10 @@ def main():
                 templates = args.templates,
                 static    = args.static,
                 book      = book,
+                includes  = os.path.dirname(args.yaml),
                 ext       = args.ext,
             )
-            html.generate_html_files(args.dir)
+            html.generate_book(args.dir)
             exit()
 
         if args.md:

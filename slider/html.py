@@ -10,13 +10,16 @@ class HTML(object):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
+        if 'book' in kw and kw['book']:
+            self.book = kw['book']
+
         if 'chapter' in kw and kw['chapter']:
             self.chapter = kw['chapter']
 
         if 'includes' in kw and kw['includes'] is not None:
             self.includes = kw['includes']
 
-        if 'ext' in kw and kw['ext'] is not None:
+        if 'ext' in kw and kw['ext'] is not None and kw['ext'] != '':
             self.ext = '.' + kw['ext']
         else:
             self.ext = ''
@@ -30,7 +33,6 @@ class HTML(object):
             self.static = kw['static']
         else:
             self.static = os.path.join(self.root, 'static')
-
 
     def generate_html(self):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
@@ -120,6 +122,18 @@ class HTML(object):
             print("Template keywords.html not found")
 
         return pages
+
+    def generate_book(self, in_dir):
+        for page in self.book['pages']:
+            #print(page)
+            html = HTML(
+                templates = self.templates,
+                static    = self.static,
+                chapter   = page,
+                includes  = self.includes,
+                ext       = self.ext,
+            )
+            html.generate_html_files(in_dir)
 
     def generate_html_files(self, in_dir):
         work_dir = os.getcwd()

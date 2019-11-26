@@ -4,6 +4,8 @@ import sys
 import subprocess
 import yaml
 
+from tools import compare_dirs
+
 def qx(cmd):
     proc = subprocess.Popen(cmd,
         stdout = subprocess.PIPE,
@@ -108,5 +110,18 @@ def test_cli_parse_yaml(tmpdir):
             expected['pages'].append(json.load(fh))
 
     assert data == expected
+
+def test_cli_html_yaml(tmpdir):
+    temp_dir = str(tmpdir)
+    yml_file = 'cases/multi.yml'
+    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir]
+    out, err, code = qx(cmd)
+    print(out)
+    print(err)
+    assert code == 0
+    assert err == b''
+    assert out == b''
+    name = 'multi'
+    compare_dirs(temp_dir, os.path.join('cases', 'multi_html', name), name)
 
 

@@ -1,3 +1,5 @@
+set -e
+
 for name in all chapter include index ol p pages ul verbatim;
 do
     python slider.py --md cases/$name.md --parse > cases/dom/$name.json
@@ -23,4 +25,13 @@ for name in all index;
 do
     rm -rf cases/plain_html/$name/*
     python slider.py --md cases/$name.md --html --dir cases/plain_html/$name/
+done
+
+
+# create files based on yaml configuration file
+for name in multi;
+do
+    rm -rf cases/multi_html/$name/*
+    #set -x
+    python slider.py --yaml cases/$name.yml --html --dir cases/multi_html/$name/
 done

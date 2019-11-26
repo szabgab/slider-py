@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+     content="width=device-width, initial-scale=1, user-scalable=yes">
+  <title>Page Two Title</title>
+</head>
+<body>
+
+<h1>Page Two Title</h1>
+
+
+   <a id='prev' href="page-1-url">Prev: Page One Title</a>
+
+
+   <a id='next' href="page-3-url">Next: Page Three Title</a>
+
+
+
+
+
+  
+  
+      <ul>
+          
+          <li>Bullets</li>
+          
+          <li>Without</li>
+          
+          <li>Numbers. There is a 3rd point</li>
+          
+      </ul>
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+      <p>
+          
+Some free text after the bullet points
+but before the verbatim text. It also has a <a href="https://code-maven.com/">link</a>.
+
+      </p>
+  
+  
+  
+
+  
+  
+  
+      <pre>
+          
+code
+    indentend line of this
+another line
+
+after empty line
+
+      </pre>
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+      <p>
+          
+It includes and external file:
+
+      </p>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+      <b>This Title</b><br>
+      <b>sample/do.py</b><br>
+      <pre>
+          import sys
+
+def main():
+    print(sys.argv)
+
+
+
+if __name__ == '__main__':
+    main()
+
+      </pre>
+  
+  
+
+  
+  
+  
+  
+  
+      <p>
+          
+It will also have an image added:
+
+      </p>
+  
+  
+  
+
+  
+  
+  
+  
+  
+      <p>
+          
+And some <b>bold text</b> and see if <b>two in a row</b> would also work.
+Some line with <span class="code">embedded code</span> and <span class="code">another code entry with single-star: 2 * 3</span> and nothing more.
+Then there is a mix of <b>bold</b>, <span class="code">code</span> and <b>more bold</b>.
+
+      </p>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+     <img src="sample/code_maven_128.png" title="A picture is worth 1000 words" />
+  
+
+
+</body>
+</html>

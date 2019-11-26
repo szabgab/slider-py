@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+     content="width=device-width, initial-scale=1, user-scalable=yes">
+  <title>Page Three Title</title>
+</head>
+<body>
+
+<h1>Page Three Title</h1>
+
+
+   <a id='prev' href="page-2-url">Prev: Page Two Title</a>
+
+
+   <a id='next' href="fake-video">Next: Fake video</a>
+
+
+
+
+
+  
+  
+  
+  
+  
+      <p>
+          
+Free text immediately followed by
+
+      </p>
+  
+  
+  
+
+  
+  
+      <ul>
+          
+          <li>a bullet point</li>
+          
+      </ul>
+  
+  
+  
+  
+  
+  
+
+
+</body>
+</html>
