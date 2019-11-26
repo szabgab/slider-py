@@ -49,3 +49,21 @@ Free text immediately followed by
 
 ![Some file instead of a real video](sample/not_real.mp4)
 
+## Some aside
+{id: some-aside}
+
+Free text before aside
+
+{aside}
+Text at beginning aside with some **bold** embedding and a [link](https://he.code-maven.com/).
+
+* Bullet
+* Points
+* In aside
+
+Text at end of aside
+{/aside}
+
+Free text after aside
+
+

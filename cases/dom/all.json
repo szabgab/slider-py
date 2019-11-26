@@ -100,6 +100,44 @@
             ],
             "id": "fake-video",
             "title": "Fake video"
+        },
+        {
+            "content": [
+                {
+                    "content": [
+                        "\nFree text before aside\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "\n{aside}\nText at beginning aside with some **bold** embedding and a [link](https://he.code-maven.com/).\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "Bullet",
+                        "Points",
+                        "In aside"
+                    ],
+                    "name": "ul"
+                },
+                {
+                    "content": [
+                        "\nText at end of aside\n{/aside}\n"
+                    ],
+                    "name": "p"
+                },
+                {
+                    "content": [
+                        "\nFree text after aside\n"
+                    ],
+                    "name": "p"
+                }
+            ],
+            "id": "some-aside",
+            "title": "Some aside"
         }
     ],
     "title": "Chapter Title"
