@@ -13,8 +13,8 @@ class HTML(object):
         if 'chapter' in kw and kw['chapter']:
             self.chapter = kw['chapter']
 
-        if 'filename' in kw and kw['filename'] is not None:
-            self.path_to_file = os.path.dirname(kw['filename'])
+        if 'includes' in kw and kw['includes'] is not None:
+            self.includes = kw['includes']
 
         if 'ext' in kw and kw['ext'] is not None:
             self.ext = '.' + kw['ext']
@@ -142,7 +142,7 @@ class HTML(object):
                     img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
                     if not os.path.exists(img_dir):
                         os.makedirs(img_dir)
-                    include_path = os.path.join(self.path_to_file, c['filename'])
+                    include_path = os.path.join(self.includes, c['filename'])
                     #print(include_path)
                     shutil.copy(include_path, img_dir)
 

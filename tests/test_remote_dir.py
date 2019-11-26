@@ -23,7 +23,7 @@ def test_other_dir(tmpdir):
 
         html = HTML(
             chapter   = pages,
-            filename  = md_file,
+            includes  = os.path.dirname(md_file),
             ext       = 'html',
         )
 

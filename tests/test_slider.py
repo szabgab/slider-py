@@ -89,7 +89,7 @@ def test_cases_with_html(tmpdir, name):
 
     html = HTML(
         chapter  = pages,
-        filename = md_file,
+        includes = os.path.dirname(md_file),
         ext      = 'html',
     )
     html.generate_html_files(target_dir)
@@ -113,7 +113,7 @@ def test_templates(tmpdir, name):
     html = HTML(
         templates = os.path.join('cases', 'simple_templates'),
         chapter   = pages,
-        filename  = md_file,
+        includes  = os.path.dirname(md_file),
     )
     html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'simple_html', name), name)
@@ -135,7 +135,7 @@ def test_no_extension(tmpdir, name):
 
     html = HTML(
         chapter   = pages,
-        filename  = md_file,
+        includes  = os.path.dirname(md_file),
     )
     html.generate_html_files(target_dir)
     compare_dirs(target_dir, os.path.join('cases', 'plain_html', name), name)

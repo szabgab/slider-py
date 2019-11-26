@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 
 from .parser import MultiSlider, Slider, SliderError
 from .html import HTML
@@ -76,7 +77,7 @@ def main():
                 templates = args.templates,
                 static    = args.static,
                 chapter   = dom,
-                filename  = args.md,
+                includes  = os.path.dirname(args.md),
                 ext       = args.ext,
             )
             html.generate_html_files(args.dir)
