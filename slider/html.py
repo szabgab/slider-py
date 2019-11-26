@@ -10,6 +10,8 @@ class HTML(object):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
+        # TODO: clean up this code so we fail early if required parameters are not provided
+        # TODO: shall we separate the Multi chapter generator to its own classs?
         if 'book' in kw and kw['book']:
             self.book = kw['book']
 
@@ -124,8 +126,8 @@ class HTML(object):
         return pages
 
     def generate_book(self, in_dir):
+        #print(self.book)
         for page in self.book['pages']:
-            #print(page)
             html = HTML(
                 templates = self.templates,
                 static    = self.static,
@@ -134,6 +136,19 @@ class HTML(object):
                 ext       = self.ext,
             )
             html.generate_html_files(in_dir)
+
+        # create index page
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        index_template = env.get_template('index.html')
+        html = index_template.render(
+            title      = self.book['title'],
+            book       = self.book,
+            this_year  = datetime.datetime.now().year,
+        )
+        html_filename = os.path.join(in_dir, 'index' + self.ext)
+        with open(html_filename, 'w', encoding="utf-8") as fh:
+            fh.write(html)
+
 
     def generate_html_files(self, in_dir):
         work_dir = os.getcwd()
