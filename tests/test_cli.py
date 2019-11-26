@@ -1,6 +1,7 @@
 import json
 import sys
 import subprocess
+import yaml
 
 def qx(cmd):
     proc = subprocess.Popen(cmd,
@@ -83,6 +84,28 @@ def test_cli_parse(tmpdir):
     data = json.loads(out)
     with open('cases/dom/all.json') as fh:
         expected = json.load(fh)
+    assert data == expected
+
+def test_cli_parse_yaml(tmpdir):
+    temp_dir = str(tmpdir)
+    yml_file = 'cases/multi.yml'
+    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--parse"]
+    out, err, code = qx(cmd)
+    print(out)
+    print(err)
+    assert code == 0
+    assert err == b''
+    data = json.loads(out)
+
+    with open(yml_file, 'r', encoding="utf-8") as fh:
+        expected = yaml.load(fh, Loader=yaml.FullLoader)
+
+    expected['pages'] = []
+    for name in ['chapter', 'all']:
+        js_file = "cases/dom/{}.json".format(name)
+        with open(js_file) as fh:
+            expected['pages'].append(json.load(fh))
+
     assert data == expected
 
 
