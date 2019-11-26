@@ -13,7 +13,8 @@ class HTML(object):
         if 'chapter' in kw and kw['chapter']:
             self.chapter = kw['chapter']
 
-        self.path_to_file = os.path.dirname(kw['filename'])
+        if 'filename' in kw and kw['filename'] is not None:
+            self.path_to_file = os.path.dirname(kw['filename'])
 
         if 'ext' in kw and kw['ext'] is not None:
             self.ext = '.' + kw['ext']

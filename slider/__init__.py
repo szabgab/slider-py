@@ -66,7 +66,6 @@ def main():
                 templates = args.templates,
                 static    = args.static,
                 book      = book,
-                filename  = args.md,
                 ext       = args.ext,
             )
             html.generate_html_files(args.dir)
