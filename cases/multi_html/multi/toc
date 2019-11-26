@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+     content="width=device-width, initial-scale=1, user-scalable=yes">
+  <title>Slide processing example</title>
+</head>
+<body>
+
+<h1>Slide processing example</h1>
+
+<ul>
+
+    <li><a href="chapter-path">Chapter Title</a>
+        <ol>
+            
+        </ol>
+    </li>
+
+    <li><a href="chapter-url">Chapter Title</a>
+        <ol>
+            
+               <li><a href="page-1-url">Page One Title</a></li>
+            
+               <li><a href="page-2-url">Page Two Title</a></li>
+            
+               <li><a href="page-3-url">Page Three Title</a></li>
+            
+               <li><a href="fake-video">Fake video</a></li>
+            
+               <li><a href="some-aside">Some aside</a></li>
+            
+        </ol>
+    </li>
+
+</ul>
+
+</body>
+</html>

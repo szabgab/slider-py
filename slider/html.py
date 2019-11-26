@@ -126,7 +126,7 @@ class HTML(object):
         return pages
 
     def generate_book(self, in_dir):
-        #print(self.book)
+        #print(self.book['pages'][1])
         for page in self.book['pages']:
             html = HTML(
                 templates = self.templates,
@@ -149,6 +149,16 @@ class HTML(object):
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
 
+        # create toc page
+        toc_template = env.get_template('toc.html')
+        html = toc_template.render(
+            title      = self.book['title'],
+            book       = self.book,
+            this_year  = datetime.datetime.now().year,
+        )
+        html_filename = os.path.join(in_dir, 'toc' + self.ext)
+        with open(html_filename, 'w', encoding="utf-8") as fh:
+            fh.write(html)
 
     def generate_html_files(self, in_dir):
         work_dir = os.getcwd()
