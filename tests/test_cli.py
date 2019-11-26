@@ -124,4 +124,18 @@ def test_cli_html_yaml(tmpdir):
     name = 'multi'
     compare_dirs(temp_dir, os.path.join('cases', 'multi_html', name), name)
 
+def test_cli_html_yaml_ext(tmpdir):
+    temp_dir = str(tmpdir)
+    #print(temp_dir)
+    yml_file = 'cases/multi.yml'
+    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir, '--ext', 'html']
+    out, err, code = qx(cmd)
+    print(out)
+    print(err)
+    assert code == 0
+    assert err == b''
+    assert out == b''
+    name = 'multi'
+    compare_dirs(temp_dir, os.path.join('cases', 'multi_html_ext', name), name)
+
 

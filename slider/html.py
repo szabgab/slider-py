@@ -22,7 +22,10 @@ class HTML(object):
             self.includes = kw['includes']
 
         if 'ext' in kw and kw['ext'] is not None and kw['ext'] != '':
-            self.ext = '.' + kw['ext']
+            if kw['ext'][0] == '.':
+                self.ext = kw['ext']
+            else:
+                self.ext = '.' + kw['ext']
         else:
             self.ext = ''
 
@@ -144,6 +147,7 @@ class HTML(object):
             title      = self.book['title'],
             book       = self.book,
             this_year  = datetime.datetime.now().year,
+            extension  = self.ext,
         )
         html_filename = os.path.join(in_dir, 'index' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:
@@ -155,6 +159,7 @@ class HTML(object):
             title      = self.book['title'],
             book       = self.book,
             this_year  = datetime.datetime.now().year,
+            extension  = self.ext,
         )
         html_filename = os.path.join(in_dir, 'toc' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:

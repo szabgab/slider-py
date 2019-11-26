@@ -35,3 +35,10 @@ do
     #set -x
     python slider.py --yaml cases/$name.yml --html --dir cases/multi_html/$name/
 done
+
+for name in multi;
+do
+    rm -rf cases/multi_html_ext/$name/*
+    #set -x
+    python slider.py --yaml cases/$name.yml --html --dir cases/multi_html_ext/$name/ --ext html
+done
