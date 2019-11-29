@@ -131,10 +131,8 @@ class HTML(object):
 
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
-        prev = {
-            'id' : 'index'
-        }
-        for page in self.book['pages']:
+        for i in range(len(self.book['pages'])):
+            page = self.book['pages'][i]
             html = HTML(
                 templates = self.templates,
                 static    = self.static,
@@ -142,8 +140,13 @@ class HTML(object):
                 includes  = self.includes,
                 ext       = self.ext,
             )
+
+            prev = {
+                'id' : 'index'
+            }
+            if i > 0:
+                prev = self.book['pages'][i-1]
             html.generate_html_files(in_dir, prev=prev)
-            prev = self.book['pages'][-1]
 
         # create index page
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
