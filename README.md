@@ -75,6 +75,9 @@ The results shoule be in the 'html' directory.
 * make sure examples is not an id
 * other conflicts?
 * Main page for multi-file case should be index.html
+* Next and Prev chapter link on the chapter pages.
+* To index of this chapter link on each page.
+* Numbering pages?
 
 ## Development suggestions:
 
