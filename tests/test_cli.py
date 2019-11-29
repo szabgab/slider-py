@@ -99,7 +99,7 @@ def test_cli_parse_yaml(tmpdir):
     print(err)
     assert code == 0
     assert err == b''
-    data = json.loads(out)
+    data = json.loads(out.decode('utf-8'))
 
     expected = read_expected(yml_file)
 
