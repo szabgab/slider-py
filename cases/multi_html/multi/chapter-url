@@ -11,7 +11,7 @@
 <h1>Chapter Title</h1>
 
 
-    <a id="prev" href="chapter-path"></a>
+    <a id="prev" href="chapter-path">Prev</a>
 
 
 

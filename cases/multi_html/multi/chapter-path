@@ -11,11 +11,11 @@
 <h1>Chapter Title</h1>
 
 
-    <a id="prev" href="index"></a>
+    <a id="prev" href="index">Prev</a>
 
 
 
-    <a id="next" href="chapter-url"></a>
+    <a id="next" href="chapter-url">Next</a>
 
 
 
