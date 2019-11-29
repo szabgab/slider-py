@@ -29,6 +29,7 @@ class MultiSlider(object):
             id = page['id']
             if id in ids:
                 raise SliderError(f"Duplicate id {id}")
+            ids[id] = 1
 
 class Slider(object):
     def is_chapter_title(self, row):

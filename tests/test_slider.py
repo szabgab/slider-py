@@ -159,4 +159,13 @@ def test_multi():
     data = multi_slider.process_yml(yml_file)
     assert data == expected
 
+def test_duplicate_id_in_chapters_of_multi():
+    yml_file = os.path.join('cases', 'duplicate_id.yml')
+
+    multi_slider = MultiSlider()
+
+    with pytest.raises(Exception) as exinfo:
+        data = multi_slider.process_yml(yml_file)
+    assert exinfo.type == SliderError
+    assert str(exinfo.value) == 'Duplicate id chapter-path'
 
