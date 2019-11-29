@@ -10,6 +10,13 @@
 
 <h1>Chapter Title</h1>
 
+
+
+
+    <a id="next" href="page-1-url"></a>
+
+
+
 <ol>
     
        <li><a href="page-1-url">Page One Title</a></li>
