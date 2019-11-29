@@ -24,5 +24,12 @@ Copyright: {{ book.copyright }}
 Version: {{ book.version }}
 </div>
 
+<div>
+{% if first %}
+    <a class="next slidebutton" id="next" href="{{ first.id }}{{ extension }}">Start (-&gt;)</a>
+{% endif %}
+</div>
+
+
 </body>
 </html>

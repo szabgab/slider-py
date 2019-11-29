@@ -143,9 +143,12 @@ class HTML(object):
         # create index page
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         index_template = env.get_template('index.html')
+        #print(self.book['pages'][0])
+        first = self.book['pages'][0]
         html = index_template.render(
             title      = self.book['title'],
             book       = self.book,
+            first      = first,
             this_year  = datetime.datetime.now().year,
             extension  = self.ext,
         )
