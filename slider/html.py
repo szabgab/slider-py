@@ -98,6 +98,7 @@ class HTML(object):
                     })
 
             html = page_template.render(
+                title = page['title'],
                 page = page,
                 timestamp = self.timestamp,
                 extension = self.ext,

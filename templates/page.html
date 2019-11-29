@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-     content="width=device-width, initial-scale=1, user-scalable=yes">
-  <title>{{ page.title }}</title>
-</head>
-<body>
-
-<h1>{{ page.title }}</h1>
+{% include 'incl/header.html' %}
 
 {% if 'prev' in page %}
    <a id='prev' href="{{ page.prev.id }}{{ extension }}">Prev: {{ page.prev.title }}</a>
@@ -65,5 +55,4 @@
   {% endif %}
 {% endfor %}
 
-</body>
-</html>
+{% include 'incl/footer.html' %}
