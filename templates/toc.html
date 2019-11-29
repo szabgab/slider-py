@@ -10,6 +10,8 @@
 
 <h1>{{ title }}</h1>
 
+<a href="index{{extension}}">Index</a>
+
 <ul>
 {% for chapter in book.pages %}
     <li><a href="{{ chapter.id }}{{ extension }}">{{ chapter.title }}</a>
