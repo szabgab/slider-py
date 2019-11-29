@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import yaml
-from tools import compare_dirs, cwd
+from tools import compare_dirs, cwd, read_expected
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from slider import MultiSlider, Slider, SliderError, HTML
@@ -37,15 +37,7 @@ def test_other_dir_multi(tmpdir):
 
     yml_file = os.path.join(original, 'cases', 'multi.yml')
 
-    with open(yml_file, 'r', encoding="utf-8") as fh:
-        expected = yaml.load(fh, Loader=yaml.FullLoader)
-
-    expected['pages'] = []
-    for name in ['chapter', 'all', 'one_chapter']:
-        js_file = os.path.join(original, "cases/dom/{}.json".format(name))
-        with open(js_file) as fh:
-            expected['pages'].append(json.load(fh))
-
+    expected = read_expected(yml_file)
 
     with cwd(root):
         multi_slider = MultiSlider()

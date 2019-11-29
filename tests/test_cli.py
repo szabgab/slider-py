@@ -4,7 +4,7 @@ import sys
 import subprocess
 import yaml
 
-from tools import compare_dirs
+from tools import compare_dirs, read_expected
 
 def qx(cmd):
     proc = subprocess.Popen(cmd,
@@ -100,14 +100,7 @@ def test_cli_parse_yaml(tmpdir):
     assert err == b''
     data = json.loads(out)
 
-    with open(yml_file, 'r', encoding="utf-8") as fh:
-        expected = yaml.load(fh, Loader=yaml.FullLoader)
-
-    expected['pages'] = []
-    for name in ['chapter', 'all', 'one_chapter']:
-        js_file = "cases/dom/{}.json".format(name)
-        with open(js_file) as fh:
-            expected['pages'].append(json.load(fh))
+    expected = read_expected(yml_file)
 
     assert data == expected
 
