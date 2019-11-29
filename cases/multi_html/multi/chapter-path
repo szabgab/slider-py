@@ -10,14 +10,17 @@
 
 <h1>Chapter Title (1 chapter no pages)</h1>
 
+<div>
 
-    <a id="prev" href="index">Prev</a>
+    <a id="prev" href="index">Prev</a> 
 
+</div>
 
+<div>
 
-    <a id="next" href="chapter-url">Next</a>
+    <a id="next" href="chapter-url">Next</a> All Chapter Title
 
-
+</div>
 
 <ol>
     

@@ -10,14 +10,17 @@
 
 <h1>{{ title }}</h1>
 
+<div>
 {% if prev %}
-    <a id="prev" href="{{ prev.id }}{{ extension }}">Prev</a>
+    <a id="prev" href="{{ prev.id }}{{ extension }}">Prev</a> {{ prev.title }}
 {% endif %}
+</div>
 
+<div>
 {% if next %}
-    <a id="next" href="{{ next.id }}{{ extension }}">Next</a>
+    <a id="next" href="{{ next.id }}{{ extension }}">Next</a> {{ next.title }}
 {% endif %}
-
+</div>
 
 <ol>
     {% for p in pages %}
