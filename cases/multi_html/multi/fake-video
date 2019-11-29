@@ -11,7 +11,7 @@
 <h1>Fake video</h1>
 
 
-   <a id='prev' href="page-3-url">Prev: Page Three Title</a>
+   <a id='prev' href="all-page-3-url">Prev: Page Three Title</a>
 
 
    <a id='next' href="some-aside">Next: Some aside</a>

@@ -2,14 +2,14 @@
 {id: chapter-url}
 
 ## Page One Title
-{id: page-1-url}
+{id: all-page-1-url}
 
 1. Several Bullet
 1. Points
 1. There is a 3rd point
 
 ## Page Two Title
-{id: page-2-url}
+{id: all-page-2-url}
 
 * Bullets
 * Without
@@ -39,7 +39,7 @@ Then there is a mix of **bold**, `code` and **more bold**.
 ![A picture is worth 1000 words](sample/code_maven_128.png)
 
 ## Page Three Title
-{id: page-3-url}
+{id: all-page-3-url}
 
 Free text immediately followed by
 * a bullet point

@@ -20,11 +20,11 @@
 
 <ol>
     
-       <li><a href="page-1-url">Page One Title</a></li>
+       <li><a href="all-page-1-url">Page One Title</a></li>
     
-       <li><a href="page-2-url">Page Two Title</a></li>
+       <li><a href="all-page-2-url">Page Two Title</a></li>
     
-       <li><a href="page-3-url">Page Three Title</a></li>
+       <li><a href="all-page-3-url">Page Three Title</a></li>
     
        <li><a href="fake-video">Fake video</a></li>
     

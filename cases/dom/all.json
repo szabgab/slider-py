@@ -12,7 +12,7 @@
                     "name": "ol"
                 }
             ],
-            "id": "page-1-url",
+            "id": "all-page-1-url",
             "title": "Page One Title"
         },
         {
@@ -69,7 +69,7 @@
                     "title": "A picture is worth 1000 words"
                 }
             ],
-            "id": "page-2-url",
+            "id": "all-page-2-url",
             "title": "Page Two Title"
         },
         {
@@ -87,7 +87,7 @@
                     "name": "ul"
                 }
             ],
-            "id": "page-3-url",
+            "id": "all-page-3-url",
             "title": "Page Three Title"
         },
         {
