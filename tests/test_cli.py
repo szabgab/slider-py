@@ -104,7 +104,7 @@ def test_cli_parse_yaml(tmpdir):
         expected = yaml.load(fh, Loader=yaml.FullLoader)
 
     expected['pages'] = []
-    for name in ['chapter', 'all']:
+    for name in ['chapter', 'all', 'one_chapter']:
         js_file = "cases/dom/{}.json".format(name)
         with open(js_file) as fh:
             expected['pages'].append(json.load(fh))
