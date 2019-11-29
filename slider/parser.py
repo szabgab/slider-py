@@ -31,6 +31,13 @@ class MultiSlider(object):
                 raise SliderError(f"Duplicate id {id}")
             ids[id] = 1
 
+            for pg in page['pages']:
+                id = pg['id']
+                if id in ids:
+                    raise SliderError(f"Duplicate id {id}")
+                ids[id] = 1
+
+
 class Slider(object):
     def is_chapter_title(self, row):
         match = re.search(r'\A# (.*)\Z', row)

@@ -1,0 +1,10 @@
+---
+title: Slide processing example
+author: Gabor Szabo
+first_year: 2006
+copyright: Gabor Szabo https://szabgab.com/
+version: 0.01
+name: slide_processing
+files:
+  - ul.md
+  - ol.md
