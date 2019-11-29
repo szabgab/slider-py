@@ -2,6 +2,7 @@ import filecmp
 import os
 import yaml
 import json
+import sys
 from contextlib import contextmanager
 
 def compare_dirs(left, right, name):
@@ -29,7 +30,10 @@ def cwd(path):
 
 def read_expected(yml_file):
     with open(yml_file, 'r', encoding="utf-8") as fh:
-        expected = yaml.load(fh, Loader=yaml.FullLoader)
+        if sys.version_info.minor < 6:
+            expected = yaml.load(fh)
+        else:
+            expected = yaml.load(fh, Loader=yaml.FullLoader)
 
     expected['pages'] = []
     for name in expected['files']:

@@ -1,6 +1,7 @@
 import re
 import os
 import yaml
+import sys
 
 class SliderError(Exception):
     pass
@@ -9,7 +10,11 @@ class MultiSlider(object):
     def process_yml(self, filename):
         root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
-            conf = yaml.load(fh, Loader=yaml.FullLoader)
+            if sys.version_info.minor < 6:
+                conf = yaml.load(fh)
+            else:
+                conf = yaml.load(fh, Loader=yaml.FullLoader)
+
             self.conf = conf
 
         conf['pages'] = []
