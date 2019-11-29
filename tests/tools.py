@@ -32,8 +32,8 @@ def read_expected(yml_file):
         expected = yaml.load(fh, Loader=yaml.FullLoader)
 
     expected['pages'] = []
-    for name in ['chapter', 'all', 'one_chapter']:
-        js_file = "cases/dom/{}.json".format(name)
+    for name in expected['files']:
+        js_file = "cases/dom/{}.json".format(name[:-3])
         with open(js_file) as fh:
             expected['pages'].append(json.load(fh))
     return expected
