@@ -44,6 +44,16 @@
         </ol>
     </li>
 
+    <li><a href="incl-chapter-url">Chapter Title</a>
+        <ol>
+            
+               <li><a href="incl-page-1-url">Page One Title</a></li>
+            
+               <li><a href="incl-page-2-url">Page Two Title</a></li>
+            
+        </ol>
+    </li>
+
     <li><a href="chapter-new-path">One Chapter Title (1 chapter no pages)</a>
         <ol>
             
