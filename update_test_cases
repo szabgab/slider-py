@@ -35,13 +35,12 @@ for name in multi;
 do
     rm -rf cases/multi_html/$name/*
     #set -x
-    python slider.py --yaml cases/$name.yml --html --dir cases/multi_html/$name/
+    python slider.py --yaml cases/$name.json --html --dir cases/multi_html/$name/
 done
 
 # Create HTML files based on YAML configuration file
 for name in multi;
 do
     rm -rf cases/multi_html_ext/$name/*
-    #set -x
-    python slider.py --yaml cases/$name.yml --html --dir cases/multi_html_ext/$name/ --ext html
+    python slider.py --yaml cases/$name.json --html --dir cases/multi_html_ext/$name/ --ext html
 done

@@ -1,6 +1,6 @@
 import re
 import os
-import yaml
+import json
 import sys
 
 class SliderError(Exception):
@@ -10,10 +10,7 @@ class MultiSlider(object):
     def process_yml(self, filename):
         root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
-            if sys.version_info.minor < 6:
-                conf = yaml.load(fh, Loader=yaml.Loader)
-            else:
-                conf = yaml.load(fh, Loader=yaml.FullLoader)
+            conf = json.load(fh)
 
             self.conf = conf
 

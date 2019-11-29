@@ -150,7 +150,7 @@ def test_cases(name):
         assert pages == json.load(fh)
 
 def test_multi():
-    yml_file = os.path.join('cases', 'multi.yml')
+    yml_file = os.path.join('cases', 'multi.json')
 
     expected = read_expected(yml_file)
 
@@ -160,7 +160,7 @@ def test_multi():
     assert data == expected
 
 def test_duplicate_id_in_chapters_of_multi():
-    yml_file = os.path.join('cases', 'duplicate_id.yml')
+    yml_file = os.path.join('cases', 'duplicate_id.json')
 
     multi_slider = MultiSlider()
 
@@ -170,7 +170,7 @@ def test_duplicate_id_in_chapters_of_multi():
     assert str(exinfo.value) == 'Duplicate id chapter-path'
 
 def test_duplicate_id_in_pages_of_multi():
-    yml_file = os.path.join('cases', 'duplicate_page_ids.yml')
+    yml_file = os.path.join('cases', 'duplicate_page_ids.json')
 
     multi_slider = MultiSlider()
 

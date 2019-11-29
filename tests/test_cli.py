@@ -92,7 +92,7 @@ def test_cli_parse(tmpdir):
 
 def test_cli_parse_yaml(tmpdir):
     temp_dir = str(tmpdir)
-    yml_file = 'cases/multi.yml'
+    yml_file = 'cases/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--parse"]
     out, err, code = qx(cmd)
     print(out)
@@ -107,7 +107,7 @@ def test_cli_parse_yaml(tmpdir):
 
 def test_cli_html_yaml(tmpdir):
     temp_dir = str(tmpdir)
-    yml_file = 'cases/multi.yml'
+    yml_file = 'cases/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir]
     out, err, code = qx(cmd)
     print(out)
@@ -121,7 +121,7 @@ def test_cli_html_yaml(tmpdir):
 def test_cli_html_yaml_ext(tmpdir):
     temp_dir = str(tmpdir)
     #print(temp_dir)
-    yml_file = 'cases/multi.yml'
+    yml_file = 'cases/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir, '--ext', 'html']
     out, err, code = qx(cmd)
     print(out)

@@ -35,7 +35,7 @@ def test_other_dir_multi(tmpdir):
     root = str(tmpdir)
     original = os.getcwd()
 
-    yml_file = os.path.join(original, 'cases', 'multi.yml')
+    yml_file = os.path.join(original, 'cases', 'multi.json')
 
     expected = read_expected(yml_file)
 
