@@ -80,11 +80,12 @@ def test_cli_parse(tmpdir):
     temp_dir = str(tmpdir)
     cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--parse"]
     out, err, code = qx(cmd)
-    #print(out)
+    print(out)
+    print(type(out))
     #print(err)
     assert code == 0
     assert err == b''
-    data = json.loads(out)
+    data = json.loads(out.decode('utf8'))
     with open('cases/dom/all.json') as fh:
         expected = json.load(fh)
     assert data == expected
