@@ -28,13 +28,13 @@ class MultiSlider(object):
         for page in self.conf['pages']:
             id = page['id']
             if id in ids:
-                raise SliderError(f"Duplicate id {id}")
+                raise SliderError("Duplicate id {}".format(id))
             ids[id] = 1
 
             for pg in page['pages']:
                 id = pg['id']
                 if id in ids:
-                    raise SliderError(f"Duplicate id {id}")
+                    raise SliderError("Duplicate id {}".format(id))
                 ids[id] = 1
 
 
@@ -176,7 +176,7 @@ class Slider(object):
     def is_block(self, row):
         blocks = ['aside', 'blockquote', 'blurb', 'exercise', 'quiz']
         blocks_str = '|'.join(blocks)
-        regex = r'\A\{/(' + blocks_str + ')}\Z'
+        regex = r'\A\{/(' + blocks_str + r')}\Z'
         match = re.search(regex, row)
         if match:
             if not self.tag:
@@ -186,7 +186,7 @@ class Slider(object):
             self.add_tag()
             return True
 
-        regex = r'\A\{(' + blocks_str + ')}\Z'
+        regex = r'\A\{(' + blocks_str + r')}\Z'
         match = re.search(regex, row)
         if match:
             if not self.page:

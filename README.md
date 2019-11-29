@@ -79,6 +79,9 @@ The results shoule be in the 'html' directory.
 * To index of this chapter link on each page.
 * Numbering pages?
 
+* Keywords file extension link
+* Keywords file content when yaml file is used
+
 ## Development suggestions:
 
 Generate html slides in a temporary local directory to look at the result
