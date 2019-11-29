@@ -174,7 +174,7 @@ class HTML(object):
         # create toc page
         toc_template = env.get_template('toc.html')
         html = toc_template.render(
-            title      = self.book['title'],
+            title      = "TOC: " + self.book['title'],
             book       = self.book,
             this_year  = datetime.datetime.now().year,
             extension  = self.ext,
