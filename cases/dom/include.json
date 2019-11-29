@@ -13,7 +13,7 @@
                 }
             ],
             "id": "incl-page-1-url",
-            "title": "Page One Title"
+            "title": "Include Page One Title"
         },
         {
             "content": [
@@ -27,8 +27,8 @@
                 }
             ],
             "id": "incl-page-2-url",
-            "title": "Page Two Title"
+            "title": "Include Page Two Title"
         }
     ],
-    "title": "Chapter Title"
+    "title": "Include Chapter Title"
 }

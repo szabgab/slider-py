@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport"
      content="width=device-width, initial-scale=1, user-scalable=yes">
-  <title>Page One Title</title>
+  <title>Include Page One Title</title>
 </head>
 <body>
 
-<h1>Page One Title</h1>
+<h1>Include Page One Title</h1>
 
 
-   <a id='prev' href="incl-chapter-url">Prev: Chapter Title</a>
+   <a id='prev' href="incl-chapter-url">Prev: Include Chapter Title</a>
 
 
-   <a id='next' href="incl-page-2-url">Next: Page Two Title</a>
+   <a id='next' href="incl-page-2-url">Next: Include Page Two Title</a>
 
 
 

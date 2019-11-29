@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport"
      content="width=device-width, initial-scale=1, user-scalable=yes">
-  <title>Page Two Title</title>
+  <title>Include Page Two Title</title>
 </head>
 <body>
 
-<h1>Page Two Title</h1>
+<h1>Include Page Two Title</h1>
 
 
-   <a id='prev' href="incl-page-1-url">Prev: Page One Title</a>
+   <a id='prev' href="incl-page-1-url">Prev: Include Page One Title</a>
 
 
    <a id='next' href="chapter-new-path">Next: One Chapter Title (1 chapter no pages)</a>

@@ -36,22 +36,22 @@
         </ol>
     </li>
 
-    <li><a href="ul-chapter-url">Chapter Title</a>
+    <li><a href="ul-chapter-url">UL Chapter Title</a>
         <ol>
             
-               <li><a href="page-1-url">Page One Title</a></li>
+               <li><a href="page-1-url">UL Page One Title</a></li>
             
-               <li><a href="page-2-url">Page Two Title</a></li>
+               <li><a href="page-2-url">UL Page Two Title</a></li>
             
         </ol>
     </li>
 
-    <li><a href="incl-chapter-url">Chapter Title</a>
+    <li><a href="incl-chapter-url">Include Chapter Title</a>
         <ol>
             
-               <li><a href="incl-page-1-url">Page One Title</a></li>
+               <li><a href="incl-page-1-url">Include Page One Title</a></li>
             
-               <li><a href="incl-page-2-url">Page Two Title</a></li>
+               <li><a href="incl-page-2-url">Include Page Two Title</a></li>
             
         </ol>
     </li>
