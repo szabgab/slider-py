@@ -12,13 +12,13 @@
 
 <ul>
 
-    <li><a href="chapter-path">Chapter Title</a>
+    <li><a href="chapter-path">Chapter Title (1 chapter no pages)</a>
         <ol>
             
         </ol>
     </li>
 
-    <li><a href="chapter-url">Chapter Title</a>
+    <li><a href="chapter-url">All Chapter Title</a>
         <ol>
             
                <li><a href="page-1-url">Page One Title</a></li>
