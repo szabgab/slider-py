@@ -39,7 +39,7 @@ class HTML(object):
         else:
             self.static = os.path.join(self.root, 'static')
 
-    def generate_html(self, prev_page = None, next_page = None):
+    def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         pages = []
 
@@ -80,6 +80,8 @@ class HTML(object):
                 }
             if i < len(self.chapter['pages'])-1:
                 page['next'] = self.chapter['pages'][i+1]
+            else:
+                page['next'] = next_chapter
 
             if 'i' in page:
                 page['keywords'] = page['i']
@@ -155,7 +157,10 @@ class HTML(object):
                 next_page = self.book['pages'][i]['pages'][0]  # first page in this chapter
             elif i < len(self.book['pages']) - 1:
                 next_page = self.book['pages'][i+1]  # next chapter
-            html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page)
+            next_chapter = None
+            if i < len(self.book['pages']) - 1:
+                next_chapter = self.book['pages'][i+1]
+            html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
 
         # create index page
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
@@ -185,12 +190,12 @@ class HTML(object):
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
 
-    def generate_html_files(self, in_dir, prev_page = None, next_page = None):
+    def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
         work_dir = os.getcwd()
         html_path = os.path.join(work_dir, in_dir)
         if not os.path.exists(html_path):
                 os.makedirs(html_path)
-        pages = self.generate_html(prev_page=prev_page, next_page=next_page)
+        pages = self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
         for page in pages:
             html_filename = os.path.join(in_dir, page['id'] + self.ext)
             with open(html_filename, 'w', encoding="utf-8") as fh:

@@ -3,7 +3,7 @@
 {% if 'prev' in page %}
    <a id='prev' href="{{ page.prev.id }}{{ extension }}">Prev: {{ page.prev.title }}</a>
 {% endif %}
-{% if 'next' in page %}
+{% if 'next' in page and page.next %}
    <a id='next' href="{{ page.next.id }}{{ extension }}">Next: {{ page.next.title }}</a>
 {% endif %}
 
