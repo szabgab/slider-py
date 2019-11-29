@@ -10,6 +10,7 @@ class MultiSlider(object):
         root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = yaml.load(fh, Loader=yaml.FullLoader)
+            self.conf = conf
 
         conf['pages'] = []
 
@@ -18,7 +19,16 @@ class MultiSlider(object):
             pages = slider.parse(os.path.join(root, md_file))
             conf['pages'].append(pages)
 
+        self.check_id_uniqueness()
+
         return conf
+
+    def check_id_uniqueness(self):
+        ids = {}
+        for page in self.conf['pages']:
+            id = page['id']
+            if id in ids:
+                raise SliderError(f"Duplicate id {id}")
 
 class Slider(object):
     def is_chapter_title(self, row):
