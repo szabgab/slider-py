@@ -151,8 +151,10 @@ class HTML(object):
                 if len(self.book['pages'][i-1]['pages']) > 0:
                     prev_page = self.book['pages'][i-1]['pages'][-1]
             next_page = None
-            if i < len(self.book['pages']) - 1:
-                next_page = self.book['pages'][i+1]  # the chapter
+            if 0 < len(self.book['pages'][i]['pages']):
+                next_page = self.book['pages'][i]['pages'][0]  # first page in this chapter
+            elif i < len(self.book['pages']) - 1:
+                next_page = self.book['pages'][i+1]  # next chapter
             html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page)
 
         # create index page
