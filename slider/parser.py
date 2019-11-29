@@ -11,7 +11,7 @@ class MultiSlider(object):
         root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
             if sys.version_info.minor < 6:
-                conf = yaml.load(fh)
+                conf = yaml.load(fh, Loader=yaml.Loader)
             else:
                 conf = yaml.load(fh, Loader=yaml.FullLoader)
 

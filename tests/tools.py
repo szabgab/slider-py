@@ -31,7 +31,7 @@ def cwd(path):
 def read_expected(yml_file):
     with open(yml_file, 'r', encoding="utf-8") as fh:
         if sys.version_info.minor < 6:
-            expected = yaml.load(fh)
+            expected = yaml.load(fh, Loader=yaml.Loader)
         else:
             expected = yaml.load(fh, Loader=yaml.FullLoader)
 
