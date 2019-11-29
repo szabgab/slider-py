@@ -1,5 +1,7 @@
 import filecmp
 import os
+import yaml
+import json
 from contextlib import contextmanager
 
 def compare_dirs(left, right, name):
@@ -24,3 +26,17 @@ def cwd(path):
         yield
     finally:
         os.chdir(oldpwd)
+
+def read_expected(yml_file):
+    with open(yml_file, 'r', encoding="utf-8") as fh:
+        expected = yaml.load(fh, Loader=yaml.FullLoader)
+
+    expected['pages'] = []
+    for name in ['chapter', 'all', 'one_chapter']:
+        js_file = "cases/dom/{}.json".format(name)
+        with open(js_file) as fh:
+            expected['pages'].append(json.load(fh))
+    return expected
+
+
+

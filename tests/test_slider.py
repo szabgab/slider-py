@@ -2,11 +2,10 @@ import sys
 import pytest
 import json
 import os
-import yaml
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tools import compare_dirs
+from tools import compare_dirs, read_expected
 from slider import MultiSlider, Slider, SliderError, HTML
 
 def test_exceptions():
@@ -150,18 +149,10 @@ def test_cases(name):
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
-
 def test_multi():
     yml_file = os.path.join('cases', 'multi.yml')
 
-    with open(yml_file, 'r', encoding="utf-8") as fh:
-        expected = yaml.load(fh, Loader=yaml.FullLoader)
-
-    expected['pages'] = []
-    for name in ['chapter', 'all', 'one_chapter']:
-        js_file = "cases/dom/{}.json".format(name)
-        with open(js_file) as fh:
-            expected['pages'].append(json.load(fh))
+    expected = read_expected(yml_file)
 
     multi_slider = MultiSlider()
 
