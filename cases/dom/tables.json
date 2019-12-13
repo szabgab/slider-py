@@ -19,11 +19,13 @@
                                 ""
                             ]
                         ],
-                        "title": [
-                            "",
-                            "Header 1",
-                            "Header 2",
-                            ""
+                        "titles": [
+                            [
+                                "",
+                                "Header 1",
+                                "Header 2",
+                                ""
+                            ]
                         ]
                     },
                     "name": "table"
@@ -31,6 +33,32 @@
             ],
             "id": "table-page-1",
             "title": "First Table Page"
+        },
+        {
+            "content": [
+                {
+                    "content": {
+                        "rows": [
+                            [
+                                "",
+                                "Cont 1",
+                                "Cont 2",
+                                ""
+                            ],
+                            [
+                                "",
+                                "Cont 3",
+                                "Cont 4",
+                                ""
+                            ]
+                        ],
+                        "titles": []
+                    },
+                    "name": "table"
+                }
+            ],
+            "id": "headless-table-page",
+            "title": "Headless Table Page"
         }
     ],
     "title": "Title for tables"

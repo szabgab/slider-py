@@ -55,11 +55,13 @@
   {% endif %}
   {% if c.name == 'table' %}
       <table>
-         <tr>
-            {% for val in c.content.title %}
-              <th>{{ val }}</th>
-            {% endfor %}
-         </tr>
+         {% for title in c.content.titles %}
+             <tr>
+                {% for val in title %}
+                  <th>{{ val }}</th>
+                {% endfor %}
+             </tr>
+         {% endfor %}
          {% for row in c.content.rows %}
            <tr>
               {% for val in row %}

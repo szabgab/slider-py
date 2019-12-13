@@ -131,13 +131,14 @@ class Slider(object):
         if not self.tag:
             self.tag['name'] = 'table'
             self.tag['content'] = {}
-            titles = re.split('\s*\|\s*', row)
-            self.tag['content']['title'] = titles
+            self.tag['content']['titles'] = []
+            self.tag['content']['rows'] = []
+
+        if re.search(r'\A\|(\s*-*\s*\|)+\s*\Z', row):
+            self.tag['content']['titles'] = self.tag['content']['rows']
             self.tag['content']['rows'] = []
             return True
 
-        if re.search(r'\A\|(\s*-*\s*\|)+\s*\Z', row):
-            return True
         this_row = re.split('\s*\|\s*', row)
         self.tag['content']['rows'].append(this_row)
         return True
