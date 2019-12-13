@@ -37,6 +37,8 @@
   
   
   
+  
+
 
   
   
@@ -52,6 +54,8 @@ but before the verbatim text. It also has a <a href="https://code-maven.com/">li
   
   
   
+  
+
 
   
   
@@ -70,6 +74,8 @@ after empty line
   
   
   
+  
+
 
   
   
@@ -84,6 +90,8 @@ It includes and external file:
   
   
   
+  
+
 
   
   
@@ -107,6 +115,8 @@ if __name__ == '__main__':
       </pre>
   
   
+  
+
 
   
   
@@ -121,6 +131,8 @@ It will also have an image added:
   
   
   
+  
+
 
   
   
@@ -137,6 +149,8 @@ Then there is a mix of <b>bold</b>, <span class="code">code</span> and <b>more b
   
   
   
+  
+
 
   
   
@@ -147,6 +161,8 @@ Then there is a mix of <b>bold</b>, <span class="code">code</span> and <b>more b
   
      <img src="sample/code_maven_128.png" title="A picture is worth 1000 words" />
   
+  
+
 
 
 </body>

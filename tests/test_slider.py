@@ -73,7 +73,7 @@ def test_exceptions():
 
 
 @pytest.mark.parametrize("name", [
-    'chapter', 'pages', 'all'
+    'chapter', 'pages', 'tables', 'all'
 ])
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
@@ -143,7 +143,7 @@ def test_no_extension(tmpdir, name):
 @pytest.mark.parametrize("name", [
     'all', 'chapter', 'include', 'index', 'ul', 'ol', 'p', 'pages', 'verbatim', 'one_chapter', 'tables',
 ])
-def test_cases(name):
+def test_cases_dom(name):
     slider = Slider()
     pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:

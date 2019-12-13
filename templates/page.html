@@ -53,6 +53,23 @@
   {% if c.name == 'image' %}
      <img src="{{ c.filename }}" title="{{ c.title }}" />
   {% endif %}
+  {% if c.name == 'table' %}
+      <table>
+         <tr>
+            {% for val in c.content.title %}
+              <th>{{ val }}</th>
+            {% endfor %}
+         </tr>
+         {% for row in c.content.rows %}
+           <tr>
+              {% for val in row %}
+                <td>{{ val }}</td>
+              {% endfor %}
+           </tr>
+         {% endfor %}
+      </table>
+  {% endif %}
+
 {% endfor %}
 
 {% include 'incl/footer.html' %}
