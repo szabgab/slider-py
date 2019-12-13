@@ -2,7 +2,7 @@
 {id: title-for-tables}
 
 ## First Table Page
-{id: tyable-page-1}
+{id: table-page-1}
 
 | Header 1  | Header 2  |
 | --------- | --------- |
