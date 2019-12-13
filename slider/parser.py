@@ -118,6 +118,30 @@ class Slider(object):
             return True
         return False
 
+    def is_table(self, row):
+        if row == '':
+            return False
+        if row[0] != '|':
+            if self.tag and self.tag['name'] == 'table':
+                self.add_tag()
+                return True
+            else:
+                return False
+
+        if not self.tag:
+            self.tag['name'] = 'table'
+            self.tag['content'] = {}
+            titles = re.split('\s*\|\s*', row)
+            self.tag['content']['title'] = titles
+            self.tag['content']['rows'] = []
+            return True
+
+        if re.search(r'\A\|(\s*-*\s*\|)+\s*\Z', row):
+            return True
+        this_row = re.split('\s*\|\s*', row)
+        self.tag['content']['rows'].append(this_row)
+        return True
+
 
     def is_empty(self, row):
         # empty row ends the ol, ul tags
@@ -284,6 +308,9 @@ class Slider(object):
                     continue
 
                 if self.is_empty(row):
+                    continue
+
+                if self.is_table(row):
                     continue
 
                 if self.is_free_text(row):

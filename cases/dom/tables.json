@@ -4,10 +4,29 @@
         {
             "content": [
                 {
-                    "content": [
-                        "\n| Header 1  | Header 2  |\n| --------- | --------- |\n| Content 1 | Content 2 |\n| Content 3 | Content 4 |\n"
-                    ],
-                    "name": "p"
+                    "content": {
+                        "rows": [
+                            [
+                                "",
+                                "Content 1",
+                                "Content 2",
+                                ""
+                            ],
+                            [
+                                "",
+                                "Content 3",
+                                "Content 4",
+                                ""
+                            ]
+                        ],
+                        "title": [
+                            "",
+                            "Header 1",
+                            "Header 2",
+                            ""
+                        ]
+                    },
+                    "name": "table"
                 }
             ],
             "id": "tyable-page-1",
