@@ -141,7 +141,7 @@ def test_no_extension(tmpdir, name):
 
 
 @pytest.mark.parametrize("name", [
-    'index', 'ul', 'ol', 'verbatim', 'p', 'include'
+    'index', 'ul', 'ol', 'verbatim', 'p', 'include', 'tables',
 ])
 def test_cases(name):
     slider = Slider()

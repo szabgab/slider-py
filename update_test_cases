@@ -1,7 +1,7 @@
 set -e
 
 # create DOM from individual MD files
-for name in all chapter include index ol p pages ul verbatim one_chapter;
+for name in all chapter include index ol p pages ul verbatim one_chapter tables;
 do
     python slider.py --md cases/$name.md --parse > cases/dom/$name.json
 done

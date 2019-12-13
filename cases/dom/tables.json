@@ -1,0 +1,18 @@
+{
+    "id": "title-for-tables",
+    "pages": [
+        {
+            "content": [
+                {
+                    "content": [
+                        "\n| Header 1  | Header 2  |\n| --------- | --------- |\n| Content 1 | Content 2 |\n| Content 3 | Content 4 |\n"
+                    ],
+                    "name": "p"
+                }
+            ],
+            "id": "tyable-page-1",
+            "title": "First Table Page"
+        }
+    ],
+    "title": "Title for tables"
+}
