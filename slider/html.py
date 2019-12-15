@@ -14,11 +14,11 @@ def _replace_links(html):
 
 
 class HTML():
-    def __init__(self, ext=None, chapter=None, includes=None, **kw):
+    # TODO: clean up the parameter list so we fail early if required parameters are not provided
+    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
-        # TODO: clean up this code so we fail early if required parameters are not provided
         self.chapter = chapter
         self.includes = includes
 
@@ -30,13 +30,13 @@ class HTML():
         else:
             self.ext = ''
 
-        if 'templates' in kw and kw['templates']:
-            self.templates = kw['templates']
+        if templates is not None:
+            self.templates = templates
         else:
             self.templates = os.path.join(self.root, 'templates')
 
-        if 'static' in kw and kw['static']:
-            self.static = kw['static']
+        if static is not None:
+            self.static = static
         else:
             self.static = os.path.join(self.root, 'static')
 
