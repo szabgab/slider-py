@@ -47,6 +47,8 @@ class HTML(object):
         else:
             self.static = os.path.join(self.root, 'static')
 
+        self.keywords = {}
+
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
         for i in range(len(self.book['pages'])):
@@ -78,6 +80,7 @@ class HTML(object):
 
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
+        self.create_book_keywords_page(in_dir)
 
     def create_book_index_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
@@ -107,6 +110,10 @@ class HTML(object):
         html_filename = os.path.join(in_dir, 'toc' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
+
+    def create_book_keywords_page(self, in_dir):
+        #print(self.keywords)
+        pass
 
     def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
         work_dir = os.getcwd()
@@ -150,8 +157,6 @@ class HTML(object):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         pages = []
 
-        keywords = {}
-
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
             title = self.chapter['title'],
@@ -191,11 +196,11 @@ class HTML(object):
                     sub_key = ''
                     if len(pair) > 1:
                         sub_key = pair[1]
-                    if main_key not in keywords:
-                        keywords[main_key] = {}
-                    if sub_key not in keywords[main_key]:
-                        keywords[main_key][sub_key] = []
-                    keywords[main_key][sub_key].append({
+                    if main_key not in self.keywords:
+                        self.keywords[main_key] = {}
+                    if sub_key not in self.keywords[main_key]:
+                        self.keywords[main_key][sub_key] = []
+                    self.keywords[main_key][sub_key].append({
                         'id': page['id'],
                         'title': page['title'],
                     })
@@ -217,7 +222,7 @@ class HTML(object):
         try:
             keywords_template = env.get_template('keywords.html')
             html = keywords_template.render(
-                keywords  = keywords,
+                keywords  = self.keywords,
                 timestamp = self.timestamp,
                 extension = self.ext,
                 title     = 'Keywords',
