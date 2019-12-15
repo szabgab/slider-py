@@ -3,7 +3,7 @@ import json
 import os
 
 from .parser import MultiSlider, Slider, SliderError
-from .html import HTML
+from .html import HTML, Book
 
 
 def get_params():
@@ -62,7 +62,7 @@ def main():
 
     if args.html:
         if args.yaml:
-            html = HTML(
+            html = Book(
                 templates = args.templates,
                 static    = args.static,
                 book      = book,

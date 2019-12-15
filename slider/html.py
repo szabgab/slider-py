@@ -49,72 +49,6 @@ class HTML(object):
 
         self.keywords = {}
 
-    def generate_book(self, in_dir):
-        #print(self.book['pages'][1])
-        for i in range(len(self.book['pages'])):
-            page = self.book['pages'][i]
-            html = HTML(
-                templates = self.templates,
-                static    = self.static,
-                chapter   = page,
-                includes  = self.includes,
-                ext       = self.ext,
-            )
-
-            prev_page = {
-                'id' : 'index'
-            }
-            if i > 0:
-                prev_page = self.book['pages'][i-1]  # chapter
-                if len(self.book['pages'][i-1]['pages']) > 0:
-                    prev_page = self.book['pages'][i-1]['pages'][-1]
-            next_page = None
-            if 0 < len(self.book['pages'][i]['pages']):
-                next_page = self.book['pages'][i]['pages'][0]  # first page in this chapter
-            elif i < len(self.book['pages']) - 1:
-                next_page = self.book['pages'][i+1]  # next chapter
-            next_chapter = None
-            if i < len(self.book['pages']) - 1:
-                next_chapter = self.book['pages'][i+1]
-            html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
-
-        self.create_book_index_page(in_dir)
-        self.create_book_toc_page(in_dir)
-        self.create_book_keywords_page(in_dir)
-
-    def create_book_index_page(self, in_dir):
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
-        index_template = env.get_template('index.html')
-        #print(self.book['pages'][0])
-        first = self.book['pages'][0]
-        html = index_template.render(
-            title      = self.book['title'],
-            book       = self.book,
-            first      = first,
-            this_year  = datetime.datetime.now().year,
-            extension  = self.ext,
-        )
-        html_filename = os.path.join(in_dir, 'index' + self.ext)
-        with open(html_filename, 'w', encoding="utf-8") as fh:
-            fh.write(html)
-
-    def create_book_toc_page(self, in_dir):
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
-        toc_template = env.get_template('toc.html')
-        html = toc_template.render(
-            title      = "TOC: " + self.book['title'],
-            book       = self.book,
-            this_year  = datetime.datetime.now().year,
-            extension  = self.ext,
-        )
-        html_filename = os.path.join(in_dir, 'toc' + self.ext)
-        with open(html_filename, 'w', encoding="utf-8") as fh:
-            fh.write(html)
-
-    def create_book_keywords_page(self, in_dir):
-        #print(self.keywords)
-        pass
-
     def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
         work_dir = os.getcwd()
         html_path = os.path.join(work_dir, in_dir)
@@ -238,5 +172,74 @@ class HTML(object):
             print("Template keywords.html not found")
 
         return pages
+
+
+class Book(HTML):
+    def generate_book(self, in_dir):
+        #print(self.book['pages'][1])
+        for i in range(len(self.book['pages'])):
+            page = self.book['pages'][i]
+            html = HTML(
+                templates = self.templates,
+                static    = self.static,
+                chapter   = page,
+                includes  = self.includes,
+                ext       = self.ext,
+            )
+
+            prev_page = {
+                'id' : 'index'
+            }
+            if i > 0:
+                prev_page = self.book['pages'][i-1]  # chapter
+                if len(self.book['pages'][i-1]['pages']) > 0:
+                    prev_page = self.book['pages'][i-1]['pages'][-1]
+            next_page = None
+            if 0 < len(self.book['pages'][i]['pages']):
+                next_page = self.book['pages'][i]['pages'][0]  # first page in this chapter
+            elif i < len(self.book['pages']) - 1:
+                next_page = self.book['pages'][i+1]  # next chapter
+            next_chapter = None
+            if i < len(self.book['pages']) - 1:
+                next_chapter = self.book['pages'][i+1]
+            html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+
+        self.create_book_index_page(in_dir)
+        self.create_book_toc_page(in_dir)
+        self.create_book_keywords_page(in_dir)
+
+    def create_book_index_page(self, in_dir):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        index_template = env.get_template('index.html')
+        #print(self.book['pages'][0])
+        first = self.book['pages'][0]
+        html = index_template.render(
+            title      = self.book['title'],
+            book       = self.book,
+            first      = first,
+            this_year  = datetime.datetime.now().year,
+            extension  = self.ext,
+        )
+        html_filename = os.path.join(in_dir, 'index' + self.ext)
+        with open(html_filename, 'w', encoding="utf-8") as fh:
+            fh.write(html)
+
+    def create_book_toc_page(self, in_dir):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        toc_template = env.get_template('toc.html')
+        html = toc_template.render(
+            title      = "TOC: " + self.book['title'],
+            book       = self.book,
+            this_year  = datetime.datetime.now().year,
+            extension  = self.ext,
+        )
+        html_filename = os.path.join(in_dir, 'toc' + self.ext)
+        with open(html_filename, 'w', encoding="utf-8") as fh:
+            fh.write(html)
+
+    def create_book_keywords_page(self, in_dir):
+        #print(self.keywords)
+        pass
+
 
 

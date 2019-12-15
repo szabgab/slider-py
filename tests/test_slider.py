@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools import compare_dirs, read_expected
-from slider import MultiSlider, Slider, SliderError, HTML
+from slider import MultiSlider, Slider, SliderError, HTML, Book
 
 
 def test_exceptions():
@@ -175,7 +175,7 @@ def test_json_to_html(tmpdir, name):
 
     multi_slider = MultiSlider()
     book = multi_slider.process_yml(yml_file)
-    html = HTML(
+    html = Book(
         book      = book,
         includes  = os.path.dirname(yml_file),
         ext       = '',
