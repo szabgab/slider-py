@@ -12,7 +12,7 @@ def qx(cmd):
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE,
     )
-    out,err = proc.communicate()
+    out, err = proc.communicate()
     return out, err, proc.returncode
 
 
