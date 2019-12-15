@@ -2,7 +2,6 @@ import json
 import os
 import sys
 import subprocess
-import yaml
 
 from tools import compare_dirs, read_expected
 

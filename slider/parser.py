@@ -1,7 +1,6 @@
 import re
 import os
 import json
-import sys
 
 
 class SliderError(Exception):

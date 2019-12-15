@@ -1,11 +1,10 @@
 import os
 import sys
 import json
-import yaml
 from tools import compare_dirs, cwd, read_expected
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from slider import MultiSlider, Slider, SliderError, HTML
+from slider import MultiSlider, Slider, HTML
 
 
 def test_other_dir(tmpdir):
