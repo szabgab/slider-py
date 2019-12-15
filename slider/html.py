@@ -15,7 +15,7 @@ def _replace_links(html):
 
 class HTML():
     # TODO: clean up the parameter list so we fail early if required parameters are not provided
-    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None, **kw):
+    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
