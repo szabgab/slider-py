@@ -39,100 +39,6 @@ class HTML(object):
         else:
             self.static = os.path.join(self.root, 'static')
 
-    def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
-        pages = []
-
-        def _replace_links(html):
-            html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
-            html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
-            html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
-            return html
-
-        keywords = {}
-
-        chapter_template = env.get_template('chapter.html')
-        html = chapter_template.render(
-            title = self.chapter['title'],
-            pages = self.chapter['pages'],
-            timestamp = self.timestamp,
-            extension  = self.ext,
-            prev       = prev_page,
-            next       = next_page,
-        )
-        html = _replace_links(html)
-        pages.append(
-            {
-                'id'   : self.chapter['id'],
-                'html' : html,
-            }
-        )
-
-        page_template = env.get_template('page.html')
-        for i in range(len(self.chapter['pages'])):
-            page = self.chapter['pages'][i]
-            if i > 0:
-                page['prev'] = self.chapter['pages'][i-1]
-            else:
-                page['prev'] = {
-                    'id' : self.chapter['id'],
-                    'title' : self.chapter['title'],
-                }
-            if i < len(self.chapter['pages'])-1:
-                page['next'] = self.chapter['pages'][i+1]
-            else:
-                page['next'] = next_chapter
-
-            if 'i' in page:
-                page['keywords'] = page['i']
-                for pair in page['i']:
-                    main_key = pair[0]
-                    sub_key = ''
-                    if len(pair) > 1:
-                        sub_key = pair[1]
-                    if main_key not in keywords:
-                        keywords[main_key] = {}
-                    if sub_key not in keywords[main_key]:
-                        keywords[main_key][sub_key] = []
-                    keywords[main_key][sub_key].append({
-                        'id': page['id'],
-                        'title': page['title'],
-                    })
-
-            html = page_template.render(
-                title = page['title'],
-                page = page,
-                timestamp = self.timestamp,
-                extension = self.ext,
-            )
-            html = _replace_links(html)
-            pages.append(
-                {
-                    'id'   : page['id'],
-                    'html' : html,
-                }
-            )
-
-        try:
-            keywords_template = env.get_template('keywords.html')
-            html = keywords_template.render(
-                keywords  = keywords,
-                timestamp = self.timestamp,
-                extension = self.ext,
-                title     = 'Keywords',
-            )
-            html = _replace_links(html)
-            pages.append(
-                {
-                    'id'   : 'keywords',
-                    'html' : html,
-                }
-            )
-        except jinja2.exceptions.TemplateNotFound:
-            print("Template keywords.html not found")
-
-        return pages
-
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
         for i in range(len(self.book['pages'])):
@@ -234,5 +140,100 @@ class HTML(object):
         info_filename = os.path.join(in_dir, 'info.yaml')
         with open(info_filename, 'w', encoding="utf-8") as fh:
             fh.write(yaml.dump(info, default_flow_style=False))
+
+
+    def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        pages = []
+
+        def _replace_links(html):
+            html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
+            html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
+            html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
+            return html
+
+        keywords = {}
+
+        chapter_template = env.get_template('chapter.html')
+        html = chapter_template.render(
+            title = self.chapter['title'],
+            pages = self.chapter['pages'],
+            timestamp = self.timestamp,
+            extension  = self.ext,
+            prev       = prev_page,
+            next       = next_page,
+        )
+        html = _replace_links(html)
+        pages.append(
+            {
+                'id'   : self.chapter['id'],
+                'html' : html,
+            }
+        )
+
+        page_template = env.get_template('page.html')
+        for i in range(len(self.chapter['pages'])):
+            page = self.chapter['pages'][i]
+            if i > 0:
+                page['prev'] = self.chapter['pages'][i-1]
+            else:
+                page['prev'] = {
+                    'id' : self.chapter['id'],
+                    'title' : self.chapter['title'],
+                }
+            if i < len(self.chapter['pages'])-1:
+                page['next'] = self.chapter['pages'][i+1]
+            else:
+                page['next'] = next_chapter
+
+            if 'i' in page:
+                page['keywords'] = page['i']
+                for pair in page['i']:
+                    main_key = pair[0]
+                    sub_key = ''
+                    if len(pair) > 1:
+                        sub_key = pair[1]
+                    if main_key not in keywords:
+                        keywords[main_key] = {}
+                    if sub_key not in keywords[main_key]:
+                        keywords[main_key][sub_key] = []
+                    keywords[main_key][sub_key].append({
+                        'id': page['id'],
+                        'title': page['title'],
+                    })
+
+            html = page_template.render(
+                title = page['title'],
+                page = page,
+                timestamp = self.timestamp,
+                extension = self.ext,
+            )
+            html = _replace_links(html)
+            pages.append(
+                {
+                    'id'   : page['id'],
+                    'html' : html,
+                }
+            )
+
+        try:
+            keywords_template = env.get_template('keywords.html')
+            html = keywords_template.render(
+                keywords  = keywords,
+                timestamp = self.timestamp,
+                extension = self.ext,
+                title     = 'Keywords',
+            )
+            html = _replace_links(html)
+            pages.append(
+                {
+                    'id'   : 'keywords',
+                    'html' : html,
+                }
+            )
+        except jinja2.exceptions.TemplateNotFound:
+            print("Template keywords.html not found")
+
+        return pages
 
 
