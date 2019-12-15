@@ -3,7 +3,7 @@ import json
 import os
 
 from .parser import MultiSlider, Slider, SliderError
-from .html import HTML, Book
+from .html import HTML, Book, OnePage
 
 
 def get_params():
@@ -73,7 +73,7 @@ def main():
             exit()
 
         if args.md:
-            html = HTML(
+            html = OnePage(
                 templates = args.templates,
                 static    = args.static,
                 chapter   = dom,

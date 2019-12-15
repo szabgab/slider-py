@@ -13,7 +13,7 @@ def _replace_links(html):
     return html
 
 
-class HTML(object):
+class HTML():
     def __init__(self, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
@@ -48,44 +48,6 @@ class HTML(object):
             self.static = os.path.join(self.root, 'static')
 
         self.keywords = {}
-
-    def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
-        work_dir = os.getcwd()
-        html_path = os.path.join(work_dir, in_dir)
-        if not os.path.exists(html_path):
-            os.makedirs(html_path)
-        pages = self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
-        for page in pages:
-            html_filename = os.path.join(in_dir, page['id'] + self.ext)
-            with open(html_filename, 'w', encoding="utf-8") as fh:
-                fh.write(page['html'])
-
-        # copy image files
-        for page in self.chapter['pages']:
-            if 'content' not in page:  # TODO: shall we make sure there is alway a content?
-                continue
-
-            for c in page['content']:
-                if c['name'] == 'image' or c['name'] == 'video':
-                    img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
-                    if not os.path.exists(img_dir):
-                        os.makedirs(img_dir)
-                    include_path = os.path.join(self.includes, c['filename'])
-                    #print(include_path)
-                    shutil.copy(include_path, img_dir)
-
-        # copy static files
-        if os.path.exists(self.static):
-            for entry in os.listdir(self.static):
-                shutil.copy(os.path.join(self.static, entry), in_dir)
-
-        info = {
-            "title": self.chapter['title'],
-            "cnt": len(pages),
-        }
-        info_filename = os.path.join(in_dir, 'info.yaml')
-        with open(info_filename, 'w', encoding="utf-8") as fh:
-            fh.write(yaml.dump(info, default_flow_style=False))
 
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
@@ -174,12 +136,52 @@ class HTML(object):
         return pages
 
 
+class OnePage(HTML):
+    def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
+        work_dir = os.getcwd()
+        html_path = os.path.join(work_dir, in_dir)
+        if not os.path.exists(html_path):
+            os.makedirs(html_path)
+        pages = self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+        for page in pages:
+            html_filename = os.path.join(in_dir, page['id'] + self.ext)
+            with open(html_filename, 'w', encoding="utf-8") as fh:
+                fh.write(page['html'])
+
+        # copy image files
+        for page in self.chapter['pages']:
+            if 'content' not in page:  # TODO: shall we make sure there is alway a content?
+                continue
+
+            for c in page['content']:
+                if c['name'] == 'image' or c['name'] == 'video':
+                    img_dir = os.path.join(in_dir, os.path.dirname(c['filename']))
+                    if not os.path.exists(img_dir):
+                        os.makedirs(img_dir)
+                    include_path = os.path.join(self.includes, c['filename'])
+                    #print(include_path)
+                    shutil.copy(include_path, img_dir)
+
+        # copy static files
+        if os.path.exists(self.static):
+            for entry in os.listdir(self.static):
+                shutil.copy(os.path.join(self.static, entry), in_dir)
+
+        info = {
+            "title": self.chapter['title'],
+            "cnt": len(pages),
+        }
+        info_filename = os.path.join(in_dir, 'info.yaml')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
+            fh.write(yaml.dump(info, default_flow_style=False))
+
+
 class Book(HTML):
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
         for i in range(len(self.book['pages'])):
             page = self.book['pages'][i]
-            html = HTML(
+            html = OnePage(
                 templates = self.templates,
                 static    = self.static,
                 chapter   = page,
@@ -240,6 +242,3 @@ class Book(HTML):
     def create_book_keywords_page(self, in_dir):
         #print(self.keywords)
         pass
-
-
-

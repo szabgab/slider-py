@@ -4,7 +4,7 @@ import json
 from tools import compare_dirs, cwd, read_expected
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from slider import MultiSlider, Slider, HTML
+from slider import MultiSlider, Slider, OnePage
 
 
 def test_other_dir(tmpdir):
@@ -21,7 +21,7 @@ def test_other_dir(tmpdir):
             expected = json.load(fh)
         assert expected == pages
 
-        html = HTML(
+        html = OnePage(
             chapter   = pages,
             includes  = os.path.dirname(md_file),
             ext       = 'html',

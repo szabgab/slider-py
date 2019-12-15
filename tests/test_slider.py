@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools import compare_dirs, read_expected
-from slider import MultiSlider, Slider, SliderError, HTML, Book
+from slider import MultiSlider, Slider, SliderError, Book, OnePage
 
 
 def test_exceptions():
@@ -87,7 +87,7 @@ def test_md_to_html(tmpdir, name):
     target_dir = str(tmpdir)
     print(target_dir)
 
-    html = HTML(
+    html = OnePage(
         chapter  = pages,
         includes = os.path.dirname(md_file),
         ext      = 'html',
@@ -110,7 +110,7 @@ def test_md_to_html_other_templates(tmpdir, name):
     target_dir = str(tmpdir)
     print(target_dir)
 
-    html = HTML(
+    html = OnePage(
         templates = os.path.join('cases', 'simple_templates'),
         chapter   = pages,
         includes  = os.path.dirname(md_file),
@@ -133,7 +133,7 @@ def test_md_to_html_no_file_extension(tmpdir, name):
     target_dir = str(tmpdir)
     print(target_dir)
 
-    html = HTML(
+    html = OnePage(
         chapter   = pages,
         includes  = os.path.dirname(md_file),
     )
