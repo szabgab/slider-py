@@ -139,7 +139,7 @@ class Slider(object):
             self.tag['content']['rows'] = []
             return True
 
-        this_row = re.split('\s*\|\s*', row)
+        this_row = re.split(r'\s*\|\s*', row)
         self.tag['content']['rows'].append(this_row)
         return True
 
