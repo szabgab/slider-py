@@ -76,7 +76,7 @@ class Slider(object):
         match = re.search(r'\A\{i:\s+(.+)\}\s*\Z', row)
         #match = re.search(r'\A\{i:\s+(.+)', row)
         if match:
-            if not 'i' in self.page:
+            if 'i' not in self.page:
                 self.page['i'] = []
             fields = match.group(1).split('!')
             self.page['i'].append(fields)
@@ -252,10 +252,10 @@ class Slider(object):
     def check_requirements(self):
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
-        if not 'title' in self.chapter:
+        if 'title' not in self.chapter:
             raise SliderError('Chapter title is missing in {}'.format(self.filename))
 
-        if not 'id' in self.chapter:
+        if 'id' not in self.chapter:
             raise SliderError('Chapter id is missing in {}'.format(self.filename))
 
     def parse(self, filename):
