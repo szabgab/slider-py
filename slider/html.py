@@ -14,16 +14,13 @@ def _replace_links(html):
 
 
 class HTML():
-    def __init__(self, ext=None, **kw):
+    def __init__(self, ext=None, chapter=None, includes=None, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
         # TODO: clean up this code so we fail early if required parameters are not provided
-        if 'chapter' in kw and kw['chapter']:
-            self.chapter = kw['chapter']
-
-        if 'includes' in kw and kw['includes'] is not None:
-            self.includes = kw['includes']
+        self.chapter = chapter
+        self.includes = includes
 
         if ext is not None and ext != '':
             if ext[0] == '.':
