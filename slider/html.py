@@ -55,7 +55,7 @@ class HTML(object):
                 'id' : 'index'
             }
             if i > 0:
-                prev_page = self.book['pages'][i-1] # chapter
+                prev_page = self.book['pages'][i-1]  # chapter
                 if len(self.book['pages'][i-1]['pages']) > 0:
                     prev_page = self.book['pages'][i-1]['pages'][-1]
             next_page = None
