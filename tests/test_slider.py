@@ -73,7 +73,7 @@ def test_exceptions():
 
 
 @pytest.mark.parametrize("name", [
-    'chapter', 'pages', 'tables', 'all'
+    'chapter', 'index', 'pages', 'tables', 'all'
 ])
 def test_cases_with_html(tmpdir, name):
     slider = Slider()
