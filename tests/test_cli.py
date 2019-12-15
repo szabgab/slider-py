@@ -14,6 +14,7 @@ def qx(cmd):
     out,err = proc.communicate()
     return out, err, proc.returncode
 
+
 def test_cli_html(tmpdir):
     temp_dir = str(tmpdir)
     cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--html", "--dir",  temp_dir]
@@ -24,6 +25,7 @@ def test_cli_html(tmpdir):
     assert out == b''
     assert err == b''
 
+
 def test_cli_empty():
     cmd = [sys.executable, "slider.py"]
     out, err, code = qx(cmd)
@@ -32,6 +34,7 @@ def test_cli_empty():
     assert code == 0
     assert 'usage: slider.py' in out.decode('utf-8')
     assert err == b''
+
 
 def test_cli_empty_parse():
     cmd = [sys.executable, "slider.py", '--parse']
@@ -43,6 +46,7 @@ def test_cli_empty_parse():
     assert '--md or --yaml is required' in out.decode('utf-8')
     assert err == b''
 
+
 def test_cli_empty_html():
     cmd = [sys.executable, "slider.py", '--html']
     out, err, code = qx(cmd)
@@ -52,6 +56,7 @@ def test_cli_empty_html():
     assert 'usage: slider.py' in out.decode('utf-8')
     assert '--dir was missing' in out.decode('utf-8')
     assert err == b''
+
 
 def test_cli_empty_html_dir(tmpdir):
     temp_dir = str(tmpdir)
@@ -64,6 +69,7 @@ def test_cli_empty_html_dir(tmpdir):
     assert '--md or --yaml is required' in out.decode('utf-8')
     assert err == b''
 
+
 def test_cli_empty_html_md():
     cmd = [sys.executable, "slider.py", '--html', "--md", "cases/all.md"]
     out, err, code = qx(cmd)
@@ -75,9 +81,7 @@ def test_cli_empty_html_md():
     assert err == b''
 
 
-
-def test_cli_parse(tmpdir):
-    temp_dir = str(tmpdir)
+def test_cli_parse():
     cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--parse"]
     out, err, code = qx(cmd)
     print(out)
@@ -90,8 +94,8 @@ def test_cli_parse(tmpdir):
         expected = json.load(fh)
     assert data == expected
 
-def test_cli_parse_yaml(tmpdir):
-    temp_dir = str(tmpdir)
+
+def test_cli_parse_yaml():
     yml_file = 'cases/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--parse"]
     out, err, code = qx(cmd)
@@ -104,6 +108,7 @@ def test_cli_parse_yaml(tmpdir):
     expected = read_expected(yml_file)
 
     assert data == expected
+
 
 def test_cli_html_yaml(tmpdir):
     temp_dir = str(tmpdir)
@@ -118,6 +123,7 @@ def test_cli_html_yaml(tmpdir):
     name = 'multi'
     compare_dirs(temp_dir, os.path.join('cases', 'multi_html', name), name)
 
+
 def test_cli_html_yaml_ext(tmpdir):
     temp_dir = str(tmpdir)
     #print(temp_dir)
@@ -131,5 +137,4 @@ def test_cli_html_yaml_ext(tmpdir):
     assert out == b''
     name = 'multi'
     compare_dirs(temp_dir, os.path.join('cases', 'multi_html_ext', name), name)
-
 

@@ -188,9 +188,10 @@ def test_duplicate_id_in_chapters_of_multi():
     multi_slider = MultiSlider()
 
     with pytest.raises(Exception) as exinfo:
-        data = multi_slider.process_yml(yml_file)
+        multi_slider.process_yml(yml_file)
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Duplicate id chapter-path'
+
 
 def test_duplicate_id_in_pages_of_multi():
     yml_file = os.path.join('cases', 'duplicate_page_ids.json')
@@ -198,7 +199,7 @@ def test_duplicate_id_in_pages_of_multi():
     multi_slider = MultiSlider()
 
     with pytest.raises(Exception) as exinfo:
-        data = multi_slider.process_yml(yml_file)
+        multi_slider.process_yml(yml_file)
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Duplicate id page-1-url'
 
