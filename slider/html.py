@@ -174,6 +174,7 @@ class OnePage(HTML):
 class Book(HTML):
     def __init__(self, book, **kw):
         self.book = book
+        self.pages = []
         super(Book, self).__init__(**kw)
         self.keywords = {}
 
@@ -209,7 +210,10 @@ class Book(HTML):
 
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
-        #self.create_keywords_page(in_dir)
+        self.create_keywords_page()
+        html_filename = os.path.join(in_dir, 'keywords' + self.ext)
+        with open(html_filename, 'w', encoding="utf-8") as fh:
+            fh.write(self.pages[0]['html'])
 
     def create_book_index_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
