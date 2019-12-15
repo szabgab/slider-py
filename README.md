@@ -80,7 +80,6 @@ The results shoule be in the 'html' directory.
 * Numbering pages?
 
 * Keywords file extension link
-* Keywords file content when yaml file is used
 
 ## Development suggestions:
 
