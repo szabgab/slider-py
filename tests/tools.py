@@ -3,6 +3,7 @@ import os
 import json
 from contextlib import contextmanager
 
+
 def compare_dirs(left, right, name):
     print("Left: {} Right: {} name: {}".format(left, right, name))
     dcmp = filecmp.dircmp(left, right)
@@ -25,6 +26,7 @@ def cwd(path):
         yield
     finally:
         os.chdir(oldpwd)
+
 
 def read_expected(yml_file):
     with open(yml_file, 'r', encoding="utf-8") as fh:

@@ -7,6 +7,7 @@ from tools import compare_dirs, cwd, read_expected
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from slider import MultiSlider, Slider, SliderError, HTML
 
+
 def test_other_dir(tmpdir):
     root = str(tmpdir)
     original = os.getcwd()

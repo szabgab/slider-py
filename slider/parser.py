@@ -3,8 +3,10 @@ import os
 import json
 import sys
 
+
 class SliderError(Exception):
     pass
+
 
 class MultiSlider(object):
     def process_yml(self, filename):

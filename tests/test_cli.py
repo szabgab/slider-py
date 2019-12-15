@@ -6,6 +6,7 @@ import yaml
 
 from tools import compare_dirs, read_expected
 
+
 def qx(cmd):
     proc = subprocess.Popen(
         cmd,

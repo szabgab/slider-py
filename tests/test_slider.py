@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tools import compare_dirs, read_expected
 from slider import MultiSlider, Slider, SliderError, HTML
 
+
 def test_exceptions():
     slider = Slider()
 
@@ -162,6 +163,7 @@ def test_json_to_dom(name):
 
     data = multi_slider.process_yml(yml_file)
     assert data == expected
+
 
 @pytest.mark.parametrize("name", [
     'multi',

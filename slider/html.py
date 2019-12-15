@@ -5,6 +5,7 @@ import re
 import shutil
 import yaml
 
+
 class HTML(object):
     def __init__(self, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
