@@ -3,6 +3,7 @@
 
 ## Page One Title
 {id: all-page-1-url}
+{i: ol}
 
 1. Several Bullet
 1. Points
@@ -10,6 +11,7 @@
 
 ## Page Two Title
 {id: all-page-2-url}
+{i: ul}
 
 * Bullets
 * Without
@@ -51,6 +53,7 @@ Free text immediately followed by
 
 ## Some aside
 {id: some-aside}
+{i: aside}
 
 Free text before aside
 

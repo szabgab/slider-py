@@ -12,6 +12,11 @@
                     "name": "ol"
                 }
             ],
+            "i": [
+                [
+                    "ol"
+                ]
+            ],
             "id": "all-page-1-url",
             "title": "Page One Title"
         },
@@ -68,6 +73,11 @@
                     "name": "image",
                     "title": "A picture is worth 1000 words"
                 }
+            ],
+            "i": [
+                [
+                    "ul"
+                ]
             ],
             "id": "all-page-2-url",
             "title": "Page Two Title"
@@ -130,6 +140,11 @@
                     ],
                     "name": "p"
                 }
+            ],
+            "i": [
+                [
+                    "aside"
+                ]
             ],
             "id": "some-aside",
             "title": "Some aside"
