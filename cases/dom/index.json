@@ -1,5 +1,5 @@
 {
-    "id": "chapter-url",
+    "id": "index-chapter-url",
     "pages": [
         {
             "i": [
@@ -7,7 +7,7 @@
                     "subject matter"
                 ]
             ],
-            "id": "page-1-url",
+            "id": "index-page-1-url",
             "title": "Page One Title"
         },
         {
@@ -20,7 +20,7 @@
                     "index field"
                 ]
             ],
-            "id": "page-2-url",
+            "id": "index-page-2-url",
             "title": "Page Two Title"
         }
     ],
