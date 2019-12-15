@@ -50,7 +50,14 @@ class HTML():
             title     = 'Keywords',
         )
         html = _replace_links(html)
-        return html
+        self.pages.append(
+            {
+                'id'   : 'keywords',
+                'html' : html,
+            }
+        )
+
+        return
 
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         self.keywords = {}
@@ -119,13 +126,7 @@ class HTML():
                 }
             )
 
-        html = self.create_keywords_page()
-        self.pages.append(
-            {
-                'id'   : 'keywords',
-                'html' : html,
-            }
-        )
+        self.create_keywords_page()
 
         return self.pages
 
