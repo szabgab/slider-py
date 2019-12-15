@@ -54,8 +54,8 @@ class HTML():
 
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         self.keywords = {}
+        self.pages = []
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
-        pages = []
 
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
@@ -67,7 +67,7 @@ class HTML():
             next       = next_page,
         )
         html = _replace_links(html)
-        pages.append(
+        self.pages.append(
             {
                 'id'   : self.chapter['id'],
                 'html' : html,
@@ -112,7 +112,7 @@ class HTML():
                 extension = self.ext,
             )
             html = _replace_links(html)
-            pages.append(
+            self.pages.append(
                 {
                     'id'   : page['id'],
                     'html' : html,
@@ -120,14 +120,14 @@ class HTML():
             )
 
         html = self.create_keywords_page()
-        pages.append(
+        self.pages.append(
             {
                 'id'   : 'keywords',
                 'html' : html,
             }
         )
 
-        return pages
+        return self.pages
 
 
 class OnePage(HTML):
