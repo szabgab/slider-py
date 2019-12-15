@@ -7,7 +7,8 @@ import yaml
 from tools import compare_dirs, read_expected
 
 def qx(cmd):
-    proc = subprocess.Popen(cmd,
+    proc = subprocess.Popen(
+        cmd,
         stdout = subprocess.PIPE,
         stderr = subprocess.PIPE,
     )
