@@ -6,6 +6,13 @@ import shutil
 import yaml
 
 
+def _replace_links(html):
+    html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
+    html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
+    html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
+    return html
+
+
 class HTML(object):
     def __init__(self, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -142,12 +149,6 @@ class HTML(object):
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         pages = []
-
-        def _replace_links(html):
-            html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
-            html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
-            html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
-            return html
 
         keywords = {}
 
