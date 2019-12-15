@@ -163,6 +163,25 @@ def test_json_to_dom(name):
     data = multi_slider.process_yml(yml_file)
     assert data == expected
 
+@pytest.mark.parametrize("name", [
+    'multi',
+])
+def test_json_to_html(tmpdir, name):
+    yml_file = os.path.join('cases', name + '.json')
+    target_dir = str(tmpdir)
+    print(target_dir)
+
+    multi_slider = MultiSlider()
+    book = multi_slider.process_yml(yml_file)
+    html = HTML(
+        book      = book,
+        includes  = os.path.dirname(yml_file),
+        ext       = '',
+    )
+    html.generate_book(target_dir)
+    compare_dirs(target_dir, os.path.join('cases', 'multi_html', name), name)
+
+
 def test_duplicate_id_in_chapters_of_multi():
     yml_file = os.path.join('cases', 'duplicate_id.json')
 
