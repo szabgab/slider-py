@@ -18,7 +18,7 @@ def qx(cmd):
 
 def test_cli_html(tmpdir):
     temp_dir = str(tmpdir)
-    cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--html", "--dir",  temp_dir]
+    cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--html", "--dir", temp_dir]
     out, err, code = qx(cmd)
     print(out)
     print(err)
