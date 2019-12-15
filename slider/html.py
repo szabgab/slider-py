@@ -107,7 +107,7 @@ class HTML(object):
         work_dir = os.getcwd()
         html_path = os.path.join(work_dir, in_dir)
         if not os.path.exists(html_path):
-                os.makedirs(html_path)
+            os.makedirs(html_path)
         pages = self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
         for page in pages:
             html_filename = os.path.join(in_dir, page['id'] + self.ext)
