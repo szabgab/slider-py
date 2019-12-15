@@ -6,10 +6,11 @@ python:
 #  - "3.4"
 install:
   - pip install pytest
+  - pip install pytest-flake8
   - pip install pytest-cov
   - pip install coveralls
   - pip install -r requirements.txt
 script:
-  - pytest --cov=slider/
+  - pytest --flake8 --cov=slider/ --cache-clear
 after_success:
   - coveralls
