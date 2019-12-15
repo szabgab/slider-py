@@ -52,7 +52,6 @@ class Slider(object):
             return True
         return False
 
-
     def is_id(self, row):
         match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
         if match:
@@ -71,7 +70,6 @@ class Slider(object):
             return True
         return False
 
-
     def is_index(self, row):
         # {i: index field}
         # {i: index!field}
@@ -85,7 +83,6 @@ class Slider(object):
             return True
         return False
 
-
     def is_page_title(self, row):
         match = re.search(r'\A## (.*)\Z', row)
         if match:
@@ -93,7 +90,6 @@ class Slider(object):
             self.page['title'] = match.group(1)
             return True
         return False
-
 
     def is_list(self, row):
         # ul, ol
@@ -145,7 +141,6 @@ class Slider(object):
         self.tag['content']['rows'].append(this_row)
         return True
 
-
     def is_empty(self, row):
         # empty row ends the ol, ul tags
         # empty row is included in the verbatim tag
@@ -162,7 +157,6 @@ class Slider(object):
             self.add_tag()
             return True
         return False
-
 
     def is_free_text(self, row):
         # free text
@@ -200,7 +194,6 @@ class Slider(object):
             self.tag['content'][0] += row + "\n"
             return True
         return False
-
 
     def is_block(self, row):
         blocks = ['aside', 'blockquote', 'blurb', 'exercise', 'quiz']
@@ -241,7 +234,6 @@ class Slider(object):
 
         return False
 
-
     def is_verbatim(self, row):
         match = re.search(r'\A```\Z', row)
         if match:
@@ -257,7 +249,6 @@ class Slider(object):
             return True
         return False
 
-
     def check_requirements(self):
         # TODO: error if id already exists anywhere in the slides (chapters, pages)
 
@@ -266,7 +257,6 @@ class Slider(object):
 
         if not 'id' in self.chapter:
             raise SliderError('Chapter id is missing in {}'.format(self.filename))
-
 
     def parse(self, filename):
         self.chapter = {}

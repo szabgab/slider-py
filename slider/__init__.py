@@ -60,7 +60,6 @@ def main():
         print(json_str)
         exit()
 
-
     if args.html:
         if args.yaml:
             html = HTML(

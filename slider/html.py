@@ -72,7 +72,6 @@ class HTML(object):
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
 
-
     def create_book_index_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         index_template = env.get_template('index.html')
@@ -89,7 +88,6 @@ class HTML(object):
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
 
-
     def create_book_toc_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         toc_template = env.get_template('toc.html')
@@ -102,7 +100,6 @@ class HTML(object):
         html_filename = os.path.join(in_dir, 'toc' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
-
 
     def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
         work_dir = os.getcwd()
@@ -141,7 +138,6 @@ class HTML(object):
         info_filename = os.path.join(in_dir, 'info.yaml')
         with open(info_filename, 'w', encoding="utf-8") as fh:
             fh.write(yaml.dump(info, default_flow_style=False))
-
 
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
