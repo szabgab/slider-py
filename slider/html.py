@@ -40,9 +40,20 @@ class HTML():
         else:
             self.static = os.path.join(self.root, 'static')
 
-        self.keywords = {}
+    def create_keywords_page(self):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        keywords_template = env.get_template('keywords.html')
+        html = keywords_template.render(
+            keywords  = self.keywords,
+            timestamp = self.timestamp,
+            extension = self.ext,
+            title     = 'Keywords',
+        )
+        html = _replace_links(html)
+        return html
 
     def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
+        self.keywords = {}
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         pages = []
 
@@ -108,23 +119,13 @@ class HTML():
                 }
             )
 
-        try:
-            keywords_template = env.get_template('keywords.html')
-            html = keywords_template.render(
-                keywords  = self.keywords,
-                timestamp = self.timestamp,
-                extension = self.ext,
-                title     = 'Keywords',
-            )
-            html = _replace_links(html)
-            pages.append(
-                {
-                    'id'   : 'keywords',
-                    'html' : html,
-                }
-            )
-        except jinja2.exceptions.TemplateNotFound:
-            print("Template keywords.html not found")
+        html = self.create_keywords_page()
+        pages.append(
+            {
+                'id'   : 'keywords',
+                'html' : html,
+            }
+        )
 
         return pages
 
@@ -173,6 +174,7 @@ class Book(HTML):
     def __init__(self, book, **kw):
         self.book = book
         super(Book, self).__init__(**kw)
+        self.keywords = {}
 
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
@@ -202,10 +204,11 @@ class Book(HTML):
             if i < len(self.book['pages']) - 1:
                 next_chapter = self.book['pages'][i+1]
             html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+            self.keywords.update(html.keywords)
 
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
-        self.create_book_keywords_page(in_dir)
+        #self.create_keywords_page(in_dir)
 
     def create_book_index_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
@@ -236,6 +239,4 @@ class Book(HTML):
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(html)
 
-    def create_book_keywords_page(self, in_dir):
-        #print(self.keywords)
-        pass
+
