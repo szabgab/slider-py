@@ -6,6 +6,7 @@
     "version": "0.01",
     "name": "slide_processing",
     "files": [
+        "index.md",
         "chapter.md",
         "all.md",
         "ul.md",
