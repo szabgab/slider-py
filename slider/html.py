@@ -169,17 +169,17 @@ class HTML(object):
         )
 
         page_template = env.get_template('page.html')
-        for i in range(len(self.chapter['pages'])):
-            page = self.chapter['pages'][i]
-            if i > 0:
-                page['prev'] = self.chapter['pages'][i-1]
+        for ix in range(len(self.chapter['pages'])):
+            page = self.chapter['pages'][ix]
+            if ix > 0:
+                page['prev'] = self.chapter['pages'][ix-1]
             else:
                 page['prev'] = {
                     'id' : self.chapter['id'],
                     'title' : self.chapter['title'],
                 }
-            if i < len(self.chapter['pages'])-1:
-                page['next'] = self.chapter['pages'][i+1]
+            if ix < len(self.chapter['pages'])-1:
+                page['next'] = self.chapter['pages'][ix+1]
             else:
                 page['next'] = next_chapter
 
