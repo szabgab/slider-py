@@ -14,7 +14,7 @@ def _replace_links(html):
 
 
 class HTML():
-    def __init__(self, **kw):
+    def __init__(self, ext=None, **kw):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
@@ -25,11 +25,11 @@ class HTML():
         if 'includes' in kw and kw['includes'] is not None:
             self.includes = kw['includes']
 
-        if 'ext' in kw and kw['ext'] is not None and kw['ext'] != '':
-            if kw['ext'][0] == '.':
-                self.ext = kw['ext']
+        if ext is not None and ext != '':
+            if ext[0] == '.':
+                self.ext = ext
             else:
-                self.ext = '.' + kw['ext']
+                self.ext = '.' + ext
         else:
             self.ext = ''
 
