@@ -19,10 +19,6 @@ class HTML():
         self.timestamp = datetime.datetime.now()
 
         # TODO: clean up this code so we fail early if required parameters are not provided
-        # TODO: shall we separate the Multi chapter generator to its own classs?
-        if 'book' in kw and kw['book']:
-            self.book = kw['book']
-
         if 'chapter' in kw and kw['chapter']:
             self.chapter = kw['chapter']
 
@@ -177,6 +173,10 @@ class OnePage(HTML):
 
 
 class Book(HTML):
+    def __init__(self, book, **kw):
+        self.book = book
+        super(Book, self).__init__(**kw)
+
     def generate_book(self, in_dir):
         #print(self.book['pages'][1])
         for i in range(len(self.book['pages'])):
