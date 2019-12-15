@@ -75,7 +75,7 @@ def test_exceptions():
 @pytest.mark.parametrize("name", [
     'chapter', 'index', 'pages', 'tables', 'all'
 ])
-def test_cases_with_html(tmpdir, name):
+def test_md_to_html(tmpdir, name):
     slider = Slider()
 
     md_file = os.path.join('cases', '{}.md'.format(name))
@@ -98,7 +98,7 @@ def test_cases_with_html(tmpdir, name):
 @pytest.mark.parametrize("name", [
     'all'
 ])
-def test_templates(tmpdir, name):
+def test_md_to_html_other_templates(tmpdir, name):
     slider = Slider()
 
     md_file = os.path.join('cases', '{}.md'.format(name))
@@ -121,7 +121,7 @@ def test_templates(tmpdir, name):
 @pytest.mark.parametrize("name", [
     'all', 'index'
 ])
-def test_no_extension(tmpdir, name):
+def test_md_to_html_no_file_extension(tmpdir, name):
     slider = Slider()
 
     md_file = os.path.join('cases', '{}.md'.format(name))
@@ -143,14 +143,18 @@ def test_no_extension(tmpdir, name):
 @pytest.mark.parametrize("name", [
     'all', 'chapter', 'include', 'index', 'ul', 'ol', 'p', 'pages', 'verbatim', 'one_chapter', 'tables',
 ])
-def test_cases_dom(name):
+def test_md_to_dom(name):
     slider = Slider()
     pages = slider.parse(os.path.join('cases', '{}.md'.format(name)))
     with open(os.path.join('cases', 'dom', '{}.json'.format(name))) as fh:
         assert pages == json.load(fh)
 
-def test_multi():
-    yml_file = os.path.join('cases', 'multi.json')
+
+@pytest.mark.parametrize("name", [
+    'multi',
+])
+def test_json_to_dom(name):
+    yml_file = os.path.join('cases', name + '.json')
 
     expected = read_expected(yml_file)
 
