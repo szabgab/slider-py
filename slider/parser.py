@@ -29,16 +29,16 @@ class MultiSlider(object):
     def check_id_uniqueness(self):
         ids = {}
         for page in self.conf['pages']:
-            id = page['id']
-            if id in ids:
-                raise SliderError("Duplicate id {}".format(id))
-            ids[id] = 1
+            idx = page['id']
+            if idx in ids:
+                raise SliderError("Duplicate id {}".format(idx))
+            ids[idx] = 1
 
             for pg in page['pages']:
-                id = pg['id']
-                if id in ids:
-                    raise SliderError("Duplicate id {}".format(id))
-                ids[id] = 1
+                idx = pg['id']
+                if idx in ids:
+                    raise SliderError("Duplicate id {}".format(idx))
+                ids[idx] = 1
 
 
 class Slider(object):
@@ -54,18 +54,18 @@ class Slider(object):
     def is_id(self, row):
         match = re.search(r'\A\{id: ([a-z0-9-]+)\}\s*\Z', row)
         if match:
-            id = match.group(1)
+            idx = match.group(1)
             if self.page:
                 if 'id' in self.page:
                     raise SliderError('Second page id found in the same file in {} in line {}'.format(self.filename, self.line))
-                self.page['id'] = id
+                self.page['id'] = idx
             else:
                 if 'id' in self.chapter:
                     raise SliderError('Second chapter id found in the same file in {} in line {}'.format(self.filename, self.line))
-                self.chapter['id'] = id
-            if id in self.ids:
-                raise SliderError('The id {} found twice in file {} in line {}'.format(id, self.filename, self.line))
-            self.ids.add(id)
+                self.chapter['id'] = idx
+            if idx in self.ids:
+                raise SliderError('The id {} found twice in file {} in line {}'.format(idx, self.filename, self.line))
+            self.ids.add(idx)
             return True
         return False
 
