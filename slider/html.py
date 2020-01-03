@@ -145,7 +145,9 @@ class OnePage(HTML):
 
         self.copy_image_files(in_dir)
         self.copy_static_files(in_dir)
+        self.save_info_yml(in_dir, pages)
 
+    def save_info_yml(self, in_dir, pages):
         info = {
             "title": self.chapter['title'],
             "cnt": len(pages),
