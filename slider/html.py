@@ -206,7 +206,16 @@ class Book(HTML):
             if i < len(self.book['pages']) - 1:
                 next_chapter = self.book['pages'][i+1]
             html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
-            self.keywords.update(html.keywords)
+            
+            for kw in html.keywords:
+                if kw in self.keywords:
+                    for kw2 in self.keywords[kw]:
+                        if kw2 in self.keywords[kw]:
+                            self.keywords[kw][kw2] += html.keywords[kw][kw2]
+                        else:
+                            self.keywords[kw][kw2] = html.keywords[kw][kw2]
+                else:
+                    self.keywords[kw] = html.keywords[kw]
 
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
