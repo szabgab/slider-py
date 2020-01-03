@@ -201,7 +201,8 @@ class Book(HTML):
             )
 
             prev_page = {
-                'id' : 'index'
+                'id' : 'toc',
+                'title' : 'TOC',
             }
             if i > 0:
                 prev_page = self.book['pages'][i-1]  # chapter
