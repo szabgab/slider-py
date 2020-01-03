@@ -107,6 +107,7 @@ class HTML():
                 page=page,
                 timestamp=self.timestamp,
                 extension=self.ext,
+                chapter=self.chapter,
             )
             html = _replace_links(html)
             self.pages.append(
