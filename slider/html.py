@@ -64,35 +64,25 @@ class HTML():
         self.pages = []
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
 
-        chapter_template = env.get_template('chapter.html')
-        html = chapter_template.render(
-            title      = self.chapter['title'],
-            pages      = self.chapter['pages'],
-            timestamp  = self.timestamp,
-            extension  = self.ext,
-            prev       = prev_page,
-            next       = next_page,
-        )
-        html = _replace_links(html)
-        self.pages.append(
-            {
-                'id'   : self.chapter['id'],
-                'html' : html,
-            }
-        )
+        self.create_chapter_head(env, next_page, prev_page)
+        self.create_pages(env, next_chapter)
+        self.create_keywords_page()
 
+        return
+
+    def create_pages(self, env, next_chapter):
         page_template = env.get_template('page.html')
         for ix in range(len(self.chapter['pages'])):
             page = self.chapter['pages'][ix]
             if ix > 0:
-                page['prev'] = self.chapter['pages'][ix-1]
+                page['prev'] = self.chapter['pages'][ix - 1]
             else:
                 page['prev'] = {
-                    'id' : self.chapter['id'],
-                    'title' : self.chapter['title'],
+                    'id': self.chapter['id'],
+                    'title': self.chapter['title'],
                 }
-            if ix < len(self.chapter['pages'])-1:
-                page['next'] = self.chapter['pages'][ix+1]
+            if ix < len(self.chapter['pages']) - 1:
+                page['next'] = self.chapter['pages'][ix + 1]
             else:
                 page['next'] = next_chapter
 
@@ -113,22 +103,36 @@ class HTML():
                     })
 
             html = page_template.render(
-                title = page['title'],
-                page = page,
-                timestamp = self.timestamp,
-                extension = self.ext,
+                title=page['title'],
+                page=page,
+                timestamp=self.timestamp,
+                extension=self.ext,
             )
             html = _replace_links(html)
             self.pages.append(
                 {
-                    'id'   : page['id'],
-                    'html' : html,
+                    'id': page['id'],
+                    'html': html,
                 }
             )
 
-        self.create_keywords_page()
-
-        return
+    def create_chapter_head(self, env, next_page, prev_page):
+        chapter_template = env.get_template('chapter.html')
+        html = chapter_template.render(
+            title=self.chapter['title'],
+            pages=self.chapter['pages'],
+            timestamp=self.timestamp,
+            extension=self.ext,
+            prev=prev_page,
+            next=next_page,
+        )
+        html = _replace_links(html)
+        self.pages.append(
+            {
+                'id': self.chapter['id'],
+                'html': html,
+            }
+        )
 
 
 class OnePage(HTML):
