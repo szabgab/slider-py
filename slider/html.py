@@ -206,16 +206,8 @@ class Book(HTML):
             if i < len(self.book['pages']) - 1:
                 next_chapter = self.book['pages'][i+1]
             html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
-            
-            for kw in html.keywords:
-                if kw in self.keywords:
-                    for kw2 in self.keywords[kw]:
-                        if kw2 in self.keywords[kw]:
-                            self.keywords[kw][kw2] += html.keywords[kw][kw2]
-                        else:
-                            self.keywords[kw][kw2] = html.keywords[kw][kw2]
-                else:
-                    self.keywords[kw] = html.keywords[kw]
+
+            self.merge_keywords(html)
 
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
@@ -223,6 +215,17 @@ class Book(HTML):
         html_filename = os.path.join(in_dir, 'keywords' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(self.pages[0]['html'])
+
+    def merge_keywords(self, html):
+        for kw in html.keywords:
+            if kw in self.keywords:
+                for kw2 in self.keywords[kw]:
+                    if kw2 in self.keywords[kw]:
+                        self.keywords[kw][kw2] += html.keywords[kw][kw2]
+                    else:
+                        self.keywords[kw][kw2] = html.keywords[kw][kw2]
+            else:
+                self.keywords[kw] = html.keywords[kw]
 
     def create_book_index_page(self, in_dir):
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
