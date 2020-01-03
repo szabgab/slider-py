@@ -143,7 +143,23 @@ class OnePage(HTML):
             with open(html_filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
-        # copy image files
+        self.copy_image_files(in_dir)
+        self.copy_static_files(in_dir)
+
+        info = {
+            "title": self.chapter['title'],
+            "cnt": len(pages),
+        }
+        info_filename = os.path.join(in_dir, 'info.yaml')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
+            fh.write(yaml.dump(info, default_flow_style=False))
+
+    def copy_static_files(self, in_dir):
+        if os.path.exists(self.static):
+            for entry in os.listdir(self.static):
+                shutil.copy(os.path.join(self.static, entry), in_dir)
+
+    def copy_image_files(self, in_dir):
         for page in self.chapter['pages']:
             if 'content' not in page:  # TODO: shall we make sure there is alway a content?
                 continue
@@ -154,21 +170,8 @@ class OnePage(HTML):
                     if not os.path.exists(img_dir):
                         os.makedirs(img_dir)
                     include_path = os.path.join(self.includes, c['filename'])
-                    #print(include_path)
+                    # print(include_path)
                     shutil.copy(include_path, img_dir)
-
-        # copy static files
-        if os.path.exists(self.static):
-            for entry in os.listdir(self.static):
-                shutil.copy(os.path.join(self.static, entry), in_dir)
-
-        info = {
-            "title": self.chapter['title'],
-            "cnt": len(pages),
-        }
-        info_filename = os.path.join(in_dir, 'info.yaml')
-        with open(info_filename, 'w', encoding="utf-8") as fh:
-            fh.write(yaml.dump(info, default_flow_style=False))
 
 
 class Book(HTML):
