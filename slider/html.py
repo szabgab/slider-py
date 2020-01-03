@@ -66,9 +66,9 @@ class HTML():
 
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
-            title = self.chapter['title'],
-            pages = self.chapter['pages'],
-            timestamp = self.timestamp,
+            title      = self.chapter['title'],
+            pages      = self.chapter['pages'],
+            timestamp  = self.timestamp,
             extension  = self.ext,
             prev       = prev_page,
             next       = next_page,
@@ -128,7 +128,7 @@ class HTML():
 
         self.create_keywords_page()
 
-        return self.pages
+        return
 
 
 class OnePage(HTML):
@@ -137,20 +137,20 @@ class OnePage(HTML):
         html_path = os.path.join(work_dir, in_dir)
         if not os.path.exists(html_path):
             os.makedirs(html_path)
-        pages = self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
-        for page in pages:
+        self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+        for page in self.pages:
             html_filename = os.path.join(in_dir, page['id'] + self.ext)
             with open(html_filename, 'w', encoding="utf-8") as fh:
                 fh.write(page['html'])
 
         self.copy_image_files(in_dir)
         self.copy_static_files(in_dir)
-        self.save_info_yml(in_dir, pages)
+        self.save_info_yml(in_dir)
 
-    def save_info_yml(self, in_dir, pages):
+    def save_info_yml(self, in_dir):
         info = {
             "title": self.chapter['title'],
-            "cnt": len(pages),
+            "cnt": len(self.pages),
         }
         info_filename = os.path.join(in_dir, 'info.yaml')
         with open(info_filename, 'w', encoding="utf-8") as fh:
