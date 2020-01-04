@@ -7,7 +7,7 @@ do
 done
 
 # Create HTML from individual MD files test_cases_with_html
-for name in chapter index pages tables all;
+for name in chapter index pages tables all verbatim;
 do
     rm -rf cases/html/$name/*
     python slider.py --md cases/$name.md --html --dir cases/html/$name/ --ext html

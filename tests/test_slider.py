@@ -74,7 +74,7 @@ def test_exceptions():
 
 
 @pytest.mark.parametrize("name", [
-    'chapter', 'index', 'pages', 'tables', 'all'
+    'chapter', 'index', 'pages', 'tables', 'all', 'verbatim'
 ])
 def test_md_to_html(tmpdir, name):
     slider = Slider()
