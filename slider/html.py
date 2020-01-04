@@ -220,12 +220,31 @@ class Book(HTML):
 
             self.merge_keywords(html)
 
+        self.page_count = 0
+        for chapter in self.book['pages']:
+            self.page_count += 1
+            for page in chapter['pages']:
+                self.page_count += 1
+
+
         self.create_book_index_page(in_dir)
         self.create_book_toc_page(in_dir)
         self.create_keywords_page()
+        self.save_info_yml(in_dir)
         html_filename = os.path.join(in_dir, 'keywords' + self.ext)
         with open(html_filename, 'w', encoding="utf-8") as fh:
             fh.write(self.pages[0]['html'])
+
+
+    def save_info_yml(self, in_dir):
+        info = {
+            "title": self.book['title'],
+            "cnt": self.page_count,
+        }
+        info_filename = os.path.join(in_dir, 'info.yaml')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
+            fh.write(yaml.dump(info, default_flow_style=False))
+
 
     def merge_keywords(self, html):
         for kw in html.keywords:
