@@ -9,6 +9,11 @@
 code
     indentend line of this
 another
+
+text with <some> special <characters>.
+{i: not-an-index}
+
+## Not a paragraph
 ```
 
 ## Page Two Title

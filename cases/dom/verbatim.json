@@ -5,7 +5,7 @@
             "content": [
                 {
                     "content": [
-                        "\n# comment\ncode\n    indentend line of this\nanother\n"
+                        "\n# comment\ncode\n    indentend line of this\nanother\n\ntext with <some> special <characters>.\n{i: not-an-index}\n\n## Not a paragraph\n"
                     ],
                     "name": "verbatim"
                 }
