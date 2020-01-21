@@ -4,6 +4,7 @@ import os
 import re
 import shutil
 import yaml
+import json
 
 
 def _replace_links(html):
@@ -160,6 +161,9 @@ class OnePage(HTML):
         info_filename = os.path.join(in_dir, 'info.yaml')
         with open(info_filename, 'w', encoding="utf-8") as fh:
             fh.write(yaml.dump(info, default_flow_style=False))
+        info_filename = os.path.join(in_dir, 'info.json')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
+            json.dump(info, fh, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
 
     def copy_static_files(self, in_dir):
         if os.path.exists(self.static):
@@ -242,6 +246,9 @@ class Book(HTML):
         info_filename = os.path.join(in_dir, 'info.yaml')
         with open(info_filename, 'w', encoding="utf-8") as fh:
             fh.write(yaml.dump(info, default_flow_style=False))
+        info_filename = os.path.join(in_dir, 'info.json')
+        with open(info_filename, 'w', encoding="utf-8") as fh:
+            json.dump(info, fh, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
 
     def merge_keywords(self, html):
         for kw in html.keywords:
