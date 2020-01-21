@@ -18,7 +18,7 @@ def qx(cmd):
 
 def test_cli_html(tmpdir):
     temp_dir = str(tmpdir)
-    cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--html", "--dir", temp_dir]
+    cmd = [sys.executable, "slider.py", "--md", "cases/input/all.md", "--html", "--dir", temp_dir]
     out, err, code = qx(cmd)
     print(out)
     print(err)
@@ -72,7 +72,7 @@ def test_cli_empty_html_dir(tmpdir):
 
 
 def test_cli_empty_html_md():
-    cmd = [sys.executable, "slider.py", '--html', "--md", "cases/all.md"]
+    cmd = [sys.executable, "slider.py", '--html', "--md", "cases/input/all.md"]
     out, err, code = qx(cmd)
     #print(out)
     print(err)
@@ -83,7 +83,7 @@ def test_cli_empty_html_md():
 
 
 def test_cli_parse():
-    cmd = [sys.executable, "slider.py", "--md", "cases/all.md", "--parse"]
+    cmd = [sys.executable, "slider.py", "--md", "cases/input/all.md", "--parse"]
     out, err, code = qx(cmd)
     print(out)
     print(type(out))
@@ -91,13 +91,13 @@ def test_cli_parse():
     assert code == 0
     assert err == b''
     data = json.loads(out.decode('utf8'))
-    with open('cases/dom/all.json') as fh:
+    with open('cases/output/dom/all.json') as fh:
         expected = json.load(fh)
     assert data == expected
 
 
 def test_cli_parse_yaml():
-    yml_file = 'cases/multi.json'
+    yml_file = 'cases/input/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--parse"]
     out, err, code = qx(cmd)
     print(out)
@@ -113,7 +113,7 @@ def test_cli_parse_yaml():
 
 def test_cli_html_yaml(tmpdir):
     temp_dir = str(tmpdir)
-    yml_file = 'cases/multi.json'
+    yml_file = 'cases/input/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir]
     out, err, code = qx(cmd)
     print(out)
@@ -122,13 +122,13 @@ def test_cli_html_yaml(tmpdir):
     assert err == b''
     assert out == b''
     name = 'multi'
-    compare_dirs(temp_dir, os.path.join('cases', 'multi_html', name), name)
+    compare_dirs(temp_dir, os.path.join('cases', 'output', 'multi_html', name), name)
 
 
 def test_cli_html_yaml_ext(tmpdir):
     temp_dir = str(tmpdir)
     #print(temp_dir)
-    yml_file = 'cases/multi.json'
+    yml_file = 'cases/input/multi.json'
     cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir, '--ext', 'html']
     out, err, code = qx(cmd)
     print(out)
@@ -137,5 +137,5 @@ def test_cli_html_yaml_ext(tmpdir):
     assert err == b''
     assert out == b''
     name = 'multi'
-    compare_dirs(temp_dir, os.path.join('cases', 'multi_html_ext', name), name)
+    compare_dirs(temp_dir, os.path.join('cases', 'output', 'multi_html_ext', name), name)
 

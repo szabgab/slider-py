@@ -15,9 +15,9 @@ def test_other_dir(tmpdir):
 
         target_dir = os.path.join(root, 'html')
         os.mkdir(target_dir)
-        md_file = os.path.join(original, 'cases', 'all.md')
+        md_file = os.path.join(original, 'cases', 'input', 'all.md')
         pages = slider.parse(md_file)
-        with open(os.path.join(original, 'cases/dom/all.json')) as fh:
+        with open(os.path.join(original, 'cases/output/dom/all.json')) as fh:
             expected = json.load(fh)
         assert expected == pages
 
@@ -28,14 +28,14 @@ def test_other_dir(tmpdir):
         )
 
         html.generate_html_files(target_dir)
-        compare_dirs(target_dir, os.path.join(original, 'cases', 'html', 'all'), 'all')
+        compare_dirs(target_dir, os.path.join(original, 'cases', 'output', 'html', 'all'), 'all')
 
 
 def test_other_dir_multi(tmpdir):
     root = str(tmpdir)
     original = os.getcwd()
 
-    yml_file = os.path.join(original, 'cases', 'multi.json')
+    yml_file = os.path.join(original, 'cases', 'input', 'multi.json')
 
     expected = read_expected(yml_file)
 
