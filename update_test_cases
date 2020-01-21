@@ -3,44 +3,44 @@ set -e
 # create DOM from individual MD files test_cases_dom
 for name in all chapter include index ul ol p pages verbatim one_chapter tables;
 do
-    python slider.py --md cases/$name.md --parse > cases/dom/$name.json
+    python slider.py --md cases/input/$name.md --parse > cases/output/dom/$name.json
 done
 
 # Create HTML from individual MD files test_cases_with_html
 for name in chapter index pages tables all verbatim;
 do
-    rm -rf cases/html/$name/*
-    python slider.py --md cases/$name.md --html --dir cases/html/$name/ --ext html
+    rm -rf cases/output/html/$name/*
+    python slider.py --md cases/input/$name.md --html --dir cases/output/html/$name/ --ext html
 done
 
 
 # Create SIMPLE_HTML files without extension from individual MD files
 for name in all;
 do
-    rm -rf cases/simple_html/$name/*
-    python slider.py --templates cases/simple_templates --md cases/$name.md --html --dir cases/simple_html/$name/
+    rm -rf cases/output/simple_html/$name/*
+    python slider.py --templates cases/input/simple_templates --md cases/input/$name.md --html --dir cases/output/simple_html/$name/
 done
 
 
 # Create HTML files without extension from individual MD files
 for name in all index;
 do
-    rm -rf cases/plain_html/$name/*
-    python slider.py --md cases/$name.md --html --dir cases/plain_html/$name/
+    rm -rf cases/output/plain_html/$name/*
+    python slider.py --md cases/input/$name.md --html --dir cases/output/plain_html/$name/
 done
 
 
 # Create HTML files without extension based on YAML configuration file
 for name in multi;
 do
-    rm -rf cases/multi_html/$name/*
+    rm -rf cases/output/multi_html/$name/*
     #set -x
-    python slider.py --yaml cases/$name.json --html --dir cases/multi_html/$name/
+    python slider.py --yaml cases/input/$name.json --html --dir cases/output/multi_html/$name/
 done
 
 # Create HTML files based on YAML configuration file
 for name in multi;
 do
-    rm -rf cases/multi_html_ext/$name/*
-    python slider.py --yaml cases/$name.json --html --dir cases/multi_html_ext/$name/ --ext html
+    rm -rf cases/output/multi_html_ext/$name/*
+    python slider.py --yaml cases/input/$name.json --html --dir cases/output/multi_html_ext/$name/ --ext html
 done
