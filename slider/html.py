@@ -109,6 +109,7 @@ class HTML():
                 timestamp=self.timestamp,
                 extension=self.ext,
                 chapter=self.chapter,
+                srcdir=os.path.basename(self.includes),
             )
             html = _replace_links(html)
             self.pages.append(
