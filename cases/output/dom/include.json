@@ -5,7 +5,7 @@
             "content": [
                 {
                     "content": [
-                        "import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"
+                        "import sys\n\ndef main():\n    print(sys.argv)\n\nbackticks = \"`text`\"\n\nif __name__ == '__main__':\n    main()\n"
                     ],
                     "filename": "sample/do.py",
                     "name": "include",
@@ -19,7 +19,7 @@
             "content": [
                 {
                     "content": [
-                        "import sys\n\ndef main():\n    print(sys.argv)\n\n\n\nif __name__ == '__main__':\n    main()\n"
+                        "import sys\n\ndef main():\n    print(sys.argv)\n\nbackticks = \"`text`\"\n\nif __name__ == '__main__':\n    main()\n"
                     ],
                     "filename": "sample/do.py",
                     "name": "include",
