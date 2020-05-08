@@ -177,6 +177,8 @@ class Slider(object):
                     self.tag['title'] = title
                     self.tag['filename'] = include_file
                 else:
+                    if not os.path.exists(include_path):
+                        raise SliderError('Included file "{}" does not exist. In {} in line {}.'.format(include_path, self.filename, self.line))
                     with open(include_path, 'r', encoding="utf-8") as fh:
                         content = fh.read()
                     self.tag['name'] = 'include'

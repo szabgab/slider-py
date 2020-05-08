@@ -72,6 +72,12 @@ def test_exceptions():
     assert exinfo.type == SliderError
     assert str(exinfo.value) == '``` outside of page {} in line 4'.format(path)
 
+    path = os.path.join('cases', 'input', 'incorrect-include.md')
+    with pytest.raises(Exception) as exinfo:
+        slider.parse(path)
+    assert exinfo.type == SliderError
+    assert str(exinfo.value) == 'Included file "cases/input/some/not/existing/place" does not exist. In {} in line 9.'.format(path)
+
 
 @pytest.mark.parametrize("name", [
     'chapter', 'index', 'pages', 'tables', 'all', 'verbatim'
