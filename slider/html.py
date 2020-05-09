@@ -25,7 +25,7 @@ def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
     skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.psgi', '.glade', '.conf'] # becasue Pygments does not know them.
     skip.extend(['.pl']) # skip Perl files becaus they look horrible in the current syntaxt highlighting
-    skip.extend(['.t']) # not supported in older version of Pygment we have on the server
+    skip.extend(['.t', '.tap']) # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
         return _html_escape(code)
     try:
