@@ -5,7 +5,9 @@ import re
 import shutil
 import yaml
 import json
-
+from pygments import highlight
+from pygments.lexers import PythonLexer, PerlLexer, GoLexer
+from pygments.formatters import HtmlFormatter
 
 def _replace_links(html):
     html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
@@ -13,6 +15,19 @@ def _replace_links(html):
     html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
     return html
 
+lexers = {
+    ".go": GoLexer,
+    ".py": PythonLexer,
+    ".pl": PerlLexer,
+    ".pm": PerlLexer,
+}
+
+def _syntax(code, filename):
+    file_name, file_extension = os.path.splitext(filename)
+    if file_extension in lexers:
+        return highlight(code, lexers[file_extension](), HtmlFormatter())
+    else:
+        return code
 
 class HTML():
     # TODO: clean up the parameter list so we fail early if required parameters are not provided
@@ -65,6 +80,7 @@ class HTML():
         self.pages = []
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         env.filters['linker'] = _replace_links
+        env.filters['syntax'] = _syntax
 
         self.create_chapter_head(env, next_page, prev_page)
         self.create_pages(env, next_chapter)
