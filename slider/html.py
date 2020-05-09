@@ -9,11 +9,13 @@ from pygments import highlight
 from pygments.lexers import PythonLexer, PerlLexer, GoLexer
 from pygments.formatters import HtmlFormatter
 
+
 def _replace_links(html):
     html = re.sub(r'\[([^]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
     html = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', html)
     html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
     return html
+
 
 lexers = {
     ".go": GoLexer,
@@ -22,12 +24,14 @@ lexers = {
     ".pm": PerlLexer,
 }
 
+
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
     if file_extension in lexers:
         return highlight(code, lexers[file_extension](), HtmlFormatter())
     else:
         return code
+
 
 class HTML():
     # TODO: clean up the parameter list so we fail early if required parameters are not provided
