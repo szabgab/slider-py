@@ -16,16 +16,18 @@ def _replace_links(html):
     html = re.sub(r'`([^`]+)`', r'<span class="code">\1</span>', html)
     return html
 
+
 def _html_escape(html):
     html = re.sub(r'<', '&lt;', html)
     html = re.sub(r'>', '&gt;', html)
     return html
 
+
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
-    skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.psgi', '.glade', '.conf'] # becasue Pygments does not know them.
-    skip.extend(['.pl']) # skip Perl files becaus they look horrible in the current syntaxt highlighting
-    skip.extend(['.t', '.tap']) # not supported in older version of Pygment we have on the server
+    skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.psgi', '.glade', '.conf']  # becasue Pygments does not know them.
+    skip.extend(['.pl'])  # skip Perl files becaus they look horrible in the current syntaxt highlighting
+    skip.extend(['.t', '.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
         return _html_escape(code)
     try:
