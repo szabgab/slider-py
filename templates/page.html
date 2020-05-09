@@ -34,13 +34,13 @@
   {% if c.name == 'aside' %}
       <div class="aside">
           {% for row in c.content %}
-              {{ row }}
+              {{ row|linker }}
           {% endfor %}
       </div>
   {% endif %}
   {% if c.name == 'p' %}
       <p>
-          {{ c.content[0] }}
+          {{ c.content[0]|linker }}
       </p>
   {% endif %}
   {% if c.name == 'include' %}

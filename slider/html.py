@@ -64,6 +64,7 @@ class HTML():
         self.keywords = {}
         self.pages = []
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
+        env.filters['linker'] = _replace_links
 
         self.create_chapter_head(env, next_page, prev_page)
         self.create_pages(env, next_chapter)
@@ -111,7 +112,7 @@ class HTML():
                 chapter=self.chapter,
                 srcdir=os.path.basename(self.includes),
             )
-            html = _replace_links(html)
+            #html = _replace_links(html)
             self.pages.append(
                 {
                     'id': page['id'],

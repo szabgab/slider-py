@@ -34,7 +34,7 @@
 def main():
     print(sys.argv)
 
-backticks = "<span class="code">text</span>"
+backticks = "`text`"
 
 if __name__ == '__main__':
     main()
