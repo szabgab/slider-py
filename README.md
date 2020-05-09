@@ -68,7 +68,7 @@ The results shoule be in the 'html' directory.
 
 ## TODO
 
-* test missing import file
+* Index of {i: !}   does not show up on the web pages
 * Navigation key-binding in JavaScript (can be in other templating system)
 * make sure the same id does not exists in different pages
 * makes sure index is not an id in the multiSlider case
