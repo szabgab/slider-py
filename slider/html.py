@@ -132,14 +132,14 @@ class HTML():
                     })
 
             html = page_template.render(
-                title=page['title'],
-                page=page,
-                prev = page.get('prev'),
-                next = page.get('next'),
-                timestamp=self.timestamp,
-                extension=self.ext,
-                chapter=self.chapter,
-                srcdir=os.path.basename(self.includes),
+                title     = page['title'],
+                page      = page,
+                prev      = page.get('prev'),
+                next      = page.get('next'),
+                timestamp = self.timestamp,
+                extension =self.ext,
+                chapter   = self.chapter,
+                srcdir    = os.path.basename(self.includes),
             )
             #html = _replace_links(html)
             self.pages.append(
@@ -152,12 +152,12 @@ class HTML():
     def create_chapter_head(self, env, next_page, prev_page):
         chapter_template = env.get_template('chapter.html')
         html = chapter_template.render(
-            title=self.chapter['title'],
-            pages=self.chapter['pages'],
-            timestamp=self.timestamp,
-            extension=self.ext,
-            prev=prev_page,
-            next=next_page,
+            title      = self.chapter['title'],
+            pages      = self.chapter['pages'],
+            timestamp  = self.timestamp,
+            extension  = self.ext,
+            prev       = prev_page,
+            next       = next_page,
         )
         html = _replace_links(html)
         self.pages.append(
