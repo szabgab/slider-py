@@ -134,6 +134,8 @@ class HTML():
             html = page_template.render(
                 title=page['title'],
                 page=page,
+                prev = page.get('prev'),
+                next = page.get('next'),
                 timestamp=self.timestamp,
                 extension=self.ext,
                 chapter=self.chapter,
@@ -298,6 +300,8 @@ class Book(HTML):
         html = index_template.render(
             title      = self.book['title'],
             book       = self.book,
+            prev       = None,
+            next       = { "id" : "toc", "title": "Start" },
             first      = first,
             this_year  = datetime.datetime.now().year,
             extension  = self.ext,
@@ -313,6 +317,8 @@ class Book(HTML):
             title      = "TOC: " + self.book['title'],
             book       = self.book,
             this_year  = datetime.datetime.now().year,
+            prev       = { "id" : "index", "title": "Index" },
+            next       = { "id" : self.book['pages'][0]['id'], "title": self.book['pages'][0]['title'] },
             extension  = self.ext,
         )
         html_filename = os.path.join(in_dir, 'toc' + self.ext)
