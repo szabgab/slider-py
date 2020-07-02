@@ -42,12 +42,13 @@ def _syntax(code, filename):
 
 class HTML():
     # TODO: clean up the parameter list so we fail early if required parameters are not provided
-    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None):
+    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None, url=""):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
         self.chapter = chapter
         self.includes = includes
+        self.url = url
 
         if ext is not None and ext != '':
             if ext[0] == '.':
@@ -72,6 +73,7 @@ class HTML():
         keywords_template = env.get_template('keywords.html')
         html = keywords_template.render(
             keywords  = self.keywords,
+            canonical = f"{self.url}/keywords{self.ext}",
             timestamp = self.timestamp,
             extension = self.ext,
             title     = 'Keywords',
@@ -86,14 +88,14 @@ class HTML():
 
         return
 
-    def generate_html(self, prev_page = None, next_page = None, next_chapter = None):
+    def generate_html(self, this_page = None, prev_page = None, next_page = None, next_chapter = None):
         self.keywords = {}
         self.pages = []
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.templates))
         env.filters['linker'] = _replace_links
         env.filters['syntax'] = _syntax
 
-        self.create_chapter_head(env, next_page, prev_page)
+        self.create_chapter_head(env, this_page, next_page, prev_page)
         self.create_pages(env, next_chapter)
         self.create_keywords_page()
 
@@ -132,12 +134,13 @@ class HTML():
                     })
 
             html = page_template.render(
+                canonical = f"{self.url}/{page['id']}{self.ext}",
                 title     = page['title'],
                 page      = page,
                 prev      = page.get('prev'),
                 next      = page.get('next'),
                 timestamp = self.timestamp,
-                extension =self.ext,
+                extension = self.ext,
                 chapter   = self.chapter,
                 srcdir    = os.path.basename(self.includes),
             )
@@ -149,11 +152,16 @@ class HTML():
                 }
             )
 
-    def create_chapter_head(self, env, next_page, prev_page):
+    def create_chapter_head(self, env, this_page, next_page, prev_page):
         chapter_template = env.get_template('chapter.html')
+        if this_page is None:
+            this_page = {
+                'id': ''
+            }
         html = chapter_template.render(
             title      = self.chapter['title'],
             pages      = self.chapter['pages'],
+            canonical  = f"{self.url}/{this_page['id']}{self.ext}",
             timestamp  = self.timestamp,
             extension  = self.ext,
             prev       = prev_page,
@@ -169,12 +177,12 @@ class HTML():
 
 
 class OnePage(HTML):
-    def generate_html_files(self, in_dir, prev_page = None, next_page = None, next_chapter = None):
+    def generate_html_files(self, in_dir, this_page = None, prev_page = None, next_page = None, next_chapter = None):
         work_dir = os.getcwd()
         html_path = os.path.join(work_dir, in_dir)
         if not os.path.exists(html_path):
             os.makedirs(html_path)
-        self.generate_html(prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+        self.generate_html(this_page=this_page, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
         for page in self.pages:
             html_filename = os.path.join(in_dir, page['id'] + self.ext)
             with open(html_filename, 'w', encoding="utf-8") as fh:
@@ -230,6 +238,7 @@ class Book(HTML):
             html = OnePage(
                 templates = self.templates,
                 static    = self.static,
+                url       = self.url,
                 chapter   = page,
                 includes  = self.includes,
                 ext       = self.ext,
@@ -251,7 +260,8 @@ class Book(HTML):
             next_chapter = None
             if i < len(self.book['pages']) - 1:
                 next_chapter = self.book['pages'][i+1]
-            html.generate_html_files(in_dir, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
+            this_page = self.book['pages'][i]
+            html.generate_html_files(in_dir, this_page=this_page, prev_page=prev_page, next_page=next_page, next_chapter=next_chapter)
 
             self.merge_keywords(html)
 
@@ -300,6 +310,7 @@ class Book(HTML):
         html = index_template.render(
             title      = self.book['title'],
             book       = self.book,
+            canonical  = f"{self.url}/",
             prev       = None,
             next       = { "id" : "toc", "title": "Start" },
             first      = first,
@@ -316,6 +327,7 @@ class Book(HTML):
         html = toc_template.render(
             title      = "TOC: " + self.book['title'],
             book       = self.book,
+            canonical  = f"{self.url}/toc{self.ext}",
             this_year  = datetime.datetime.now().year,
             prev       = { "id" : "index", "title": "Index" },
             next       = { "id" : self.book['pages'][0]['id'], "title": self.book['pages'][0]['title'] },
