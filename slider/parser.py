@@ -221,12 +221,12 @@ class Slider(object):
             return True
 
         if self.tag and self.tag['name'] in blocks:
-            m = re.search(r'\A\* (.*)', row)
-            if m:
+            match = re.search(r'\A\* (.*)', row)
+            if match:
                 if 'internal' not in self.tag:
                     self.tag['internal'] = '</ul>'
                     self.tag['content'].append('<ul>')
-                self.tag['content'].append('<li>' + m.group(1) + '</li>')
+                self.tag['content'].append('<li>' + match.group(1) + '</li>')
             else:
                 if 'internal' in self.tag:
                     self.tag['content'].append(self.tag.pop('internal'))
