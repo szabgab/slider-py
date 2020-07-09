@@ -51,6 +51,8 @@ Free text before aside
           
               
           
+              <p>
+          
               <ul>
           
               <li>Bullet</li>
@@ -62,6 +64,8 @@ Free text before aside
               </ul>
           
               
+          
+              <p>
           
               Text at end of aside
           

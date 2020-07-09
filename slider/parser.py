@@ -231,6 +231,9 @@ class Slider(object):
                 if 'internal' in self.tag:
                     self.tag['content'].append(self.tag.pop('internal'))
                 self.tag['content'].append(row)
+            match_empty_row = re.search(r'\A\s*\Z', row)
+            if match_empty_row:
+                self.tag['content'].append('<p>')
             return True
 
         return False

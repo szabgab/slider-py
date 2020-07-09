@@ -124,12 +124,14 @@
                         "\n",
                         "Text at beginning aside with some **bold** embedding and a [link](https://he.code-maven.com/).",
                         "",
+                        "<p>",
                         "<ul>",
                         "<li>Bullet</li>",
                         "<li>Points</li>",
                         "<li>In aside</li>",
                         "</ul>",
                         "",
+                        "<p>",
                         "Text at end of aside"
                     ],
                     "name": "aside"
@@ -156,9 +158,11 @@
                         "\n",
                         "First paragraph.",
                         "",
+                        "<p>",
                         "Second paragraph - row 1.",
                         "Second paragraph - row 2.",
                         "",
+                        "<p>",
                         "Third paragraph."
                     ],
                     "name": "aside"
