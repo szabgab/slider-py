@@ -199,8 +199,8 @@ class Slider(object):
     def is_block(self, row):
         blocks = ['aside', 'blockquote', 'blurb', 'exercise', 'quiz']
         blocks_str = '|'.join(blocks)
-        regex = r'\A\{/(' + blocks_str + r')}\Z'
-        match = re.search(regex, row)
+        closing_regex = r'\A\{/(' + blocks_str + r')}\Z'
+        match = re.search(closing_regex, row)
         if match:
             if not self.tag:
                 raise SliderError('{} before it was started page {} in line {}'.format(row, self.filename, self.line))
@@ -209,8 +209,8 @@ class Slider(object):
             self.add_tag()
             return True
 
-        regex = r'\A\{(' + blocks_str + r')}\Z'
-        match = re.search(regex, row)
+        opening_regex = r'\A\{(' + blocks_str + r')}\Z'
+        match = re.search(opening_regex, row)
         if match:
             if not self.page:
                 raise SliderError('Starting {} outside of page {} in line {}'.format(row, self.filename, self.line))
