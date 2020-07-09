@@ -148,6 +148,35 @@
             ],
             "id": "some-aside",
             "title": "Some aside"
+        },
+        {
+            "content": [
+                {
+                    "content": [
+                        "\n",
+                        "First paragraph.",
+                        "",
+                        "Second paragraph - row 1.",
+                        "Second paragraph - row 2.",
+                        "",
+                        "Third paragraph."
+                    ],
+                    "name": "aside"
+                },
+                {
+                    "content": [
+                        "\nAfter the aside.\n"
+                    ],
+                    "name": "p"
+                }
+            ],
+            "i": [
+                [
+                    "aside"
+                ]
+            ],
+            "id": "aside-with-paragraphs",
+            "title": "Aside with paragraphs"
         }
     ],
     "title": "All Chapter Title"

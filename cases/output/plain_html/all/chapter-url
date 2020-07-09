@@ -30,6 +30,8 @@
     
        <li><a href="some-aside">Some aside</a></li>
     
+       <li><a href="aside-with-paragraphs">Aside with paragraphs</a></li>
+    
 </ol>
 
 </body>

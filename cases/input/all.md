@@ -69,4 +69,18 @@ Text at end of aside
 
 Free text after aside
 
+## Aside with paragraphs
+{id: aside-with-paragraphs}
+{i: aside}
+
+{aside}
+First paragraph.
+
+Second paragraph - row 1.
+Second paragraph - row 2.
+
+Third paragraph.
+{/aside}
+
+After the aside.
 
