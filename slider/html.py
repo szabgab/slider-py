@@ -6,7 +6,7 @@ import shutil
 import yaml
 import json
 from pygments import highlight
-from pygments.lexers import get_lexer_for_filename
+from pygments.lexers import get_lexer_for_filename, PerlLexer
 from pygments.formatters import HtmlFormatter
 
 
@@ -22,22 +22,28 @@ def _html_escape(html):
     html = re.sub(r'>', '&gt;', html)
     return html
 
+spec_lexer = {
+    '.pl': PerlLexer,
+    '.t': PerlLexer,
+}
 
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
     skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.psgi', '.glade', '.conf']  # becasue Pygments does not know them.
-    skip.extend(['.pl'])  # skip Perl files becaus they look horrible in the current syntaxt highlighting
-    skip.extend(['.t', '.tap'])  # not supported in older version of Pygment we have on the server
+    skip.extend(['.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
         return _html_escape(code)
-    try:
-        lexer = get_lexer_for_filename(filename)
-        return highlight(code, lexer, HtmlFormatter())
-    except Exception:
-        print("Could not find lexer for {}".format(filename))
-        exit(1)
-        #It is ok if we can't find a lexer
-        #pass
+    if file_extension in spec_lexer:
+        lexer = spec_lexer[file_extension]()
+    else:
+        try:
+            lexer = get_lexer_for_filename(filename)
+        except Exception:
+            print("Could not find lexer for {}".format(filename))
+            exit(1)
+            #It is ok if we can't find a lexer
+            #pass
+    return highlight(code, lexer, HtmlFormatter())
 
 
 class HTML():
