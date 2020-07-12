@@ -22,10 +22,12 @@ def _html_escape(html):
     html = re.sub(r'>', '&gt;', html)
     return html
 
+
 spec_lexer = {
     '.pl': PerlLexer,
     '.t': PerlLexer,
 }
+
 
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
