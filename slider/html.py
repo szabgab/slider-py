@@ -26,12 +26,13 @@ def _html_escape(html):
 spec_lexer = {
     '.pl': PerlLexer,
     '.t': PerlLexer,
+    '.psgi': PerlLexer,
 }
 
 
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
-    skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.psgi', '.glade', '.conf']  # becasue Pygments does not know them.
+    skip = ['.out', '.log', '.in', '.csv', '.err', '.PL', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.glade', '.conf']  # becasue Pygments does not know them.
     skip.extend(['.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
         return _html_escape(code)
