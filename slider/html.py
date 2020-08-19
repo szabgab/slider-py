@@ -6,7 +6,7 @@ import shutil
 import yaml
 import json
 from pygments import highlight
-from pygments.lexers import get_lexer_for_filename, PerlLexer
+from pygments.lexers import get_lexer_for_filename, PerlLexer, DockerLexer
 from pygments.formatters import HtmlFormatter
 
 
@@ -36,7 +36,10 @@ def _syntax(code, filename):
     skip = ['.out', '.log', '.in', '.csv', '.err', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.glade', '.conf']  # becasue Pygments does not know them.
     skip.extend(['.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
-        return _html_escape(code)
+        if file_name.endswith('Dockerfile'):
+            lexer = DockerLexer
+        else:
+            return _html_escape(code)
     if file_extension in spec_lexer:
         lexer = spec_lexer[file_extension]()
     else:
