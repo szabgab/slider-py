@@ -50,6 +50,7 @@ def _syntax(code, filename):
             exit(1)
             #It is ok if we can't find a lexer
             #pass
+    code = re.sub(r'\t', '    ', code)
     return highlight(code, lexer, HtmlFormatter())
 
 
