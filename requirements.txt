@@ -1,4 +1,5 @@
 jinja2
 pytest
+pytest-flake8
 PyYAML
 pygments
