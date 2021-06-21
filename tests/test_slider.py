@@ -28,7 +28,7 @@ def test_exceptions():
     with pytest.raises(Exception) as exinfo:
         slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Second chapter found in the same file in {}'.format(path)
+    assert str(exinfo.value) == "Second chapter 'Chapters Title 1' found in the same file in '{}'".format(path)
 
     path = os.path.join('cases', 'input', 'duplicate_page_ids.md')
     with pytest.raises(Exception) as exinfo:
@@ -58,7 +58,7 @@ def test_exceptions():
     with pytest.raises(Exception) as exinfo:
         slider.parse(path)
     assert exinfo.type == SliderError
-    assert str(exinfo.value) == 'Second page id found in the same file in {} in line 9'.format(path)
+    assert str(exinfo.value) == "Second page id 'page-1-url' found in the same file in '{}' in line '9'".format(path)
 
     path = os.path.join('cases', 'input', 'second_chapter_id.md')
     with pytest.raises(Exception) as exinfo:

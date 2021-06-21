@@ -46,7 +46,7 @@ class Slider(object):
         match = re.search(r'\A# (.*)\Z', row)
         if match:
             if 'title' in self.chapter:
-                raise SliderError('Second chapter found in the same file in {}'.format(self.filename))
+                raise SliderError("Second chapter '{}' found in the same file in '{}'".format(self.chapter['title'], self.filename))
             self.chapter['title'] = match.group(1)
             return True
         return False
@@ -57,7 +57,7 @@ class Slider(object):
             idx = match.group(1)
             if self.page:
                 if 'id' in self.page:
-                    raise SliderError('Second page id found in the same file in {} in line {}'.format(self.filename, self.line))
+                    raise SliderError("Second page id '{}' found in the same file in '{}' in line '{}'".format(self.page['id'], self.filename, self.line))
                 self.page['id'] = idx
             else:
                 if 'id' in self.chapter:
