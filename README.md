@@ -106,3 +106,16 @@ python slider/__init__.py --md cases/all.md --html --dir cases/html/all/
 
 update all the test cases:
 ./update_test_cases
+
+## Development
+
+```
+virtualenv -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install -r dev-requirements.txt
+pytest -sv
+```
+
+
+
