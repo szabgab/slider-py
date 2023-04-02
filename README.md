@@ -1,5 +1,4 @@
 # Slider-Py
-[![Build Status](https://travis-ci.org/szabgab/slider-py.png)](https://travis-ci.org/szabgab/slider-py)
 [![Coverage Status](https://coveralls.io/repos/github/szabgab/slider-py/badge.svg?branch=master)](https://coveralls.io/github/szabgab/slider-py?branch=master)
 
 
@@ -12,9 +11,9 @@ See the [slide sources](https://github.com/szabgab/slides) and the generated [sl
 
 ## Example
 
-Create a director (e.g. 'example') and in there a file called 'main.md' with the following content.
+Create a directory (e.g. 'example') and in there a file called 'main.md' with the following content.
 
-```
+~~~
 # Chapter Title
 {id: page-url}
 {i: subject matter}
@@ -56,7 +55,7 @@ In the asides, we support [links](http://some-page.com), **bold** and
 * unordered
 * list
 {/aside}
-```
+~~~
 
 Then run
 
