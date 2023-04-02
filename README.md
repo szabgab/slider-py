@@ -112,9 +112,8 @@ update all the test cases:
 ```
 virtualenv -p python3 venv
 source venv/bin/activate
-pip install -r requirements.txt
-pip install -r dev-requirements.txt
-pytest -sv
+pip install -r dev-requirements.txt -c constraints.txt
+pytest -v
 ```
 
 
