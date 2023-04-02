@@ -36,5 +36,5 @@ jobs:
       run: python -V
 
     - name: Test with pytest
-      run: pytest -vs
+      run: pytest -v
 
