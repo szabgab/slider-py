@@ -35,5 +35,9 @@ jobs:
       run: python -V
 
     - name: Test with pytest
-      run: pytest -v
+      run: pytest -v --flake8 --cov=slider/ --cache-clear
+
+    - name: Coveralls
+      if:  ${{ success() && matrix.runner == 'ubuntu-latest' && matrix.python-version == '3.11' }}
+      run: coveralls
 
