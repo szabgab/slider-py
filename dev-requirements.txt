@@ -1,0 +1,6 @@
+pytest
+pytest-flake8
+flake8-builtins
+pytest-cov
+coveralls
+
