@@ -34,7 +34,7 @@ spec_lexer = {
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
     skip = ['.out', '.log', '.in', '.csv', '.err', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.glade', '.conf', '.ep']  # becasue Pygments does not know them.
-    skip.extend(['.ecr', '.j2']) # Crystal
+    skip.extend(['.ecr', '.j2'])  # Crystal
     skip.extend(['.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
         if file_name.endswith('Dockerfile'):

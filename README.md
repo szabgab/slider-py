@@ -114,6 +114,8 @@ virtualenv -p python3 venv
 source venv/bin/activate
 pip install -r dev-requirements.txt -c constraints.txt
 pytest -v
+pytest -v --cov=slider/ --cache-clear
+flake8
 ```
 
 
