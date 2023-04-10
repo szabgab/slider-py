@@ -39,7 +39,7 @@ jobs:
         pytest -v --cov=slider/ --cache-clear
         flake8
 
-    - name: Coveralls
-      if:  ${{ success() && matrix.runner == 'ubuntu-latest' && matrix.python-version == '3.11' }}
-      run: coveralls
+#    - name: Coveralls
+#      if:  ${{ success() && matrix.runner == 'ubuntu-latest' && matrix.python-version == '3.11' }}
+#      run: coveralls
 
