@@ -1,6 +1,6 @@
 certifi==2023.5.7
 charset-normalizer==3.1.0
-coverage==6.5.0
+coverage==7.2.7
 coveralls==3.3.1
 docopt==0.6.2
 flake8==6.0.0
