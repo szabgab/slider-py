@@ -118,4 +118,25 @@ flake8
 ```
 
 
+## Format
+
+### Chapter title and id:
+
+* Must be exactly one at the top of each .md file. The `id` will become the last part in the URL.
+
+```
+# Chapter
+{id: chapter}
+```
+
+### Page title, id, and words to index:
+
+* The `id` is required. It will become the last part of the URL.
+* There can be 0 or more `{i: }` entries. These are the words that are indexed and shown in the keywords table.
+
+```
+## Page title
+{id: page-file-name}
+{i: print}
+```
 
