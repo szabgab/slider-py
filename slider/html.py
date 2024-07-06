@@ -262,7 +262,7 @@ class Book(HTML):
                 chapter   = page,
                 includes  = self.includes,
                 ext       = self.ext,
-                repo      = self.book.get("repo", ""),
+                repo      = self.book["repo"],
             )
 
             prev_page = {

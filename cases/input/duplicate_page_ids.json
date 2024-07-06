@@ -4,6 +4,7 @@
     "first_year": "2006",
     "copyright": "Gabor Szabo https://szabgab.com/",
     "version": "0.01",
+    "repo": "",
     "name": "slide_processing",
     "files": [
         "ul.md",
