@@ -13,7 +13,7 @@ class MultiSlider(object):
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = json.load(fh)
             if 'repo' not in conf:
-                exit(f"repo is missing in {filename}");
+                exit(f"repo is missing in {filename}")
 
             self.conf = conf
 
