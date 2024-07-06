@@ -57,13 +57,14 @@ def _syntax(code, filename):
 
 class HTML():
     # TODO: clean up the parameter list so we fail early if required parameters are not provided
-    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None, url=""):
+    def __init__(self, ext=None, chapter=None, includes=None, templates=None, static=None, url="", repo=""):
         self.root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.timestamp = datetime.datetime.now()
 
         self.chapter = chapter
         self.includes = includes
         self.url = url
+        self.repo = repo
 
         if ext is not None and ext != '':
             if ext[0] == '.':
@@ -117,6 +118,7 @@ class HTML():
         return
 
     def create_pages(self, env, next_chapter):
+        #exit(self.repo)
         page_template = env.get_template('page.html')
         for ix in range(len(self.chapter['pages'])):
             page = self.chapter['pages'][ix]
@@ -158,6 +160,7 @@ class HTML():
                 extension = self.ext,
                 chapter   = self.chapter,
                 srcdir    = os.path.basename(self.includes),
+                repo      = self.repo,
             )
             #html = _replace_links(html)
             self.pages.append(
@@ -247,6 +250,8 @@ class Book(HTML):
         self.keywords = {}
 
     def generate_book(self, in_dir):
+        #exit(" ".join(self.book.keys()))
+        #exit(self.book["repo"])
         #print(self.book['pages'][1])
         for i in range(len(self.book['pages'])):
             page = self.book['pages'][i]
@@ -257,6 +262,7 @@ class Book(HTML):
                 chapter   = page,
                 includes  = self.includes,
                 ext       = self.ext,
+                repo      = self.book.get("repo", ""),
             )
 
             prev_page = {
