@@ -44,7 +44,7 @@ def test_cli_empty_parse():
     print(err)
     assert code == 1
     assert 'usage: slider.py' in out.decode('utf-8')
-    assert '--md or --yaml is required' in out.decode('utf-8')
+    assert '--md or --config is required' in out.decode('utf-8')
     assert err == b''
 
 
@@ -67,7 +67,7 @@ def test_cli_empty_html_dir(tmpdir):
     print(err)
     assert code == 1
     assert 'usage: slider.py' in out.decode('utf-8')
-    assert '--md or --yaml is required' in out.decode('utf-8')
+    assert '--md or --config is required' in out.decode('utf-8')
     assert err == b''
 
 
@@ -97,8 +97,8 @@ def test_cli_parse():
 
 
 def test_cli_parse_yaml():
-    yml_file = 'cases/input/multi.json'
-    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--parse"]
+    config_file = 'cases/input/multi.json'
+    cmd = [sys.executable, "slider.py", "--config", config_file, "--parse"]
     out, err, code = qx(cmd)
     print(out)
     print(err)
@@ -106,15 +106,15 @@ def test_cli_parse_yaml():
     assert err == b''
     data = json.loads(out.decode('utf-8'))
 
-    expected = read_expected(yml_file)
+    expected = read_expected(config_file)
 
     assert data == expected
 
 
 def test_cli_html_yaml(tmpdir):
     temp_dir = str(tmpdir)
-    yml_file = 'cases/input/multi.json'
-    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir]
+    config_file = 'cases/input/multi.json'
+    cmd = [sys.executable, "slider.py", "--config", config_file, "--html", "--dir", temp_dir]
     out, err, code = qx(cmd)
     print(out)
     print(err)
@@ -128,8 +128,8 @@ def test_cli_html_yaml(tmpdir):
 def test_cli_html_yaml_ext(tmpdir):
     temp_dir = str(tmpdir)
     #print(temp_dir)
-    yml_file = 'cases/input/multi.json'
-    cmd = [sys.executable, "slider.py", "--yaml", yml_file, "--html", "--dir", temp_dir, '--ext', 'html']
+    config_file = 'cases/input/multi.json'
+    cmd = [sys.executable, "slider.py", "--config", config_file, "--html", "--dir", temp_dir, '--ext', 'html']
     out, err, code = qx(cmd)
     print(out)
     print(err)

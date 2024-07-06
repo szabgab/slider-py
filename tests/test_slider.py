@@ -161,13 +161,13 @@ def test_md_to_dom(name):
     'multi',
 ])
 def test_json_to_dom(name):
-    yml_file = os.path.join('cases', 'input', name + '.json')
+    config_file = os.path.join('cases', 'input', name + '.json')
 
-    expected = read_expected(yml_file)
+    expected = read_expected(config_file)
 
     multi_slider = MultiSlider()
 
-    data = multi_slider.process_yml(yml_file)
+    data = multi_slider.process_config(config_file)
     assert data == expected
 
 
@@ -175,15 +175,15 @@ def test_json_to_dom(name):
     'multi',
 ])
 def test_json_to_html(tmpdir, name):
-    yml_file = os.path.join('cases', 'input', name + '.json')
+    config_file = os.path.join('cases', 'input', name + '.json')
     target_dir = str(tmpdir)
     print(target_dir)
 
     multi_slider = MultiSlider()
-    book = multi_slider.process_yml(yml_file)
+    book = multi_slider.process_config(config_file)
     html = Book(
         book      = book,
-        includes  = os.path.dirname(yml_file),
+        includes  = os.path.dirname(config_file),
         ext       = '',
     )
     html.generate_book(target_dir)
@@ -191,23 +191,23 @@ def test_json_to_html(tmpdir, name):
 
 
 def test_duplicate_id_in_chapters_of_multi():
-    yml_file = os.path.join('cases', 'input', 'duplicate_id.json')
+    config_file = os.path.join('cases', 'input', 'duplicate_id.json')
 
     multi_slider = MultiSlider()
 
     with pytest.raises(Exception) as exinfo:
-        multi_slider.process_yml(yml_file)
+        multi_slider.process_config(config_file)
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Duplicate id chapter-path'
 
 
 def test_duplicate_id_in_pages_of_multi():
-    yml_file = os.path.join('cases', 'input', 'duplicate_page_ids.json')
+    config_file = os.path.join('cases', 'input', 'duplicate_page_ids.json')
 
     multi_slider = MultiSlider()
 
     with pytest.raises(Exception) as exinfo:
-        multi_slider.process_yml(yml_file)
+        multi_slider.process_config(config_file)
     assert exinfo.type == SliderError
     assert str(exinfo.value) == 'Duplicate id page-1-url'
 

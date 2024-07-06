@@ -16,7 +16,7 @@ def get_params():
     parser = argparse.ArgumentParser()
     parser.add_argument("--parse", help="Create DOM of md file as JSON file", action='store_true')
     parser.add_argument("--html", help="Create HTML files", action='store_true')
-    parser.add_argument("--yaml", help="Name of the yaml file")
+    parser.add_argument("--config", help="Name of the JSON config file of each course/book")
     parser.add_argument("--md", help="Name of an md file")
     parser.add_argument("--dir", help="Path to the HTML directory")
     parser.add_argument("--templates", help="Directory of the HTML templates")
@@ -34,8 +34,8 @@ def get_params():
         print("--dir was missing")
         parser.print_help()
         exit(1)
-    if not args.yaml and not args.md:
-        print("--md or --yaml is required")
+    if not args.config and not args.md:
+        print("--md or --config is required")
         parser.print_help()
         exit(1)
 
@@ -45,15 +45,15 @@ def get_params():
 def main():
     args = get_params()
 
-    if args.yaml:
+    if args.config:
         multi_slider = MultiSlider()
-        book = multi_slider.process_yml(args.yaml)
+        book = multi_slider.process_config(args.config)
     if args.md:
         slider = Slider()
         dom = slider.parse(args.md)
 
     if args.parse:
-        if args.yaml:
+        if args.config:
             json_str = json.dumps(book, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
         if args.md:
             json_str = json.dumps(dom, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
@@ -62,14 +62,14 @@ def main():
         exit()
 
     if args.html:
-        if args.yaml:
+        if args.config:
             #exit(args.url)
             html = Book(
                 templates = args.templates,
                 static    = args.static,
                 url       = args.url,
                 book      = book,
-                includes  = os.path.dirname(args.yaml),
+                includes  = os.path.dirname(args.config),
                 ext       = args.ext,
             )
             html.generate_book(args.dir)

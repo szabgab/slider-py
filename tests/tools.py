@@ -28,8 +28,8 @@ def cwd(path):
         os.chdir(oldpwd)
 
 
-def read_expected(yml_file):
-    with open(yml_file, 'r', encoding="utf-8") as fh:
+def read_expected(json_file):
+    with open(json_file, 'r', encoding="utf-8") as fh:
         expected = json.load(fh)
 
     expected['pages'] = []

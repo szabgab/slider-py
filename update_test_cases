@@ -30,17 +30,17 @@ do
 done
 
 
-# Create HTML files without extension based on YAML configuration file
+# Create HTML files without extension based on configuration file
 for name in multi;
 do
     rm -rf cases/output/multi_html/$name/*
     #set -x
-    python slider.py --yaml cases/input/$name.json --html --dir cases/output/multi_html/$name/
+    python slider.py --config cases/input/$name.json --html --dir cases/output/multi_html/$name/
 done
 
-# Create HTML files based on YAML configuration file
+# Create HTML files based on configuration file
 for name in multi;
 do
     rm -rf cases/output/multi_html_ext/$name/*
-    python slider.py --yaml cases/input/$name.json --html --dir cases/output/multi_html_ext/$name/ --ext html
+    python slider.py --config cases/input/$name.json --html --dir cases/output/multi_html_ext/$name/ --ext html
 done

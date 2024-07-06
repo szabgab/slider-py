@@ -8,7 +8,7 @@ class SliderError(Exception):
 
 
 class MultiSlider(object):
-    def process_yml(self, filename):
+    def process_config(self, filename):
         root = os.path.dirname(os.path.abspath(filename))
         with open(filename, 'r', encoding="utf-8") as fh:
             conf = json.load(fh)
