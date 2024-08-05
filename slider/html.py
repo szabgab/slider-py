@@ -6,7 +6,7 @@ import shutil
 import yaml
 import json
 from pygments import highlight
-from pygments.lexers import get_lexer_for_filename, PerlLexer, DockerLexer
+from pygments.lexers import get_lexer_for_filename, HtmlLexer, PerlLexer, DockerLexer
 from pygments.formatters import HtmlFormatter
 
 
@@ -28,12 +28,13 @@ spec_lexer = {
     '.pl': PerlLexer,
     '.t': PerlLexer,
     '.psgi': PerlLexer,
+    '.tera': HtmlLexer,
 }
 
 
 def _syntax(code, filename):
     file_name, file_extension = os.path.splitext(filename)
-    skip = ['.out', '.log', '.in', '.csv', '.err', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.glade', '.conf', '.ep', '.gql', '.lock', '.tera']  # becasue Pygments does not know them.
+    skip = ['.out', '.log', '.in', '.csv', '.err', '.mypy', '.dump', '.ok', '.nok', '.SKIP', '.glade', '.conf', '.ep', '.gql', '.lock']  # becasue Pygments does not know them.
     skip.extend(['.ecr', '.j2'])  # Crystal
     skip.extend(['.tap'])  # not supported in older version of Pygment we have on the server
     if not file_extension or file_extension in skip:
